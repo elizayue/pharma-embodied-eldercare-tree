@@ -361,7 +361,7 @@ function pointDetail(key, here) {
     <div class="sec"><b>学什么</b>${esc(g.what)}</div>
     <div class="sec"><b>学完能回答</b><ol>${g.ask.map(a => `<li>${esc(a)}</li>`).join('')}</ol></div>
     <div class="sec"><b>入门阅读</b><ul>${g.read.map(r => `<li><a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.title)} ↗</a></li>`).join('')}</ul></div>`
-    : '<div class="sec muted">这个学习点的「学什么 / 自检问题 / 入门阅读」还没写（目前试点只覆盖 05 篇章）。</div>';
+    : '';
   const cardsHtml = cs.length ? `<div class="sec"><b>学习卡片 · ${cs.length}</b>${cs.map(({ c, rel }) => `
       <div class="mini">${ck(c.id)}<span class="rel ${rel === '直挂' ? 'direct' : ''}">${rel}</span>
         <a href="${esc(c.url)}" target="_blank" rel="noopener">${esc(c.name)} ↗</a>
