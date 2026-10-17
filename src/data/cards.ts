@@ -1,10 +1,12 @@
 // 学习卡片（cards）—— 挂在树上节点的粗粒度索引卡（不是笔记，一屏看完）
-// 格式沿用 S2AI 的 5 字段约定：target / url / tags / next / date；next 只指向树上节点。
+// 格式沿用 S2AI 的 5 字段约定：target / url / tags / next / date，另加 def（是什么）/ use（怎么用）；next 只指向树上节点。
 // date = 论文或版本首次公开的年月（拿不准就不填，宁缺毋编）。
 
 export interface StudyCard {
   id: string
   name: string
+  def: string             // 是什么：一句准确的定义
+  use: string             // 怎么用：1–3 个具体用法（任务 / 输入输出 / 用哪个工具上手）
   target: string
   url: string
   tags: string[]
@@ -18,6 +20,8 @@ export const CARDS: StudyCard[] = [
   {
     id: 'card-lipinski',
     name: 'Lipinski 五规则（Rule of 5）',
+    def: 'Lipinski 等人基于大量进入临床研究的化合物统计提出的经验规则：分子量 > 500、logP > 5、氢键供体 > 5、氢键受体 > 10，超出其中两项及以上时，口服吸收或渗透差的可能性更大。',
+    use: '① 虚拟筛选 / 分子生成后的第一道类药性过滤；② 用 RDKit 计算分子量、logP、氢键供受体即可自查（见练习「用 RDKit 计算类药性指标」）；③ 只作参考：天然产物、转运体底物、新型药物模态常是例外。',
     target: '01-M2.3',
     url: 'https://doi.org/10.1016/S0169-409X(96)00423-1',
     tags: ['口服类药性', '分子量', 'logP', '氢键供体 / 受体'],
@@ -28,6 +32,8 @@ export const CARDS: StudyCard[] = [
   {
     id: 'card-alphafold2',
     name: 'AlphaFold 2',
+    def: 'DeepMind 的蛋白结构预测模型：输入氨基酸序列（及多序列比对），输出三维结构和每残基置信度 pLDDT、残基对误差 PAE。',
+    use: '① 靶点没有实验结构时得到结构模型，用于口袋分析与对接；② 先查 AlphaFold 蛋白结构数据库，查不到再用 ColabFold 自己跑；③ 只信任高 pLDDT 区域，低置信区域多为柔性或无序。',
     target: '05-M3.1',
     url: 'https://www.nature.com/articles/s41586-021-03819-2',
     tags: ['蛋白结构预测', 'MSA', 'Evoformer', 'CASP14'],
@@ -38,6 +44,8 @@ export const CARDS: StudyCard[] = [
   {
     id: 'card-alphafold3',
     name: 'AlphaFold 3',
+    def: 'DeepMind 与 Isomorphic Labs 的复合物结构预测模型，可预测蛋白与配体、核酸、离子等组成的复合物结构。',
+    use: '① 在 AlphaFold Server 在线提交复合物，获得结合模式假设（服务器支持的分子类型与用途受条款限制，用前阅读）；② 预测结果需用对接、物理合理性检查或实验进一步验证。',
     target: '05-M3.2',
     url: 'https://www.nature.com/articles/s41586-024-07487-w',
     tags: ['复合物结构', '扩散模块', '蛋白—配体', '蛋白—核酸'],
@@ -48,6 +56,8 @@ export const CARDS: StudyCard[] = [
   {
     id: 'card-esm2',
     name: 'ESM-2 / ESMFold',
+    def: 'Meta 的蛋白语言模型系列：ESM-2 在大规模蛋白序列上自监督预训练；ESMFold 基于 ESM-2 表示，无需多序列比对即可从单条序列预测结构。',
+    use: '① 用 fair-esm 包或 Hugging Face 提取蛋白嵌入，作为 DTI、功能预测等任务的输入特征；② 用 ESMFold 快速批量预测结构，再与 AlphaFold 结果对照。',
     target: '05-M1.2',
     url: 'https://github.com/facebookresearch/esm',
     tags: ['蛋白语言模型', '单序列结构预测', '表示学习'],
@@ -57,6 +67,8 @@ export const CARDS: StudyCard[] = [
   {
     id: 'card-diffdock',
     name: 'DiffDock',
+    def: '把分子对接视为生成问题的扩散模型：在配体平移、旋转和扭转角上逐步去噪生成结合姿态，并用置信度模型给姿态排序。',
+    use: '① 输入蛋白结构 + 配体 SMILES，输出排序后的结合姿态，适合口袋未知的盲对接；② 结果用 PoseBusters 检查物理合理性，并与 AutoDock Vina 对照（见对接练习）。',
     target: '05-M3.3',
     url: 'https://arxiv.org/abs/2210.01776',
     tags: ['扩散模型', '盲对接', '姿态生成'],
@@ -67,6 +79,8 @@ export const CARDS: StudyCard[] = [
   {
     id: 'card-rfdiffusion',
     name: 'RFdiffusion',
+    def: 'Baker 实验室基于 RoseTTAFold 结构预测网络改造的扩散模型，用于生成新的蛋白质骨架。',
+    use: '① 无条件骨架生成、基序支架（motif scaffolding）、结合蛋白设计；② 标准流程：RFdiffusion 生成骨架 → ProteinMPNN 设计序列 → AlphaFold 检查结构自洽，再进实验。',
     target: '05-M4.3',
     url: 'https://www.nature.com/articles/s41586-023-06415-8',
     tags: ['蛋白质从头设计', '扩散模型', '结合蛋白设计'],
@@ -77,6 +91,8 @@ export const CARDS: StudyCard[] = [
   {
     id: 'card-chemprop',
     name: 'Chemprop（D-MPNN）',
+    def: '基于有向消息传递神经网络（D-MPNN）的开源分子性质预测软件包。',
+    use: '① 准备「SMILES + 标签」的 CSV，命令行即可训练回归 / 分类模型；② 作为 QSAR / ADMET 任务的强基线，并可开启不确定性估计；③ 用 TDC 数据配合骨架划分评估泛化。',
     target: '05-M2.1',
     url: 'https://github.com/chemprop/chemprop',
     tags: ['消息传递网络', '性质预测', '不确定性'],
@@ -86,6 +102,8 @@ export const CARDS: StudyCard[] = [
   {
     id: 'card-tdc',
     name: 'TDC 基准',
+    def: 'Therapeutics Data Commons：面向治疗学机器学习的数据集、任务与基准平台，提供 Python 包 PyTDC。',
+    use: '① 用几行代码加载 ADMET、DTI 等数据集，并按随机 / 骨架等方式划分；② 在 ADMET Benchmark Group 上按统一协议与已有模型对比结果。',
     target: 'leaf-tdc',
     url: 'https://tdcommons.ai/',
     tags: ['ADMET 基准', 'DTI', '数据划分'],
@@ -95,6 +113,8 @@ export const CARDS: StudyCard[] = [
   {
     id: 'card-ich-gcp',
     name: 'ICH 指南体系（Q / S / E / M）',
+    def: '人用药品技术要求国际协调理事会（ICH）制定的技术指南，按质量（Q）、安全性（S）、有效性（E）、多学科（M）分类，被多国监管机构采纳。',
+    use: '① 查药品研发某一环节的国际共识要求，如 E6 药物临床试验质量管理规范（GCP）、Q8 药物开发；② 在 ich.org 下载指南原文，结合 NMPA 等本国法规理解 AI / 数据工作的合规背景。',
     target: '04-M2.1',
     url: 'https://www.ich.org/',
     tags: ['质量 Q', '安全 S', '有效性 E（含 GCP）', '多学科 M'],
@@ -105,6 +125,8 @@ export const CARDS: StudyCard[] = [
   {
     id: 'card-rt1',
     name: 'RT-1',
+    def: 'Google 的 Robotics Transformer：输入图像与语言指令，输出离散化的机器人动作 token，用大规模真实机器人示教数据训练。',
+    use: '① 理解「大规模真实数据 + Transformer 策略」范式及其泛化评测方法；② 与 RT-2 对比，看引入视觉语言模型带来的语义泛化差异。',
     target: '10-M2.1',
     url: 'https://arxiv.org/abs/2212.06817',
     tags: ['Robotics Transformer', '真实机器人大规模数据', '离散动作 token'],
@@ -115,6 +137,8 @@ export const CARDS: StudyCard[] = [
   {
     id: 'card-rt2',
     name: 'RT-2',
+    def: 'Google 的视觉—语言—动作（VLA）模型：在网络图文数据与机器人轨迹上联合微调视觉语言模型，把动作表示为文本 token 输出。',
+    use: '① 理解 VLM → VLA 的核心思路与「动作即 token」的设计；② RT-2 未开源权重，想动手可用 OpenVLA 在开源数据上体验类似路线。',
     target: '10-M2.1',
     url: 'https://arxiv.org/abs/2307.15818',
     tags: ['VLA', 'VLM 联合微调', '动作即文本 token', '语义泛化'],
@@ -125,6 +149,8 @@ export const CARDS: StudyCard[] = [
   {
     id: 'card-oxe',
     name: 'Open X-Embodiment / RT-X',
+    def: '多家机构汇集的跨本体机器人示教数据集合，以统一的 RLDS 格式发布，并在其上训练了 RT-1-X / RT-2-X。',
+    use: '① 预训练或微调通用策略的数据来源；② 从中挑选与自己机器人形态、任务相近的子数据集；③ Octo、OpenVLA 都基于其中的数据训练，可直接对照学习。',
     target: '09-M3.2',
     url: 'https://arxiv.org/abs/2310.08864',
     tags: ['跨本体数据集', '多机构协作', 'RT-1-X / RT-2-X'],
@@ -135,6 +161,8 @@ export const CARDS: StudyCard[] = [
   {
     id: 'card-openvla',
     name: 'OpenVLA',
+    def: '开源的 7B 参数视觉—语言—动作模型，基于预训练视觉语言模型构建，在 Open X-Embodiment 数据上训练，输出离散化动作 token。',
+    use: '① 下载开源权重，用 LoRA 在自己的机器人数据上微调；② 作为 VLA 研究与对比实验的开源基线；③ 关注推理速度与量化部署问题（见 10-M3.2）。',
     target: '10-M2.2',
     url: 'https://arxiv.org/abs/2406.09246',
     tags: ['开源 VLA', '7B', 'LoRA 微调', 'Open X-Embodiment 训练'],
@@ -145,6 +173,8 @@ export const CARDS: StudyCard[] = [
   {
     id: 'card-octo',
     name: 'Octo',
+    def: '基于 Transformer、用扩散头输出动作的开源通用机器人策略，支持语言指令或目标图像作为任务条件。',
+    use: '① 用少量自有数据微调，适配新的机器人、相机或动作空间；② 作为通用策略的轻量开源基线，与 OpenVLA 对比。',
     target: '10-M2.2',
     url: 'https://arxiv.org/abs/2405.12213',
     tags: ['通用策略', 'Transformer + 扩散动作头', '开源'],
@@ -155,6 +185,8 @@ export const CARDS: StudyCard[] = [
   {
     id: 'card-pi0',
     name: 'π0（pi-zero）',
+    def: 'Physical Intelligence 的 VLA 模型：在预训练视觉语言模型上接一个用流匹配生成连续动作块的「动作专家」。',
+    use: '① 通过 openpi 获取代码与权重，在自己的数据上微调；② 学习「VLM 负责理解、动作专家负责高频连续控制」的分层设计，适合灵巧操作研究。',
     target: '10-M2.3',
     url: 'https://arxiv.org/abs/2410.24164',
     tags: ['VLM 主干', '流匹配动作专家', '高频连续控制', '跨本体'],
@@ -165,6 +197,8 @@ export const CARDS: StudyCard[] = [
   {
     id: 'card-diffusion-policy',
     name: 'Diffusion Policy',
+    def: '把视觉运动策略建模为条件去噪扩散过程：根据观测生成未来一段动作序列，擅长表达多峰的动作分布。',
+    use: '① 用官方代码或 LeRobot 内置实现在示教数据上训练；② 作为模仿学习的强基线，与 ACT 在同一任务上对比（见练习「用 LeRobot 训行为克隆策略」）。',
     target: '09-M2.3',
     url: 'https://arxiv.org/abs/2303.04137',
     tags: ['扩散模型', '视觉运动策略', '多峰动作分布'],
@@ -175,6 +209,8 @@ export const CARDS: StudyCard[] = [
   {
     id: 'card-act',
     name: 'ACT / ALOHA',
+    def: 'ALOHA 是低成本双臂遥操作硬件系统；ACT（Action Chunking with Transformers）是配套的模仿学习算法，一次预测一段动作块。',
+    use: '① 用少量示教学习精细双臂操作；② LeRobot 内置 ACT 实现，可配合 SO-100 等低成本机械臂直接采集数据并训练。',
     target: '09-M2.2',
     url: 'https://arxiv.org/abs/2304.13705',
     tags: ['动作分块', '低成本双臂遥操作', '精细操作'],
@@ -185,6 +221,8 @@ export const CARDS: StudyCard[] = [
   {
     id: 'card-saycan',
     name: 'SayCan',
+    def: 'Google 的「语言规划 + 技能」方法：用 LLM 判断某个技能对完成指令有多大帮助，再结合价值函数估计的可执行性，选出下一步技能。',
+    use: '① 作为「LLM 高层规划 + 底层技能库」系统设计的范式参考；② 养老场景中可把「取药盒」「递水杯」等封装成技能，由 LLM 负责排序与组合。',
     target: '10-M2.4',
     url: 'https://arxiv.org/abs/2204.01691',
     tags: ['LLM 高层规划', '可供性（affordance）', '技能库'],
@@ -195,6 +233,8 @@ export const CARDS: StudyCard[] = [
   {
     id: 'card-palme',
     name: 'PaLM-E',
+    def: 'Google 的具身多模态语言模型：把图像、机器人状态等连续传感器输入编码后注入大语言模型，可输出任务规划等文本。',
+    use: '① 理解多模态输入如何接入 LLM；② 作为分层架构中高层规划器的设计参考（模型未开源，以读论文为主）。',
     target: '10-M2.4',
     url: 'https://arxiv.org/abs/2303.03378',
     tags: ['具身多模态语言模型', '传感器嵌入', '规划'],
@@ -205,6 +245,8 @@ export const CARDS: StudyCard[] = [
   {
     id: 'card-mujoco',
     name: 'MuJoCo',
+    def: '开源物理引擎，侧重接触丰富场景的快速、精确仿真，用 MJCF 描述模型，提供官方 Python 绑定。',
+    use: '① pip 安装 mujoco 后加载机器人模型，做控制与强化学习实验；② 搭配 Gymnasium、robosuite 使用现成任务环境（见练习「在 MuJoCo 环境里训 PPO」）。',
     target: '11-M1.1',
     url: 'https://mujoco.org/',
     tags: ['接触动力学', 'MJCF', 'Python 绑定', '开源'],
@@ -214,6 +256,8 @@ export const CARDS: StudyCard[] = [
   {
     id: 'card-lerobot',
     name: 'LeRobot',
+    def: 'Hugging Face 的开源机器人学习库，提供统一的数据集格式、预训练策略以及真机采集、训练、部署工具。',
+    use: '① 下载 Hub 上的数据集，训练 ACT / Diffusion Policy 等策略；② 配合 SO-100 低成本机械臂采集示教数据并部署到真机。',
     target: 'leaf-lerobot',
     url: 'https://github.com/huggingface/lerobot',
     tags: ['数据集格式', 'ACT / Diffusion Policy 实现', '低成本硬件'],
@@ -224,6 +268,8 @@ export const CARDS: StudyCard[] = [
   {
     id: 'card-beers',
     name: 'Beers 标准（AGS）',
+    def: '美国老年医学会发布并定期更新的老年人潜在不适当用药清单，按应避免、慎用、需避免的相互作用、需按肾功能调整等类别列出。',
+    use: '① 老年患者用药审核、用药清单检查时的参考依据；② 在 CDSS 或规则引擎中编码条目（需使用官方最新版原文并注意版权）；③ 只作提示，不能替代医生与药师的临床判断。',
     target: '13-M2.1',
     url: 'https://www.americangeriatrics.org/',
     tags: ['潜在不适当用药', '老年人', '定期更新', '需查看最新版原文'],
@@ -233,6 +279,8 @@ export const CARDS: StudyCard[] = [
   {
     id: 'card-cga',
     name: '老年综合评估（CGA）',
+    def: '由多学科团队对老年人的躯体、功能、认知、心理、社会与环境进行多维度诊断评估，并据此制定照护计划的过程。',
+    use: '① 理解养老产品真正要服务的评估维度；② 设计监测或干预指标时对齐 ADL / IADL 等功能指标，而不只盯单一疾病指标。',
     target: '12-M3.1',
     url: 'https://www.who.int/health-topics/ageing',
     tags: ['多维评估', 'ADL / IADL', '跨学科团队'],
@@ -242,6 +290,8 @@ export const CARDS: StudyCard[] = [
   {
     id: 'card-paro',
     name: 'PARO 治疗型海豹机器人',
+    def: '日本产业技术综合研究所（AIST）开发的海豹外形治疗型陪伴机器人，能通过触摸、声音等传感器做出反应。',
+    use: '① 认知症非药物干预与陪伴机器人研究的经典案例；② 讨论陪伴机器人伦理（依赖、欺骗感、替代人际关怀）时的参照对象。',
     target: '16-M4.1',
     url: 'http://www.parorobots.com/',
     tags: ['陪伴机器人', '认知症照护', '非药物干预', '伦理讨论'],
@@ -251,6 +301,8 @@ export const CARDS: StudyCard[] = [
   {
     id: 'card-mediapipe-fall',
     name: '姿态估计做跌倒检测',
+    def: '先用人体姿态估计得到骨架关键点序列，再用规则或分类器识别跌倒事件的检测方法。',
+    use: '① 用 MediaPipe 提取关键点，依据身体高度、下降速度、躯干角度等特征判断跌倒；② 尽量在本地设备处理视频以保护隐私；③ 重点统计误报与漏报（见练习「基于姿态估计的跌倒检测」）。',
     target: '16-M3.1',
     url: 'https://ai.google.dev/edge/mediapipe',
     tags: ['人体关键点', '误报 / 漏报', '隐私本地化'],

@@ -173,6 +173,8 @@
   .route li::before { content: counter(r) ". "; color: var(--k4); font-variant-numeric: tabular-nums; }
   .route li:hover { color: var(--kt); text-decoration: underline; }
   .route li.done { color: var(--pos); }
+  .mini .cdef { flex-basis: 100%; font-size: 12px; color: var(--k2); padding-inline-start: 22px; }
+  .mini .cdef b { font-weight: 500; color: var(--k3); margin-inline-end: 6px; font-size: 11px; }
   footer { margin-block-start: var(--sp4); font-size: 11px; color: var(--k4); }
 </style>
 </head>
@@ -365,7 +367,9 @@ function pointDetail(key, here) {
         <a href="${esc(c.url)}" target="_blank" rel="noopener">${esc(c.name)} ↗</a>
         ${c.date ? `<span class="badge">${esc(c.date)}</span>` : ''}
         <span class="muted">${c.tags.map(esc).join(' · ')}</span>
-        <span class="badge node" data-go="${esc(c.id)}" title="在学习卡片板块查看">卡片详情</span></div>`).join('')}</div>` : '';
+        <span class="badge node" data-go="${esc(c.id)}" title="在学习卡片板块查看">卡片详情</span>
+        ${c.def ? `<span class="cdef"><b>是什么</b>${esc(c.def)}</span>` : ''}
+        ${c.use ? `<span class="cdef"><b>怎么用</b>${esc(c.use)}</span>` : ''}</div>`).join('')}</div>` : '';
   const leavesHtml = here.length ? `<div class="sec"><b>叶子（项目 / 练习）· ${here.length}</b>${here.map(l => `
       <div class="mini">${ck(l.id)}${l.url ? `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.name)} ↗</a>` : `<span>✎ ${esc(l.name)}</span><span class="badge">练习</span>`}
         <span class="muted">${esc(l.intro)}</span></div>`).join('')}</div>` : '';
@@ -481,7 +485,7 @@ function panelInbox() {
 }
 
 function panelCards() {
-  return T.cards.filter(cd => match(cd.name, cd.tags.join(' '), cd.target)).map((cd, i) => {
+  return T.cards.map((cd, i) => ({ cd, i })).filter(({ cd }) => match(cd.name, cd.tags.join(' '), cd.target, cd.def, cd.use)).map(({ cd, i }) => {
     const relLeaves = T.leaves.filter(l => cardHits(cd, l));
     return `
     <div class="cardx ${isDone(cd.id) ? 'is-done' : ''}" id="cd-${i}">
@@ -490,6 +494,8 @@ function panelCards() {
         ${cd.madeBy ? `<span class="badge">${esc(cd.madeBy)}</span>` : ''}${noteBtn(cd.id, cd.name)}</h3>
       ${noteText(cd.id)}
       <div class="sub">挂载点 ${nodeBadge(cd.target)}</div>
+      ${cd.def ? `<div class="kv"><b>是什么</b><span>${esc(cd.def)}</span></div>` : ''}
+      ${cd.use ? `<div class="kv"><b>怎么用</b><span>${esc(cd.use)}</span></div>` : ''}
       <div class="kv"><b>技术栈</b><span class="tags">${cd.tags.map(t => `<span class="badge">${esc(t)}</span>`).join('')}</span></div>
       ${relLeaves.length ? `<div class="kv"><b>相关叶子</b><span>${relLeaves.map(l => l.url
         ? `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.name)} ↗</a>`

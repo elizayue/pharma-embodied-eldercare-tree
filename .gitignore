@@ -23,3 +23,6 @@ __pycache__/
 .vscode/
 .DS_Store
 Thumbs.db
+
+# 本地预览截图（只保留 README 用的 preview.png）
+preview-*.png

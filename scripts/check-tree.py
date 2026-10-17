@@ -149,6 +149,13 @@ for lid in set(leaf_ids):
 for block in cards_slice.split('\n  {'):
     cid = re.search(r"id: '([^']+)'", block)
     tg = re.search(r'tags: \[([^\]]*)\]', block, re.S)
+    if cid:
+        for fld, label in (('def', '是什么'), ('use', '怎么用')):
+            fm = re.search(r'(?<![A-Za-z])' + fld + r": '((?:[^'\\]|\\.)*)'", block)
+            if not fm or not fm.group(1).strip():
+                errors.append(f'卡片 {cid.group(1)} 缺少 {fld}（{label}）')
+            elif len(fm.group(1)) > 160:
+                errors.append(f'卡片 {cid.group(1)} 的 {fld} 超过 160 字——卡片是索引卡，不是笔记')
     if cid and tg:
         n = len(re.findall(r"'[^']*'", tg.group(1)))
         if not 3 <= n <= 5:

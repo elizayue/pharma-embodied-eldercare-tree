@@ -74,9 +74,11 @@ for k in ['root'] + [c['id'] for c in T['chapters']] + ['wild']:
         nm = f'[{l["name"]}]({l["url"]})' if l['url'] else f'{l["name"]}（练习）'
         L.append(f'- [ ] {nm} — {l["intro"]}  `{l["anchor"]}`')
     L.append('')
-L += ['## 学习卡片', '', '| 卡片 | 挂载点 | 关键词 | 接下来 | 年月 |', '| --- | --- | --- | --- | --- |']
+L += ['## 学习卡片', '']
 for c in T['cards']:
-    L.append(f'| [{c["name"]}]({c["url"]}) | `{c["target"]}` | {" · ".join(c["tags"])} | {", ".join("`" + n + "`" for n in c["next"])} | {c["date"] or "—"} |')
+    L.append(f'### [{c["name"]}]({c["url"]})' + (f'（{c["date"]}）' if c['date'] else ''))
+    L += ['', f'- **是什么**：{c["def"]}', f'- **怎么用**：{c["use"]}',
+          f'- 挂载点：`{c["target"]}` ｜ 关键词：{" · ".join(c["tags"])} ｜ 接下来：{", ".join("`" + n + "`" for n in c["next"])}', '']
 L += ['', '## 收集箱', '']
 for it in T['inbox']:
     L.append(f'- **[{it["name"]}]({it["url"]})**（{it["cat"]} · {it["level"]}）：{it["intro"]} 为什么收：{it["why"]} 怎么下潜：{it["dive"]}'

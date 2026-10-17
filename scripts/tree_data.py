@@ -119,7 +119,8 @@ def parse_cards():
             am = re.search(key + r': \[([^\]]*)\]', block, re.S)
             return [unquote(x) for x in re.findall(r"'([^']*)'", am.group(1))] if am else []
 
-        cards.append({'id': m.group(1), 'name': field('name'), 'target': field('target'),
+        cards.append({'id': m.group(1), 'name': field('name'), 'def': field('def') or '', 'use': field('use') or '',
+                      'target': field('target'),
                       'url': field('url'), 'tags': arr('tags'), 'next': arr('next'),
                       'madeBy': field('madeBy'), 'date': field('date')})
     return cards
