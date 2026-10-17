@@ -1,0 +1,25 @@
+# ===== 个人数据：永不进 git =====
+# 学习进度 / 笔记的导出文件（推荐存放路径 progress/personal.local.json）
+*.local.json
+*.local.ts
+*.local.md
+progress/*
+!progress/personal.example.json
+!progress/README.md
+# 内嵌了个人进度的私有看板
+dashboard/*.private.html
+*.private.html
+
+# Python
+__pycache__/
+*.pyc
+
+# 环境变量与密钥
+.env
+.env.*
+
+# 编辑器与系统文件
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

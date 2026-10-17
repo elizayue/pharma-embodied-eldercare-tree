@@ -1,0 +1,14 @@
+{
+  "schema": "pe-eldercare-tree-progress",
+  "version": 1,
+  "updated": "2026-10-17T00:00:00.000Z",
+  "done": {
+    "05-M1.1": true,
+    "05-M3.1": true,
+    "leaf-rdkit": true,
+    "card-alphafold2": true
+  },
+  "notes": {
+    "16-M2.1": "示例笔记：先调研智能药盒现有方案，再决定是否需要机械臂。"
+  }
+}

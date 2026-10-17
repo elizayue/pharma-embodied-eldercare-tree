@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<!-- 药学 × 具身智能 × 养老 学习树看板。页面模板改编自 S2AI scripts/dashboard-template.html（MIT License, Copyright (c) 2026 cxy），见 THIRD_PARTY_NOTICES.md -->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>药学 × 具身智能 × 养老 · 学习树</title>
+<style>
+  :root {
+    font-family: var(--kimi-font-sans, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif);
+    --kt: var(--kimi-color-text-primary, #1a1a1a);
+    --k2: var(--kimi-color-text-secondary, #555);
+    --k3: var(--kimi-color-text-tertiary, #888);
+    --k4: var(--kimi-color-text-quaternary, #aaa);
+    --bd: var(--kimi-color-border, #e5e5e5);
+    --sm: var(--kimi-color-surface-muted, #f5f5f5);
+    --pos: var(--kimi-color-positive, #16a34a);
+    --warn: var(--kimi-color-warning, #d97706);
+    --dan: var(--kimi-color-danger, #dc2626);
+    --c1: var(--kimi-chart-1, #2563eb);
+    --c3: var(--kimi-chart-3, #16a34a);
+    --c4: var(--kimi-chart-4, #9333ea);
+    --sans: var(--kimi-font-sans, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif);
+    --mono: var(--kimi-font-mono, ui-monospace, Consolas, monospace);
+    --sp1: var(--kimi-space-1, 4px); --sp2: var(--kimi-space-2, 8px); --sp3: var(--kimi-space-3, 12px);
+    --sp4: var(--kimi-space-4, 16px); --sp5: var(--kimi-space-5, 20px); --sp6: var(--kimi-space-6, 24px);
+    --rc: var(--kimi-radius-chip, 6px); --rp: var(--kimi-radius-panel, 12px); --ri: var(--kimi-radius-input, 10px);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  button, input { font: inherit; color: inherit; }
+  .root {
+    padding-block-start: var(--sp4);
+    padding-inline: var(--sp4);
+    padding-block-end: var(--sp4);
+    font-family: var(--sans);
+    color: var(--kt);
+    font-size: 14px;
+    line-height: 1.55;
+  }
+  .head { margin-block-end: var(--sp3); }
+  .head h1 { font-size: 17px; font-weight: 500; }
+  .head .meta { font-size: 12px; color: var(--k3); margin-block-start: 2px; }
+  .stats { display: flex; flex-wrap: wrap; gap: var(--sp1); margin-block-end: var(--sp3); }
+  .stat {
+    font-size: 12px; color: var(--k3);
+    border: 1px solid var(--bd); border-radius: var(--rc);
+    padding: 1px var(--sp2);
+    font-variant-numeric: tabular-nums;
+  }
+  .stat b { color: var(--kt); font-weight: 500; margin-inline-end: 3px; }
+  .toolbar { margin-block-end: var(--sp3); }
+  .toolbar input {
+    width: 100%; padding: 7px var(--sp3);
+    border: 1px solid var(--bd); border-radius: var(--ri);
+    background: transparent; font-size: 14px; color: var(--kt);
+  }
+  .toolbar input::placeholder { color: var(--k4); }
+  .toolbar input:focus { outline: 2px solid var(--kt); outline-offset: -1px; }
+  .tabs { display: flex; gap: var(--sp1); flex-wrap: wrap; margin-block-end: var(--sp3); }
+  .tab {
+    border: 1px solid var(--bd); background: transparent; border-radius: var(--rc);
+    padding: 3px var(--sp3); font-size: 13px; color: var(--k2); cursor: pointer;
+    font-variant-numeric: tabular-nums;
+  }
+  .tab:hover { color: var(--kt); }
+  .tab[aria-selected="true"] { background: var(--kt); border-color: var(--kt); color: var(--sm); }
+  .tab .cnt { opacity: .65; margin-inline-start: 4px; font-size: 12px; }
+
+  details.ch { border-block-start: 1px solid var(--bd); }
+  details.ch:first-of-type { border-block-start: none; }
+  details.ch summary {
+    display: flex; align-items: center; gap: var(--sp2);
+    padding-block: var(--sp2); cursor: pointer; list-style: none;
+    font-size: 14px; font-weight: 500;
+  }
+  details.ch summary::-webkit-details-marker { display: none; }
+  details.ch summary .chev {
+    flex: none; width: 16px; height: 16px; color: var(--k3);
+    transition: transform .15s ease-out;
+  }
+  details.ch[open] summary .chev { transform: rotate(90deg); }
+  details.ch summary .stars { color: var(--warn); font-size: 12px; letter-spacing: 1px; }
+  details.ch summary .sum { font-weight: 400; font-size: 12px; color: var(--k3); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; }
+  details.ch summary .n { margin-inline-start: auto; font-size: 12px; color: var(--k4); font-variant-numeric: tabular-nums; flex: none; }
+  .ch-body { padding-block-end: var(--sp3); }
+  .p0 { font-size: 12px; color: var(--k2); background: var(--sm); border-radius: var(--rc); padding: var(--sp2) var(--sp3); margin-block-end: var(--sp2); }
+  .mod { margin-block-end: var(--sp2); }
+  .mod h4 { font-size: 12px; color: var(--k3); font-weight: 500; margin-block-end: 2px; }
+  .pt { display: flex; align-items: baseline; gap: var(--sp2); padding-block: 3px; padding-inline: var(--sp1); border-radius: var(--rc); }
+  .pt:hover { background: var(--sm); }
+  .pt .id { font-family: var(--mono); font-size: 11px; color: var(--k4); flex: none; }
+  .pt .nm { flex: 1; min-width: 0; }
+  .pt .nm .chips { display: flex; flex-wrap: wrap; gap: var(--sp1); margin-block-start: 2px; }
+  .pt .done { color: var(--pos); font-size: 12px; flex: none; }
+  .badge.dash { border-style: dashed; color: var(--k3); }
+  .cnt { display: inline-block; font-size: 10px; padding: 0 5px; border-radius: var(--rc); flex: none; font-variant-numeric: tabular-nums; white-space: nowrap; cursor: pointer; border: 1px solid transparent; }
+  .cnt.leafy { color: var(--pos); background: color-mix(in srgb, var(--pos) 10%, transparent); }
+  .cnt.cardy { color: var(--em); background: color-mix(in srgb, var(--em) 10%, transparent); }
+  .cnt:hover { border-color: currentColor; }
+  :root { --em: var(--kimi-chart-2, #059669); }
+
+  .grp { margin-block-end: var(--sp4); }
+  .grp h3 { font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: var(--sp2); flex-wrap: wrap; }
+  .grp h3 .gmeta { font-weight: 400; font-size: 12px; color: var(--k4); font-variant-numeric: tabular-nums; }
+  .grp .gnote { font-size: 12px; color: var(--k3); margin-block: var(--sp1) var(--sp2); }
+  .leaf { display: flex; gap: var(--sp2); align-items: baseline; padding-block: 4px; padding-inline: var(--sp1); border-radius: var(--rc); }
+  .leaf:hover { background: var(--sm); }
+  .leaf .nm { font-weight: 500; }
+  .leaf .intro { color: var(--k3); font-size: 12px; }
+  .orphan { margin-block-start: var(--sp2); padding-block-start: var(--sp2); border-block-start: 1px dashed var(--bd); font-size: 12px; color: var(--k3); display: flex; flex-wrap: wrap; gap: var(--sp1); align-items: baseline; }
+
+  .cardx { border: 1px solid var(--bd); border-radius: var(--ri); padding: var(--sp3); margin-block-end: var(--sp2); }
+  .cardx h3 { font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: var(--sp2); flex-wrap: wrap; }
+  .cardx .sub { font-size: 12px; color: var(--k3); margin-block-start: 2px; }
+  .kv { display: flex; gap: var(--sp2); margin-block-start: var(--sp1); font-size: 13px; }
+  .kv b { flex: none; width: 60px; font-weight: 500; font-size: 12px; color: var(--k3); padding-block-start: 1px; }
+  .tags { display: flex; flex-wrap: wrap; gap: var(--sp1); }
+
+  a { color: var(--kt); text-decoration: none; border-block-end: 1px solid transparent; }
+  a:hover { border-block-end-color: var(--kt); }
+  .badge {
+    display: inline-block; font-size: 11px; padding: 0 var(--sp2);
+    border-radius: var(--rc); border: 1px solid var(--bd); color: var(--k3);
+    font-variant-numeric: tabular-nums; white-space: nowrap;
+  }
+  .badge.node { cursor: pointer; color: var(--k2); }
+  .badge.node:hover { color: var(--kt); border-color: var(--kt); }
+  .badge.broken { color: var(--dan); border-color: color-mix(in srgb, var(--dan) 40%, transparent); text-decoration: line-through; }
+  .badge.leafy { color: var(--pos); border-color: color-mix(in srgb, var(--pos) 35%, transparent); background: color-mix(in srgb, var(--pos) 8%, transparent); }
+  .badge.lv-深入 { color: var(--warn); border-color: color-mix(in srgb, var(--warn) 35%, transparent); background: color-mix(in srgb, var(--warn) 8%, transparent); }
+  .badge.lv-跟练 { color: var(--pos); border-color: color-mix(in srgb, var(--pos) 35%, transparent); background: color-mix(in srgb, var(--pos) 8%, transparent); }
+  .badge.grad { color: var(--c4); border-color: color-mix(in srgb, var(--c4) 35%, transparent); background: color-mix(in srgb, var(--c4) 8%, transparent); }
+  .badge.kind-twig { color: var(--c4); border-color: color-mix(in srgb, var(--c4) 35%, transparent); background: color-mix(in srgb, var(--c4) 8%, transparent); }
+  .mono { font-family: var(--mono); font-size: 11px; }
+  .empty { color: var(--k4); text-align: center; padding-block: var(--sp6); font-size: 13px; }
+  .hl { outline: 2px solid var(--warn); outline-offset: 1px; border-radius: var(--rc); }
+  .pbar { height: 6px; border-radius: 3px; background: var(--sm); overflow: hidden; margin-block-end: var(--sp3); }
+  .pbar i { display: block; height: 100%; background: var(--pos); }
+  .actions { display: flex; flex-wrap: wrap; gap: var(--sp1); margin-block-end: var(--sp3); align-items: center; }
+  .btn { border: 1px solid var(--bd); background: transparent; border-radius: var(--rc); padding: 2px var(--sp3); font-size: 12px; color: var(--k2); cursor: pointer; }
+  .btn:hover { color: var(--kt); border-color: var(--kt); }
+  .actions .hint { font-size: 11px; color: var(--k4); }
+  input.ck { flex: none; width: 14px; height: 14px; accent-color: var(--pos); cursor: pointer; align-self: center; }
+  .note-btn { flex: none; font-size: 11px; color: var(--k4); cursor: pointer; border: none; background: none; }
+  .note-btn.has { color: var(--c1); }
+  .note { display: block; font-size: 12px; color: var(--c1); white-space: pre-wrap; margin-block-start: 2px; }
+  .is-done > .nm, .is-done .nm > a { color: var(--k3); }
+  .starters { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--sp2); margin-block-end: var(--sp3); }
+  .starter { border: 1px solid var(--bd); border-radius: var(--ri); padding: var(--sp2) var(--sp3); font-size: 12px; color: var(--k2); }
+  .starter b { display: block; font-size: 13px; color: var(--kt); font-weight: 500; }
+  .starter ol { padding-inline-start: 18px; margin-block-start: 2px; }
+  .domain { font-size: 11px; color: var(--k4); margin-block: var(--sp3) var(--sp1); letter-spacing: 1px; }
+  footer { margin-block-start: var(--sp4); font-size: 11px; color: var(--k4); }
+</style>
+</head>
+<body>
+<div class="root">
+  <div class="head">
+    <h1>药学 × 具身智能 × 养老 · 学习树</h1>
+    <p class="meta" id="meta"></p>
+  </div>
+  <div class="stats" id="stats"></div>
+  <div class="pbar" title="学习点完成度"><i id="pbar"></i></div>
+  <div class="actions">
+    <button class="btn" id="btn-export" title="把本机进度与笔记下载为 JSON，可放进任意文件夹或网盘">导出进度 JSON</button>
+    <button class="btn" id="btn-import" title="从 JSON 文件导入（与本机进度合并）">导入进度</button>
+    <button class="btn" id="btn-clear" title="清空本浏览器里保存的进度与笔记">清空本机进度</button>
+    <input type="file" id="file-import" accept="application/json,.json" hidden>
+    <span class="hint" id="psrc"></span>
+  </div>
+  <details class="ch" id="starters-box"><summary><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg><span>从哪开始</span><span class="sum">三条入口路径</span></summary><div class="starters" id="starters"></div></details>
+  <div class="toolbar"><input id="q" type="search" placeholder="搜索当前板块：名称 / 编号 / 关键词…" aria-label="搜索"></div>
+  <nav class="tabs" id="tabs" role="tablist"></nav>
+  <main id="main"></main>
+  <footer>由 scripts/export-dashboard.py 生成 · 公共内容来自 src/data/*.ts，个人进度只保存在本浏览器 localStorage 或你导出的 JSON 文件中 · 结构与看板思路参考 <a href="https://github.com/chenxiaoyu0505/S2AI" target="_blank" rel="noopener">S2AI</a>（MIT）</footer>
+</div>
+<script id="tree-data" type="application/json">{"chapters": [{"id": "00", "name": "公共基础：数学、编程与科研方法", "weight": 2, "summary": "三条主线共用的地基：数学、Python、深度学习与文献方法", "p0": "1.2 概率统计 ｜ 2.1 Python 科学计算 ｜ 3.1 深度学习基础 ｜ 4.1 文献检索与阅读", "modules": [{"name": "M1 数学基础", "points": [{"id": "M1.1", "name": "线性代数（矩阵、特征分解、SVD）", "freq": 2, "done": false}, {"id": "M1.2", "name": "概率统计与贝叶斯推断", "freq": 3, "done": false}, {"id": "M1.3", "name": "微积分与优化（梯度、凸优化）", "freq": 2, "done": false}, {"id": "M1.4", "name": "刚体变换与李群初步（旋转矩阵、四元数）", "freq": 2, "done": false}]}, {"name": "M2 编程与工具", "points": [{"id": "M2.1", "name": "Python 科学计算（NumPy / pandas / Matplotlib）", "freq": 3, "done": false}, {"id": "M2.2", "name": "Linux、Git 与环境管理", "freq": 2, "done": false}, {"id": "M2.3", "name": "C++ 基础（机器人系统常用）", "freq": 1, "done": false}, {"id": "M2.4", "name": "实验管理与可复现（配置、随机种子、日志）", "freq": 2, "done": false}]}, {"name": "M3 机器学习与深度学习", "points": [{"id": "M3.1", "name": "深度学习基础（反向传播、优化器、正则化）", "freq": 3, "done": false}, {"id": "M3.2", "name": "CNN / GNN / Transformer 架构", "freq": 3, "done": false}, {"id": "M3.3", "name": "生成模型（VAE / 扩散模型 / 自回归）", "freq": 2, "done": false}, {"id": "M3.4", "name": "大语言模型与多模态模型基础", "freq": 3, "done": false}, {"id": "M3.5", "name": "评估方法（数据划分、交叉验证、不确定性）", "freq": 2, "done": false}]}, {"name": "M4 科研方法", "points": [{"id": "M4.1", "name": "文献检索与阅读（PubMed / arXiv / Google Scholar）", "freq": 2, "done": false}, {"id": "M4.2", "name": "实验设计与统计检验", "freq": 2, "done": false}, {"id": "M4.3", "name": "跨学科沟通：医学、药学、工程术语对齐", "freq": 1, "done": false}]}]}, {"id": "01", "name": "药物化学与药物发现流程", "weight": 3, "summary": "从靶点到候选药物：理解一个分子如何成为药", "p0": "1.1 研发全流程 ｜ 2.2 构效关系 ｜ 2.3 类药性规则 ｜ 3.1 苗头到先导", "modules": [{"name": "M1 新药研发全景", "points": [{"id": "M1.1", "name": "研发流程：靶点发现 → 苗头 → 先导 → 候选 → 临床 → 上市", "freq": 3, "done": false}, {"id": "M1.2", "name": "靶点识别与验证", "freq": 2, "done": false}, {"id": "M1.3", "name": "药物类型：小分子、多肽、抗体、核酸、细胞与基因治疗", "freq": 2, "done": false}, {"id": "M1.4", "name": "研发成本、周期与失败原因", "freq": 1, "done": false}]}, {"name": "M2 药物化学基础", "points": [{"id": "M2.1", "name": "官能团、立体化学与手性药物", "freq": 2, "done": false}, {"id": "M2.2", "name": "构效关系（SAR）与生物电子等排", "freq": 3, "done": false}, {"id": "M2.3", "name": "类药性规则（Lipinski 五规则等）与成药性", "freq": 3, "done": false}, {"id": "M2.4", "name": "前药设计", "freq": 1, "done": false}, {"id": "M2.5", "name": "分子表示：SMILES、分子指纹、分子图", "freq": 3, "done": false}]}, {"name": "M3 先导发现与优化", "points": [{"id": "M3.1", "name": "苗头化合物发现：高通量筛选、片段筛选、DNA 编码库", "freq": 2, "done": false}, {"id": "M3.2", "name": "先导优化：活性、选择性、ADMET 多参数平衡", "freq": 3, "done": false}, {"id": "M3.3", "name": "骨架跃迁与化合物库设计", "freq": 2, "done": false}, {"id": "M3.4", "name": "天然产物与中药现代化", "freq": 1, "done": false}]}, {"name": "M4 结构生物学与分子相互作用", "points": [{"id": "M4.1", "name": "蛋白质结构层级与结合口袋", "freq": 2, "done": false}, {"id": "M4.2", "name": "结构解析：X 射线、冷冻电镜、NMR", "freq": 1, "done": false}, {"id": "M4.3", "name": "分子间作用力与结合自由能", "freq": 2, "done": false}, {"id": "M4.4", "name": "分子对接与虚拟筛选原理", "freq": 3, "done": false}, {"id": "M4.5", "name": "分子动力学模拟基础", "freq": 2, "done": false}]}]}, {"id": "02", "name": "药理学与药代动力学（ADMET）", "weight": 3, "summary": "药物对机体做什么、机体对药物做什么", "p0": "1.1 受体理论 ｜ 2.1 ADME 四环节 ｜ 2.3 PK 参数 ｜ 3.1 药物相互作用", "modules": [{"name": "M1 药效学", "points": [{"id": "M1.1", "name": "受体理论：激动剂、拮抗剂、部分激动剂", "freq": 3, "done": false}, {"id": "M1.2", "name": "量效关系：EC50、Emax、治疗指数", "freq": 3, "done": false}, {"id": "M1.3", "name": "主要药物类别与作用机制（心血管、中枢、抗感染、内分泌）", "freq": 2, "done": false}, {"id": "M1.4", "name": "耐受、依赖与个体差异", "freq": 1, "done": false}]}, {"name": "M2 药代动力学", "points": [{"id": "M2.1", "name": "ADME：吸收、分布、代谢、排泄", "freq": 3, "done": false}, {"id": "M2.2", "name": "CYP450 代谢酶与转运体", "freq": 3, "done": false}, {"id": "M2.3", "name": "PK 参数：半衰期、清除率、分布容积、生物利用度、AUC", "freq": 3, "done": false}, {"id": "M2.4", "name": "房室模型与非房室分析", "freq": 2, "done": false}, {"id": "M2.5", "name": "群体药代（PopPK）与生理药代（PBPK）模型", "freq": 2, "done": false}]}, {"name": "M3 药物相互作用与毒理", "points": [{"id": "M3.1", "name": "药物相互作用（DDI）：酶抑制 / 诱导、转运体介导", "freq": 3, "done": false}, {"id": "M3.2", "name": "毒理学基础：急毒、重复给药毒性、遗传毒性", "freq": 2, "done": false}, {"id": "M3.3", "name": "心脏毒性（hERG / QT 延长）与肝毒性", "freq": 2, "done": false}, {"id": "M3.4", "name": "药物不良反应分类", "freq": 2, "done": false}]}, {"name": "M4 精准药学", "points": [{"id": "M4.1", "name": "药物基因组学（如 CYP2C19、CYP2D6 多态性）", "freq": 2, "done": false}, {"id": "M4.2", "name": "治疗药物监测（TDM）", "freq": 2, "done": false}, {"id": "M4.3", "name": "特殊人群用药：老年、肝肾功能不全、儿童、孕期", "freq": 3, "done": false}]}]}, {"id": "03", "name": "药剂学与制剂", "weight": 2, "summary": "药物如何被做成患者能用、愿意用的剂型", "p0": "1.1 剂型分类 ｜ 2.2 缓控释 ｜ 3.1 质量源于设计 ｜ 4.1 适老化剂型", "modules": [{"name": "M1 剂型与给药途径", "points": [{"id": "M1.1", "name": "常见剂型：片剂、胶囊、注射剂、吸入剂、透皮贴剂", "freq": 2, "done": false}, {"id": "M1.2", "name": "给药途径与首过效应", "freq": 2, "done": false}, {"id": "M1.3", "name": "溶解度、溶出与生物药剂学分类系统（BCS）", "freq": 2, "done": false}]}, {"name": "M2 新型递送系统", "points": [{"id": "M2.1", "name": "缓释 / 控释制剂", "freq": 2, "done": false}, {"id": "M2.2", "name": "纳米递送与脂质纳米粒（LNP）", "freq": 2, "done": false}, {"id": "M2.3", "name": "靶向递送与抗体偶联药物（ADC）", "freq": 1, "done": false}]}, {"name": "M3 制药工程与质量", "points": [{"id": "M3.1", "name": "质量源于设计（QbD）与 ICH 质量指南", "freq": 2, "done": false}, {"id": "M3.2", "name": "GMP 与连续制造", "freq": 1, "done": false}, {"id": "M3.3", "name": "稳定性研究与包装", "freq": 1, "done": false}, {"id": "M3.4", "name": "仿制药一致性评价与生物等效性", "freq": 2, "done": false}]}, {"name": "M4 适老化与以患者为中心的制剂", "points": [{"id": "M4.1", "name": "吞咽困难患者的剂型选择（口崩片、液体、可否掰开 / 研碎）", "freq": 3, "done": false}, {"id": "M4.2", "name": "包装与标签的适老化（大字、易开启、单剂量包装）", "freq": 2, "done": false}, {"id": "M4.3", "name": "固定剂量复方与减少服药负担", "freq": 2, "done": false}]}]}, {"id": "04", "name": "临床研究、法规与药物警戒", "weight": 2, "summary": "药从实验室走向患者的规则与证据体系", "p0": "1.1 临床分期 ｜ 1.3 终点与统计 ｜ 2.1 监管体系 ｜ 3.1 药物警戒", "modules": [{"name": "M1 临床试验", "points": [{"id": "M1.1", "name": "临床试验分期（I–IV 期）", "freq": 3, "done": false}, {"id": "M1.2", "name": "随机、对照、盲法与伦理审查", "freq": 2, "done": false}, {"id": "M1.3", "name": "终点设计与统计分析（ITT、样本量）", "freq": 2, "done": false}, {"id": "M1.4", "name": "老年人在临床试验中的代表性不足问题", "freq": 2, "done": false}, {"id": "M1.5", "name": "真实世界数据与真实世界证据（RWD / RWE）", "freq": 2, "done": false}]}, {"name": "M2 监管与法规", "points": [{"id": "M2.1", "name": "监管机构：NMPA、FDA、EMA 与 ICH", "freq": 2, "done": false}, {"id": "M2.2", "name": "新药申报路径（IND / NDA / BLA）概念", "freq": 2, "done": false}, {"id": "M2.3", "name": "GCP、GLP 与数据完整性", "freq": 1, "done": false}, {"id": "M2.4", "name": "AI / 软件作为医疗器械（SaMD）的监管思路", "freq": 2, "done": false}]}, {"name": "M3 药物警戒与用药安全", "points": [{"id": "M3.1", "name": "药物警戒与不良反应监测体系", "freq": 2, "done": false}, {"id": "M3.2", "name": "自发报告数据库与信号检测（比例失衡分析）", "freq": 2, "done": false}, {"id": "M3.3", "name": "用药错误的分类与防范", "freq": 2, "done": false}]}, {"name": "M4 药学服务与临床药学", "points": [{"id": "M4.1", "name": "处方审核与合理用药", "freq": 2, "done": false}, {"id": "M4.2", "name": "药物重整（Medication Reconciliation）", "freq": 3, "done": false}, {"id": "M4.3", "name": "药学门诊与慢病管理中的药师角色", "freq": 1, "done": false}]}]}, {"id": "05", "name": "AIDD：AI 驱动的药物发现", "weight": 3, "summary": "你的主场：把机器学习用于分子、蛋白与临床数据", "p0": "1.1 分子表示学习 ｜ 2.1 性质预测 ｜ 3.1 结构预测 ｜ 4.1 分子生成", "modules": [{"name": "M1 数据与表示", "points": [{"id": "M1.1", "name": "分子表示学习：指纹、图神经网络、SMILES 语言模型", "freq": 3, "done": false}, {"id": "M1.2", "name": "蛋白表示：序列语言模型（ESM 类）与结构表示", "freq": 3, "done": false}, {"id": "M1.3", "name": "公共数据库：ChEMBL、PubChem、PDB、ZINC、DrugBank", "freq": 2, "done": false}, {"id": "M1.4", "name": "数据划分陷阱：随机 vs 骨架划分、数据泄漏", "freq": 3, "done": false}]}, {"name": "M2 性质与活性预测", "points": [{"id": "M2.1", "name": "QSAR 与分子性质预测", "freq": 3, "done": false}, {"id": "M2.2", "name": "ADMET 预测模型", "freq": 3, "done": false}, {"id": "M2.3", "name": "药物—靶点相互作用（DTI）与结合亲和力预测", "freq": 2, "done": false}, {"id": "M2.4", "name": "不确定性估计与适用域", "freq": 2, "done": false}]}, {"name": "M3 结构驱动方法", "points": [{"id": "M3.1", "name": "蛋白结构预测（AlphaFold 系列、RoseTTAFold、ESMFold）", "freq": 3, "done": false}, {"id": "M3.2", "name": "生物分子复合物结构预测（蛋白—配体、蛋白—核酸）", "freq": 2, "done": false}, {"id": "M3.3", "name": "深度学习分子对接（如 DiffDock）", "freq": 2, "done": false}, {"id": "M3.4", "name": "结合自由能计算与 ML 加速", "freq": 1, "done": false}]}, {"name": "M4 生成式设计", "points": [{"id": "M4.1", "name": "分子生成：VAE、强化学习、扩散模型、语言模型", "freq": 3, "done": false}, {"id": "M4.2", "name": "基于口袋的三维分子生成", "freq": 2, "done": false}, {"id": "M4.3", "name": "蛋白质设计（如 RFdiffusion、ProteinMPNN）", "freq": 2, "done": false}, {"id": "M4.4", "name": "多目标优化与可合成性评估", "freq": 2, "done": false}, {"id": "M4.5", "name": "逆合成与反应预测", "freq": 2, "done": false}]}, {"name": "M5 闭环与智能体", "points": [{"id": "M5.1", "name": "主动学习与贝叶斯优化", "freq": 2, "done": false}, {"id": "M5.2", "name": "自动化实验室（Self-driving Lab）与 DMTA 闭环", "freq": 2, "done": false}, {"id": "M5.3", "name": "LLM / Agent 在药物研发中的应用（文献挖掘、工具调用）", "freq": 3, "done": false}, {"id": "M5.4", "name": "AI 临床：患者分层、试验设计与药物重定位", "freq": 2, "done": false}]}]}, {"id": "06", "name": "机器人学基础", "weight": 2, "summary": "具身智能的物理地基：机构、运动学、动力学与系统软件", "p0": "1.2 正逆运动学 ｜ 2.1 动力学 ｜ 3.1 ROS 2 ｜ 4.1 机器人形态", "modules": [{"name": "M1 运动学", "points": [{"id": "M1.1", "name": "位姿表示：旋转矩阵、欧拉角、四元数、齐次变换", "freq": 3, "done": false}, {"id": "M1.2", "name": "正运动学与逆运动学", "freq": 3, "done": false}, {"id": "M1.3", "name": "雅可比矩阵与奇异性", "freq": 2, "done": false}, {"id": "M1.4", "name": "移动机器人运动学（差速、全向）", "freq": 2, "done": false}]}, {"name": "M2 动力学", "points": [{"id": "M2.1", "name": "刚体动力学：牛顿—欧拉与拉格朗日方法", "freq": 2, "done": false}, {"id": "M2.2", "name": "接触、摩擦与抓取力学", "freq": 2, "done": false}, {"id": "M2.3", "name": "腿足与平衡（ZMP 等概念）", "freq": 1, "done": false}]}, {"name": "M3 机器人软件系统", "points": [{"id": "M3.1", "name": "ROS 2：节点、话题、服务、动作", "freq": 3, "done": false}, {"id": "M3.2", "name": "URDF / MJCF 机器人描述", "freq": 2, "done": false}, {"id": "M3.3", "name": "坐标系管理（TF）与时间同步", "freq": 2, "done": false}, {"id": "M3.4", "name": "实时性与嵌入式控制", "freq": 1, "done": false}]}, {"name": "M4 硬件与形态", "points": [{"id": "M4.1", "name": "机器人形态：机械臂、移动底盘、移动操作、四足、人形", "freq": 2, "done": false}, {"id": "M4.2", "name": "执行器：电机、减速器、力控 / 柔性驱动", "freq": 2, "done": false}, {"id": "M4.3", "name": "传感器：编码器、IMU、力 / 力矩、触觉、相机、激光雷达", "freq": 2, "done": false}, {"id": "M4.4", "name": "灵巧手与末端执行器", "freq": 1, "done": false}, {"id": "M4.5", "name": "安全：协作机器人标准与人机交互安全", "freq": 3, "done": false}]}]}, {"id": "07", "name": "机器人感知", "weight": 2, "summary": "让机器人看懂、听懂、摸懂环境与人", "p0": "1.2 目标检测分割 ｜ 2.1 三维视觉 ｜ 3.1 SLAM ｜ 4.1 人体姿态", "modules": [{"name": "M1 二维视觉", "points": [{"id": "M1.1", "name": "相机模型与标定", "freq": 2, "done": false}, {"id": "M1.2", "name": "目标检测与分割（含开放词汇方法）", "freq": 3, "done": false}, {"id": "M1.3", "name": "视觉基础模型（CLIP 类、SAM 类、DINO 类）", "freq": 3, "done": false}]}, {"name": "M2 三维感知", "points": [{"id": "M2.1", "name": "深度相机与点云处理", "freq": 2, "done": false}, {"id": "M2.2", "name": "6D 位姿估计", "freq": 2, "done": false}, {"id": "M2.3", "name": "三维场景表示（体素、NeRF、3D 高斯）", "freq": 1, "done": false}]}, {"name": "M3 定位与建图", "points": [{"id": "M3.1", "name": "SLAM 基础（视觉 / 激光）", "freq": 2, "done": false}, {"id": "M3.2", "name": "语义地图与场景图", "freq": 2, "done": false}]}, {"name": "M4 以人为中心的感知", "points": [{"id": "M4.1", "name": "人体姿态估计与动作识别", "freq": 3, "done": false}, {"id": "M4.2", "name": "跌倒检测：视觉、可穿戴、雷达等方案对比", "freq": 3, "done": false}, {"id": "M4.3", "name": "语音识别与自然语言交互", "freq": 2, "done": false}, {"id": "M4.4", "name": "情绪与认知状态识别（局限与伦理）", "freq": 1, "done": false}]}, {"name": "M5 多模态融合", "points": [{"id": "M5.1", "name": "触觉感知", "freq": 1, "done": false}, {"id": "M5.2", "name": "多传感器融合与卡尔曼滤波", "freq": 2, "done": false}]}]}, {"id": "08", "name": "控制与规划", "weight": 2, "summary": "从“想做什么”到“精确地做出来”", "p0": "1.1 PID ｜ 2.1 运动规划 ｜ 3.1 任务规划 ｜ 1.3 力控", "modules": [{"name": "M1 控制", "points": [{"id": "M1.1", "name": "PID 与经典控制", "freq": 3, "done": false}, {"id": "M1.2", "name": "模型预测控制（MPC）", "freq": 2, "done": false}, {"id": "M1.3", "name": "阻抗 / 导纳控制与力控", "freq": 2, "done": false}, {"id": "M1.4", "name": "全身控制（WBC）概念", "freq": 1, "done": false}]}, {"name": "M2 运动规划", "points": [{"id": "M2.1", "name": "采样式规划（RRT、PRM）", "freq": 2, "done": false}, {"id": "M2.2", "name": "轨迹优化", "freq": 2, "done": false}, {"id": "M2.3", "name": "移动导航（全局 / 局部规划、避障）", "freq": 2, "done": false}, {"id": "M2.4", "name": "抓取规划", "freq": 2, "done": false}]}, {"name": "M3 任务规划与决策", "points": [{"id": "M3.1", "name": "任务与运动规划（TAMP）", "freq": 1, "done": false}, {"id": "M3.2", "name": "行为树与状态机", "freq": 2, "done": false}, {"id": "M3.3", "name": "LLM 作为任务规划器（高层规划 + 底层技能）", "freq": 3, "done": false}]}, {"name": "M4 人机协作", "points": [{"id": "M4.1", "name": "人机共融的安全控制（限速、限力、碰撞检测）", "freq": 2, "done": false}, {"id": "M4.2", "name": "人类意图预测与共享控制", "freq": 1, "done": false}, {"id": "M4.3", "name": "辅助移动与搀扶类机器人控制要点", "freq": 1, "done": false}]}]}, {"id": "09", "name": "机器人学习：强化学习与模仿学习", "weight": 3, "summary": "从数据和试错中学技能", "p0": "1.2 策略梯度 ｜ 2.1 行为克隆 ｜ 2.3 扩散策略 ｜ 3.1 示教数据采集", "modules": [{"name": "M1 强化学习", "points": [{"id": "M1.1", "name": "MDP、价值函数与贝尔曼方程", "freq": 3, "done": false}, {"id": "M1.2", "name": "策略梯度与 PPO", "freq": 3, "done": false}, {"id": "M1.3", "name": "off-policy 方法（DQN / SAC）", "freq": 2, "done": false}, {"id": "M1.4", "name": "奖励设计与安全约束", "freq": 2, "done": false}, {"id": "M1.5", "name": "离线强化学习", "freq": 1, "done": false}]}, {"name": "M2 模仿学习", "points": [{"id": "M2.1", "name": "行为克隆与分布偏移（DAgger）", "freq": 3, "done": false}, {"id": "M2.2", "name": "动作分块（Action Chunking）与 ACT", "freq": 2, "done": false}, {"id": "M2.3", "name": "扩散策略（Diffusion Policy）与流匹配策略", "freq": 3, "done": false}, {"id": "M2.4", "name": "逆强化学习概念", "freq": 1, "done": false}]}, {"name": "M3 数据", "points": [{"id": "M3.1", "name": "示教数据采集：遥操作、主从臂、VR、手持采集设备", "freq": 3, "done": false}, {"id": "M3.2", "name": "数据格式与大规模数据集（Open X-Embodiment 等）", "freq": 2, "done": false}, {"id": "M3.3", "name": "人类视频学习", "freq": 1, "done": false}]}, {"name": "M4 世界模型", "points": [{"id": "M4.1", "name": "世界模型与基于模型的强化学习", "freq": 2, "done": false}, {"id": "M4.2", "name": "视频生成模型作为模拟器", "freq": 1, "done": false}]}]}, {"id": "10", "name": "具身大模型与 VLA", "weight": 3, "summary": "把大模型的语义能力接到机器人身体上", "p0": "1.1 VLA 定义 ｜ 2.1 RT-2 ｜ 2.3 π0 ｜ 3.1 分层架构", "modules": [{"name": "M1 概念", "points": [{"id": "M1.1", "name": "视觉—语言—动作模型（VLA）的定义与动机", "freq": 3, "done": false}, {"id": "M1.2", "name": "动作表示：离散化 token、连续动作头、扩散 / 流匹配", "freq": 3, "done": false}, {"id": "M1.3", "name": "跨本体（cross-embodiment）泛化", "freq": 2, "done": false}]}, {"name": "M2 代表性工作", "points": [{"id": "M2.1", "name": "RT-1 / RT-2 与 RT-X", "freq": 3, "done": false}, {"id": "M2.2", "name": "OpenVLA 与 Octo（开源通用策略）", "freq": 3, "done": false}, {"id": "M2.3", "name": "π0 系列（流匹配动作专家）", "freq": 3, "done": false}, {"id": "M2.4", "name": "SayCan、PaLM-E 等“语言规划 + 技能”", "freq": 2, "done": false}, {"id": "M2.5", "name": "人形机器人基础模型（行业进展跟踪）", "freq": 1, "done": false}]}, {"name": "M3 系统设计", "points": [{"id": "M3.1", "name": "分层架构：高层 VLM 推理 + 底层快速控制", "freq": 3, "done": false}, {"id": "M3.2", "name": "微调与部署：LoRA 微调、量化、推理频率", "freq": 2, "done": false}, {"id": "M3.3", "name": "具身智能体：记忆、工具调用与长程任务", "freq": 2, "done": false}]}, {"name": "M4 评测", "points": [{"id": "M4.1", "name": "仿真基准与真实评测", "freq": 2, "done": false}, {"id": "M4.2", "name": "泛化维度：物体、场景、指令、本体", "freq": 2, "done": false}, {"id": "M4.3", "name": "安全性与失败模式分析", "freq": 3, "done": false}]}]}, {"id": "11", "name": "仿真、数据与 Sim2Real", "weight": 2, "summary": "低成本地大量试错，再把能力搬到真机", "p0": "1.1 物理仿真器 ｜ 2.1 域随机化 ｜ 3.1 合成数据 ｜ 1.3 家居场景仿真", "modules": [{"name": "M1 仿真平台", "points": [{"id": "M1.1", "name": "物理仿真器：MuJoCo、Isaac Sim / Isaac Lab、PyBullet", "freq": 3, "done": false}, {"id": "M1.2", "name": "机器人学习环境：Gymnasium、robosuite、ManiSkill", "freq": 2, "done": false}, {"id": "M1.3", "name": "家居与具身导航仿真（Habitat 等）", "freq": 2, "done": false}]}, {"name": "M2 Sim2Real", "points": [{"id": "M2.1", "name": "域随机化", "freq": 3, "done": false}, {"id": "M2.2", "name": "系统辨识", "freq": 2, "done": false}, {"id": "M2.3", "name": "Real2Sim 与数字孪生", "freq": 1, "done": false}]}, {"name": "M3 数据工程", "points": [{"id": "M3.1", "name": "合成数据与程序化场景生成", "freq": 2, "done": false}, {"id": "M3.2", "name": "数据质量、标注与清洗", "freq": 2, "done": false}, {"id": "M3.3", "name": "低成本开源硬件平台（如 SO-100 机械臂）入门", "freq": 2, "done": false}]}]}, {"id": "12", "name": "老年医学与常见慢病", "weight": 3, "summary": "理解服务对象：老年人的身体、认知与功能", "p0": "1.1 衰老生理 ｜ 2.1 老年综合征 ｜ 3.1 综合评估 ｜ 4.1 认知障碍", "modules": [{"name": "M1 衰老生理", "points": [{"id": "M1.1", "name": "衰老的生理变化与器官储备下降", "freq": 2, "done": false}, {"id": "M1.2", "name": "老年药代 / 药效变化（肾功能下降、体成分改变、敏感性改变）", "freq": 3, "done": false}, {"id": "M1.3", "name": "人口老龄化趋势与健康老龄化理念", "freq": 2, "done": false}]}, {"name": "M2 老年综合征", "points": [{"id": "M2.1", "name": "衰弱（Frailty）", "freq": 3, "done": false}, {"id": "M2.2", "name": "跌倒及其危险因素", "freq": 3, "done": false}, {"id": "M2.3", "name": "肌少症与营养不良", "freq": 2, "done": false}, {"id": "M2.4", "name": "尿失禁、睡眠障碍、谵妄", "freq": 2, "done": false}, {"id": "M2.5", "name": "吞咽障碍", "freq": 2, "done": false}]}, {"name": "M3 老年综合评估（CGA）", "points": [{"id": "M3.1", "name": "CGA 的维度：躯体、功能、认知、心理、社会", "freq": 3, "done": false}, {"id": "M3.2", "name": "日常生活能力评估：ADL / IADL", "freq": 3, "done": false}, {"id": "M3.3", "name": "常用量表思路：认知筛查、跌倒风险、营养筛查", "freq": 2, "done": false}]}, {"name": "M4 常见慢病", "points": [{"id": "M4.1", "name": "认知障碍与阿尔茨海默病", "freq": 3, "done": false}, {"id": "M4.2", "name": "高血压、糖尿病、冠心病与心衰", "freq": 2, "done": false}, {"id": "M4.3", "name": "帕金森病与卒中后康复", "freq": 2, "done": false}, {"id": "M4.4", "name": "骨质疏松与骨关节病", "freq": 2, "done": false}, {"id": "M4.5", "name": "慢阻肺与感染防控", "freq": 1, "done": false}, {"id": "M4.6", "name": "共病与以人为中心的照护目标", "freq": 2, "done": false}]}]}, {"id": "13", "name": "老年药学：多重用药与依从性", "weight": 3, "summary": "药学 × 养老的核心交叉：让老人用对药、按时用药", "p0": "1.1 多重用药 ｜ 2.1 Beers 标准 ｜ 3.1 依从性 ｜ 4.1 药物重整", "modules": [{"name": "M1 多重用药", "points": [{"id": "M1.1", "name": "多重用药的定义与危害", "freq": 3, "done": false}, {"id": "M1.2", "name": "处方瀑布（Prescribing Cascade）", "freq": 2, "done": false}, {"id": "M1.3", "name": "抗胆碱能负荷与跌倒风险药物", "freq": 3, "done": false}]}, {"name": "M2 潜在不适当用药（PIM）评估", "points": [{"id": "M2.1", "name": "Beers 标准（美国老年医学会）", "freq": 3, "done": false}, {"id": "M2.2", "name": "STOPP / START 标准", "freq": 2, "done": false}, {"id": "M2.3", "name": "中国老年人潜在不适当用药判断标准", "freq": 2, "done": false}, {"id": "M2.4", "name": "减药 / 停药（Deprescribing）流程", "freq": 3, "done": false}]}, {"name": "M3 用药依从性", "points": [{"id": "M3.1", "name": "依从性的影响因素：认知、视力、手功能、经济、方案复杂度", "freq": 3, "done": false}, {"id": "M3.2", "name": "依从性测量：自报、药盒计数、电子监测、药房取药记录", "freq": 2, "done": false}, {"id": "M3.3", "name": "提升依从性：简化方案、分装药盒、提醒、家属与照护者参与", "freq": 3, "done": false}]}, {"name": "M4 用药安全管理", "points": [{"id": "M4.1", "name": "社区与机构场景的药物重整与用药清单", "freq": 2, "done": false}, {"id": "M4.2", "name": "养老机构用药管理流程（领药、分药、给药、记录）", "freq": 3, "done": false}, {"id": "M4.3", "name": "用药相关不良事件的识别与上报", "freq": 2, "done": false}, {"id": "M4.4", "name": "临床决策支持系统（CDSS）中的老年用药规则", "freq": 2, "done": false}]}]}, {"id": "14", "name": "照护服务与智慧养老", "weight": 2, "summary": "理解场景：谁在照护、在哪照护、痛点在哪", "p0": "1.1 养老服务体系 ｜ 2.1 照护需求 ｜ 3.1 智慧养老技术 ｜ 3.4 适老化设计", "modules": [{"name": "M1 养老服务体系", "points": [{"id": "M1.1", "name": "居家、社区、机构养老与医养结合", "freq": 3, "done": false}, {"id": "M1.2", "name": "长期护理保险与照护等级评估", "freq": 2, "done": false}, {"id": "M1.3", "name": "照护人力短缺与照护者负担", "freq": 2, "done": false}]}, {"name": "M2 照护需求与场景", "points": [{"id": "M2.1", "name": "生活照料：进食、如厕、洗浴、转移", "freq": 2, "done": false}, {"id": "M2.2", "name": "失能与认知症照护要点", "freq": 2, "done": false}, {"id": "M2.3", "name": "康复与功能维持", "freq": 2, "done": false}, {"id": "M2.4", "name": "孤独感、社会参与与心理支持", "freq": 2, "done": false}, {"id": "M2.5", "name": "安宁疗护", "freq": 1, "done": false}]}, {"name": "M3 智慧养老技术", "points": [{"id": "M3.1", "name": "可穿戴设备与生命体征监测", "freq": 3, "done": false}, {"id": "M3.2", "name": "智能家居与非接触式监测（毫米波雷达、红外、门磁等）", "freq": 2, "done": false}, {"id": "M3.3", "name": "远程医疗与慢病远程管理", "freq": 2, "done": false}, {"id": "M3.4", "name": "适老化设计：界面、语音交互、无障碍标准", "freq": 3, "done": false}, {"id": "M3.5", "name": "养老信息系统与健康档案", "freq": 1, "done": false}]}, {"name": "M4 用户研究与评估", "points": [{"id": "M4.1", "name": "老年用户研究方法：访谈、观察、参与式设计", "freq": 2, "done": false}, {"id": "M4.2", "name": "技术接受度与数字鸿沟", "freq": 2, "done": false}, {"id": "M4.3", "name": "效果评估：临床结局、生活质量、成本效益", "freq": 2, "done": false}]}]}, {"id": "15", "name": "伦理、隐私、政策与标准", "weight": 2, "summary": "做之前先想清楚：能不能做、该不该做、怎样合规地做", "p0": "1.1 自主与知情同意 ｜ 2.1 健康数据隐私 ｜ 3.1 产业政策 ｜ 3.3 机器人安全标准", "modules": [{"name": "M1 伦理", "points": [{"id": "M1.1", "name": "自主性、知情同意与认知障碍者的代理决策", "freq": 3, "done": false}, {"id": "M1.2", "name": "陪伴机器人的伦理争议：欺骗、依赖、替代人际关怀", "freq": 2, "done": false}, {"id": "M1.3", "name": "算法偏见与年龄歧视", "freq": 2, "done": false}, {"id": "M1.4", "name": "责任归属：机器人或 AI 出错时谁负责", "freq": 2, "done": false}]}, {"name": "M2 隐私与数据合规", "points": [{"id": "M2.1", "name": "健康数据隐私与个人信息保护（个人信息保护法等）", "freq": 3, "done": false}, {"id": "M2.2", "name": "家庭摄像头 / 传感器监测的隐私权衡与本地化处理", "freq": 2, "done": false}, {"id": "M2.3", "name": "医疗 AI 数据治理与去标识化", "freq": 2, "done": false}]}, {"name": "M3 政策与标准", "points": [{"id": "M3.1", "name": "国家银发经济与智慧健康养老相关政策（跟踪最新文件）", "freq": 2, "done": false}, {"id": "M3.2", "name": "医疗器械分类与 AI 医疗软件注册", "freq": 2, "done": false}, {"id": "M3.3", "name": "服务机器人安全标准（如 ISO 13482 个人护理机器人）", "freq": 2, "done": false}, {"id": "M3.4", "name": "无障碍与适老化标准（如 WCAG）", "freq": 1, "done": false}]}]}, {"id": "16", "name": "交叉应用：养老机器人与 AI 用药安全", "weight": 3, "summary": "三条主线的汇合点：做一个真正有用的养老+用药系统", "p0": "2.1 用药提醒 ｜ 2.3 自动化药房 ｜ 3.1 跌倒检测 ｜ 5.1 系统集成", "modules": [{"name": "M1 场景地图", "points": [{"id": "M1.1", "name": "养老机器人分类：陪伴社交、生活辅助、康复、护理移位、巡检", "freq": 3, "done": false}, {"id": "M1.2", "name": "需求优先级：安全 > 健康 > 便利 > 陪伴", "freq": 2, "done": false}, {"id": "M1.3", "name": "已有产品与落地经验的复盘方法（成功与失败案例）", "freq": 2, "done": false}]}, {"name": "M2 用药管理机器人与系统", "points": [{"id": "M2.1", "name": "用药提醒与服药确认（视觉 / 智能药盒 / 语音）", "freq": 3, "done": false}, {"id": "M2.2", "name": "智能药盒与分装：分药、计数、漏服检测", "freq": 2, "done": false}, {"id": "M2.3", "name": "自动化药房、药品配送机器人与机构内物流", "freq": 2, "done": false}, {"id": "M2.4", "name": "机器人取药递药：识别、抓取、交接人手", "freq": 2, "done": false}, {"id": "M2.5", "name": "老年用药 DDI / PIM 规则引擎与 LLM 用药问答（安全边界）", "freq": 3, "done": false}]}, {"name": "M3 居家健康监测与安全", "points": [{"id": "M3.1", "name": "跌倒检测与报警系统", "freq": 3, "done": false}, {"id": "M3.2", "name": "夜间与睡眠异常监测", "freq": 2, "done": false}, {"id": "M3.3", "name": "生命体征趋势分析与预警", "freq": 2, "done": false}, {"id": "M3.4", "name": "认知衰退的数字生物标志物（研究阶段，审慎使用）", "freq": 1, "done": false}]}, {"name": "M4 陪护与交互", "points": [{"id": "M4.1", "name": "陪伴机器人与对话 Agent（记忆、个性化、情感支持）", "freq": 2, "done": false}, {"id": "M4.2", "name": "认知训练与康复游戏", "freq": 1, "done": false}, {"id": "M4.3", "name": "照护者辅助：交接班记录、照护计划生成", "freq": 2, "done": false}, {"id": "M4.4", "name": "移位、喂食、穿衣等物理辅助操作（研究前沿）", "freq": 2, "done": false}]}, {"name": "M5 系统落地", "points": [{"id": "M5.1", "name": "系统集成：感知 + 规则 + 大模型 + 机器人 + 人工兜底", "freq": 3, "done": false}, {"id": "M5.2", "name": "人在回路与升级机制（何时必须叫人）", "freq": 3, "done": false}, {"id": "M5.3", "name": "合规评估：医疗器械边界、隐私、安全认证", "freq": 2, "done": false}, {"id": "M5.4", "name": "小规模试点与真实场景评估方法", "freq": 2, "done": false}, {"id": "M5.5", "name": "AIDD × 养老：老年适应症药物研发与老年人群 PK 建模", "freq": 2, "done": false}]}]}], "leaves": [{"id": "leaf-pytorch", "name": "PyTorch", "url": "https://pytorch.org/", "anchor": "root", "tags": ["深度学习框架", "00-M3.1"], "intro": "深度学习训练与推理的基础框架，AIDD 与机器人学习都用它", "opt": false, "practice": false}, {"id": "leaf-hf", "name": "Hugging Face", "url": "https://huggingface.co/", "anchor": "root", "tags": ["模型", "数据集", "00-M3.4"], "intro": "开源模型与数据集社区，分子模型、VLA 权重常在这里发布", "opt": false, "practice": false}, {"id": "leaf-jupyter", "name": "Jupyter", "url": "https://jupyter.org/", "anchor": "root", "tags": ["交互式实验", "00-M2.1"], "intro": "交互式笔记本，适合做数据探索和教学演示", "opt": false, "practice": false}, {"id": "leaf-rdkit", "name": "RDKit", "url": "https://www.rdkit.org/", "anchor": "root", "tags": ["化学信息学", "01-M2.5"], "intro": "开源化学信息学工具包：分子读写、指纹、描述符、子结构搜索", "opt": false, "practice": false}, {"id": "leaf-ros2", "name": "ROS 2", "url": "https://docs.ros.org/", "anchor": "root", "tags": ["机器人中间件", "06-M3.1"], "intro": "机器人操作系统第 2 代，具身项目的通用软件骨架", "opt": false, "practice": false}, {"id": "leaf-pubchem", "name": "PubChem", "url": "https://pubchem.ncbi.nlm.nih.gov/", "anchor": "05-M1.3", "tags": ["化合物数据库", "01-M2.5"], "intro": "NCBI 维护的公共化合物与生物活性数据库", "opt": false, "practice": false}, {"id": "leaf-chembl", "name": "ChEMBL", "url": "https://www.ebi.ac.uk/chembl/", "anchor": "05-M1.3", "tags": ["生物活性数据", "05-M2.1"], "intro": "EMBL-EBI 维护的类药分子生物活性数据库，QSAR 建模常用数据源", "opt": false, "practice": false}, {"id": "leaf-zinc", "name": "ZINC", "url": "https://zinc.docking.org/", "anchor": "05-M1.3", "tags": ["虚拟筛选库", "01-M4.4"], "intro": "可购买化合物的虚拟筛选数据库", "opt": false, "practice": false}, {"id": "leaf-drugbank", "name": "DrugBank", "url": "https://go.drugbank.com/", "anchor": "05-M1.3", "tags": ["药物知识库", "02-M3.1"], "intro": "药物、靶点与相互作用知识库（注意其使用许可条款）", "opt": false, "practice": false}, {"id": "leaf-rcsb", "name": "RCSB PDB", "url": "https://www.rcsb.org/", "anchor": "01-M4.1", "tags": ["蛋白结构", "05-M1.3"], "intro": "蛋白质结构数据库，结构生物学与对接的起点", "opt": false, "practice": false}, {"id": "leaf-p-lipinski", "name": "用 RDKit 计算一组上市药的类药性指标", "url": "", "anchor": "01-M2.3", "tags": ["01-M2.5", "描述符"], "intro": "算分子量、logP、氢键供受体，对照类药性规则看例外", "opt": false, "practice": true}, {"id": "leaf-vina", "name": "AutoDock Vina", "url": "https://vina.scripps.edu/", "anchor": "01-M4.4", "tags": ["分子对接"], "intro": "经典开源分子对接程序", "opt": false, "practice": false}, {"id": "leaf-openmm", "name": "OpenMM", "url": "https://openmm.org/", "anchor": "01-M4.5", "tags": ["分子动力学", "GPU"], "intro": "GPU 加速、Python 友好的分子动力学模拟库", "opt": false, "practice": false}, {"id": "leaf-p-dock", "name": "对一个已知复合物做重对接并计算 RMSD", "url": "", "anchor": "01-M4.4", "tags": ["05-M3.3", "对接评估"], "intro": "从 PDB 取共晶结构，重对接配体，体会对接打分与姿态误差", "opt": false, "practice": true}, {"id": "leaf-swissadme", "name": "SwissADME", "url": "http://www.swissadme.ch/", "anchor": "02-M2.1", "tags": ["ADME 估算", "05-M2.2"], "intro": "在线估算理化性质、药代与类药性的免费工具", "opt": false, "practice": false}, {"id": "leaf-osp", "name": "Open Systems Pharmacology（PK-Sim / MoBi）", "url": "https://www.open-systems-pharmacology.org/", "anchor": "02-M2.5", "tags": ["PBPK", "16-M5.5"], "intro": "开源的生理药代动力学建模平台", "opt": false, "practice": false}, {"id": "leaf-p-pk", "name": "用 Python 写一个一室模型并拟合血药浓度曲线", "url": "", "anchor": "02-M2.4", "tags": ["02-M2.3", "scipy"], "intro": "手写一室口服吸收模型，求半衰期、清除率、AUC", "opt": false, "practice": true}, {"id": "leaf-ctgov", "name": "ClinicalTrials.gov", "url": "https://clinicaltrials.gov/", "anchor": "04-M1.1", "tags": ["临床试验注册", "04-M1.4"], "intro": "全球最大的临床试验注册库，可检索老年人群相关试验", "opt": false, "practice": false}, {"id": "leaf-ich", "name": "ICH 指南", "url": "https://www.ich.org/", "anchor": "04-M2.1", "tags": ["GCP", "03-M3.1"], "intro": "人用药品技术要求国际协调理事会，质量 / 安全 / 有效性指南的来源", "opt": false, "practice": false}, {"id": "leaf-nmpa", "name": "国家药品监督管理局（NMPA）", "url": "https://www.nmpa.gov.cn/", "anchor": "04-M2.1", "tags": ["中国监管", "15-M3.2"], "intro": "中国药品与医疗器械监管机构官网", "opt": false, "practice": false}, {"id": "leaf-fda-drugs", "name": "FDA Drugs", "url": "https://www.fda.gov/drugs", "anchor": "04-M2.1", "tags": ["美国监管", "04-M3.1"], "intro": "美国 FDA 药品板块：审评、安全通讯、指导原则", "opt": false, "practice": false}, {"id": "leaf-tdc", "name": "Therapeutics Data Commons（TDC）", "url": "https://tdcommons.ai/", "anchor": "05-M2.2", "tags": ["基准数据集", "05-M1.4"], "intro": "治疗学机器学习数据集与基准，覆盖 ADMET、DTI 等任务", "opt": false, "practice": false}, {"id": "leaf-deepchem", "name": "DeepChem", "url": "https://deepchem.io/", "anchor": "05-M2.1", "tags": ["分子机器学习", "05-M1.1"], "intro": "面向化学与生物的开源深度学习库", "opt": false, "practice": false}, {"id": "leaf-chemprop", "name": "Chemprop", "url": "https://github.com/chemprop/chemprop", "anchor": "05-M2.1", "tags": ["消息传递网络", "05-M1.1"], "intro": "基于有向消息传递神经网络的分子性质预测工具", "opt": false, "practice": false}, {"id": "leaf-reinvent", "name": "REINVENT 4", "url": "https://github.com/MolecularAI/REINVENT4", "anchor": "05-M4.1", "tags": ["分子生成", "强化学习"], "intro": "AstraZeneca 开源的生成式分子设计框架", "opt": false, "practice": false}, {"id": "leaf-afdb", "name": "AlphaFold 蛋白结构数据库", "url": "https://alphafold.ebi.ac.uk/", "anchor": "05-M3.1", "tags": ["预测结构", "01-M4.1"], "intro": "EMBL-EBI 与 DeepMind 提供的预测蛋白结构数据库", "opt": false, "practice": false}, {"id": "leaf-colabfold", "name": "ColabFold", "url": "https://github.com/sokrypton/ColabFold", "anchor": "05-M3.1", "tags": ["结构预测", "易上手"], "intro": "可在 Colab 上运行的加速版 AlphaFold2 / RoseTTAFold 推理", "opt": false, "practice": false}, {"id": "leaf-diffdock", "name": "DiffDock 代码", "url": "https://github.com/gcorso/DiffDock", "anchor": "05-M3.3", "tags": ["扩散模型", "01-M4.4"], "intro": "基于扩散生成模型的分子对接开源实现", "opt": false, "practice": false}, {"id": "leaf-rfdiffusion", "name": "RFdiffusion 代码", "url": "https://github.com/RosettaCommons/RFdiffusion", "anchor": "05-M4.3", "tags": ["蛋白设计"], "intro": "基于扩散模型的蛋白质结构生成与设计", "opt": false, "practice": false}, {"id": "leaf-p-scaffold", "name": "同一个 ADMET 任务对比随机划分与骨架划分", "url": "", "anchor": "05-M1.4", "tags": ["05-M2.2", "泛化"], "intro": "在 TDC 数据上分别用两种划分训练，观察性能差距，理解数据泄漏", "opt": false, "practice": true}, {"id": "leaf-p-agent", "name": "做一个调用 RDKit / PubChem 的药物问答小 Agent", "url": "", "anchor": "05-M5.3", "tags": ["16-M2.5", "工具调用"], "intro": "让 LLM 通过工具查分子性质与相互作用，并标注信息来源", "opt": false, "practice": true}, {"id": "leaf-modernrobotics", "name": "Modern Robotics（教材与课程）", "url": "http://hades.mech.northwestern.edu/index.php/Modern_Robotics", "anchor": "06-M1.2", "tags": ["运动学", "06-M2.1"], "intro": "西北大学 Lynch & Park 的机器人学教材与配套课程", "opt": false, "practice": false}, {"id": "leaf-pinocchio", "name": "Pinocchio", "url": "https://github.com/stack-of-tasks/pinocchio", "anchor": "06-M2.1", "tags": ["刚体动力学库"], "intro": "高效的刚体动力学与运动学 C++/Python 库", "opt": false, "practice": false}, {"id": "leaf-drake", "name": "Drake", "url": "https://drake.mit.edu/", "anchor": "08-M2.2", "tags": ["轨迹优化", "06-M2.2"], "intro": "MIT 发起的机器人建模、仿真与优化工具箱", "opt": false, "practice": false}, {"id": "leaf-moveit", "name": "MoveIt", "url": "https://moveit.ai/", "anchor": "08-M2.1", "tags": ["机械臂规划", "06-M3.1"], "intro": "ROS 生态的机械臂运动规划框架", "opt": false, "practice": false}, {"id": "leaf-nav2", "name": "Nav2", "url": "https://docs.nav2.org/", "anchor": "08-M2.3", "tags": ["移动导航", "06-M3.1"], "intro": "ROS 2 导航框架：定位、规划与避障", "opt": false, "practice": false}, {"id": "leaf-opencv", "name": "OpenCV", "url": "https://opencv.org/", "anchor": "07-M1.1", "tags": ["计算机视觉", "标定"], "intro": "经典计算机视觉库", "opt": false, "practice": false}, {"id": "leaf-open3d", "name": "Open3D", "url": "https://www.open3d.org/", "anchor": "07-M2.1", "tags": ["点云"], "intro": "三维数据处理库：点云、网格、配准", "opt": false, "practice": false}, {"id": "leaf-mediapipe", "name": "MediaPipe", "url": "https://ai.google.dev/edge/mediapipe", "anchor": "07-M4.1", "tags": ["姿态估计", "16-M3.1"], "intro": "Google 的端侧感知方案，含人体姿态、手部关键点等", "opt": false, "practice": false}, {"id": "leaf-p-fk", "name": "手推一个 2 自由度平面机械臂的正逆运动学并用 Python 可视化", "url": "", "anchor": "06-M1.2", "tags": ["06-M1.3"], "intro": "从几何法到雅可比，体会奇异位形", "opt": false, "practice": true}, {"id": "leaf-p-pid", "name": "在仿真里给单关节调 PID", "url": "", "anchor": "08-M1.1", "tags": ["11-M1.1"], "intro": "观察比例、积分、微分项对超调和稳态误差的影响", "opt": false, "practice": true}, {"id": "leaf-gymnasium", "name": "Gymnasium", "url": "https://gymnasium.farama.org/", "anchor": "09-M1.1", "tags": ["强化学习环境", "11-M1.2"], "intro": "强化学习标准环境接口（OpenAI Gym 的继任者）", "opt": false, "practice": false}, {"id": "leaf-sb3", "name": "Stable-Baselines3", "url": "https://stable-baselines3.readthedocs.io/", "anchor": "09-M1.2", "tags": ["PPO", "SAC"], "intro": "可靠的 PyTorch 强化学习算法实现", "opt": false, "practice": false}, {"id": "leaf-lerobot", "name": "LeRobot", "url": "https://github.com/huggingface/lerobot", "anchor": "09-M2.1", "tags": ["模仿学习", "11-M3.3", "10-M3.2"], "intro": "Hugging Face 的真实机器人学习库：数据集、策略训练、低成本硬件", "opt": false, "practice": false}, {"id": "leaf-so100", "name": "SO-ARM100 开源机械臂", "url": "https://github.com/TheRobotStudio/SO-ARM100", "anchor": "11-M3.3", "tags": ["开源硬件", "09-M3.1"], "intro": "低成本开源机械臂，常与 LeRobot 搭配做示教采集", "opt": false, "practice": false}, {"id": "leaf-aloha", "name": "ALOHA 项目页", "url": "https://tonyzhaozh.github.io/aloha/", "anchor": "09-M2.2", "tags": ["双臂遥操作", "09-M3.1"], "intro": "低成本双臂遥操作系统与 ACT 算法", "opt": false, "practice": false}, {"id": "leaf-dp", "name": "Diffusion Policy 项目页", "url": "https://diffusion-policy.cs.columbia.edu/", "anchor": "09-M2.3", "tags": ["扩散策略"], "intro": "把动作生成建模为条件扩散过程的视觉运动策略", "opt": false, "practice": false}, {"id": "leaf-oxe", "name": "Open X-Embodiment", "url": "https://robotics-transformer-x.github.io/", "anchor": "09-M3.2", "tags": ["跨本体数据集", "10-M1.3"], "intro": "多机构汇集的跨本体机器人数据集与 RT-X 模型", "opt": false, "practice": false}, {"id": "leaf-openvla", "name": "OpenVLA", "url": "https://openvla.github.io/", "anchor": "10-M2.2", "tags": ["开源 VLA", "10-M3.2"], "intro": "开源视觉—语言—动作模型，支持微调", "opt": false, "practice": false}, {"id": "leaf-octo", "name": "Octo", "url": "https://octo-models.github.io/", "anchor": "10-M2.2", "tags": ["通用策略"], "intro": "基于 Open X-Embodiment 训练的开源通用机器人策略", "opt": false, "practice": false}, {"id": "leaf-openpi", "name": "openpi", "url": "https://github.com/Physical-Intelligence/openpi", "anchor": "10-M2.3", "tags": ["π0", "10-M3.2"], "intro": "Physical Intelligence 开源的 π0 系列模型代码与权重", "opt": false, "practice": false}, {"id": "leaf-mujoco", "name": "MuJoCo", "url": "https://mujoco.org/", "anchor": "11-M1.1", "tags": ["物理仿真", "06-M3.2"], "intro": "高性能物理仿真器，机器人学习的常用底座", "opt": false, "practice": false}, {"id": "leaf-isaaclab", "name": "Isaac Lab", "url": "https://isaac-sim.github.io/IsaacLab/", "anchor": "11-M1.1", "tags": ["GPU 并行仿真", "11-M2.1"], "intro": "基于 NVIDIA Isaac Sim 的机器人学习框架", "opt": false, "practice": false}, {"id": "leaf-pybullet", "name": "PyBullet", "url": "https://pybullet.org/", "anchor": "11-M1.1", "tags": ["入门仿真"], "intro": "轻量易上手的物理仿真 Python 接口", "opt": false, "practice": false}, {"id": "leaf-robosuite", "name": "robosuite", "url": "https://robosuite.ai/", "anchor": "11-M1.2", "tags": ["操作基准"], "intro": "基于 MuJoCo 的机器人操作仿真基准", "opt": false, "practice": false}, {"id": "leaf-maniskill", "name": "ManiSkill", "url": "https://github.com/haosulab/ManiSkill", "anchor": "11-M1.2", "tags": ["操作基准", "GPU 仿真"], "intro": "可 GPU 并行的机器人操作仿真与基准", "opt": false, "practice": false}, {"id": "leaf-habitat", "name": "AI Habitat", "url": "https://aihabitat.org/", "anchor": "11-M1.3", "tags": ["家居场景", "具身导航"], "intro": "面向家居场景的具身 AI 仿真平台", "opt": false, "practice": false}, {"id": "leaf-p-ppo", "name": "用 SB3 在 MuJoCo 环境里训一个 PPO 智能体", "url": "", "anchor": "09-M1.2", "tags": ["11-M1.1"], "intro": "跑通训练曲线，再改奖励函数看行为变化", "opt": false, "practice": true}, {"id": "leaf-p-bc", "name": "用 LeRobot 在仿真数据上训一个行为克隆策略", "url": "", "anchor": "09-M2.1", "tags": ["09-M2.2"], "intro": "体会示教数据量与分布偏移对成功率的影响", "opt": false, "practice": true}, {"id": "leaf-who-ageing", "name": "WHO 老龄与健康主题页", "url": "https://www.who.int/health-topics/ageing", "anchor": "12-M1.3", "tags": ["健康老龄化", "14-M1.1"], "intro": "世界卫生组织关于老龄化、健康老龄化的资料入口", "opt": false, "practice": false}, {"id": "leaf-ags", "name": "美国老年医学会（AGS）", "url": "https://www.americangeriatrics.org/", "anchor": "13-M2.1", "tags": ["Beers 标准"], "intro": "Beers 标准的发布方，提供老年医学资源", "opt": false, "practice": false}, {"id": "leaf-who-mwh", "name": "WHO 用药无害（Medication Without Harm）", "url": "https://www.who.int/initiatives/medication-without-harm", "anchor": "13-M4.3", "tags": ["用药安全", "04-M3.3"], "intro": "WHO 全球患者安全挑战：减少可避免的用药伤害", "opt": false, "practice": false}, {"id": "leaf-physionet", "name": "PhysioNet", "url": "https://physionet.org/", "anchor": "14-M3.1", "tags": ["生理信号数据", "16-M3.3"], "intro": "生理信号与临床数据库平台（部分数据需资质认证与培训）", "opt": false, "practice": false}, {"id": "leaf-wcag", "name": "WCAG 无障碍指南", "url": "https://www.w3.org/WAI/standards-guidelines/wcag/", "anchor": "15-M3.4", "tags": ["适老化界面", "14-M3.4"], "intro": "W3C 网页内容无障碍指南，适老化界面设计参考", "opt": false, "practice": false}, {"id": "leaf-homeassistant", "name": "Home Assistant", "url": "https://www.home-assistant.io/", "anchor": "14-M3.2", "tags": ["智能家居", "本地化"], "intro": "开源、可本地运行的智能家居平台，可接入各类传感器", "opt": false, "practice": false}, {"id": "leaf-p-pim", "name": "整理一份 10 种老年常见潜在不适当用药的速查表", "url": "", "anchor": "13-M2.1", "tags": ["13-M2.2", "13-M1.3"], "intro": "对照 Beers / STOPP 与国内标准，写出风险与替代思路（自己核对原文）", "opt": false, "practice": true}, {"id": "leaf-p-interview", "name": "访谈 2–3 位老人或照护者，画一张用药日常流程图", "url": "", "anchor": "14-M4.1", "tags": ["13-M3.1", "16-M1.2"], "intro": "找到漏服、错服、重复服药真正发生在哪一步", "opt": false, "practice": true}, {"id": "leaf-p-pillbot", "name": "原型：摄像头 + 语音的服药提醒与服药确认 Demo", "url": "", "anchor": "16-M2.1", "tags": ["07-M4.1", "14-M3.4"], "intro": "定时提醒 → 识别药盒格子打开 → 语音确认 → 漏服通知家属（全部本地处理）", "opt": false, "practice": true}, {"id": "leaf-p-fall", "name": "原型：基于姿态估计的跌倒检测并评估误报率", "url": "", "anchor": "16-M3.1", "tags": ["07-M4.2", "15-M2.2"], "intro": "用 MediaPipe 关键点做规则或小模型，重点统计误报 / 漏报", "opt": false, "practice": true}, {"id": "leaf-p-ddi", "name": "原型：老年用药清单的 DDI / PIM 规则检查 + LLM 解释", "url": "", "anchor": "16-M2.5", "tags": ["13-M4.4", "02-M3.1"], "intro": "规则引擎给结论、LLM 只负责通俗解释，并强制“请咨询医生或药师”兜底", "opt": false, "practice": true}, {"id": "leaf-p-handover", "name": "原型：在仿真中让机械臂从药架取药盒并递到人手", "url": "", "anchor": "16-M2.4", "tags": ["10-M3.1", "08-M2.4"], "intro": "组合 VLM 识别 + 抓取规划 + 安全减速，体会人机交接难点", "opt": false, "practice": true}], "inbox": [{"name": "Boltz", "url": "https://github.com/jwohlwend/boltz", "kind": "leaf", "added": "2026-10", "cat": "AIDD 结构预测 · 05-M3", "intro": "开源的生物分子复合物结构预测模型。", "why": "可作为复合物结构预测的开源替代来对照学习，与 AlphaFold 3 卡片同主题。", "dive": "先读 README 跑官方示例，对比 AlphaFold 3 的输入输出设计即可。", "level": "观望", "concept": null, "graduated": null}, {"name": "Genesis", "url": "https://genesis-embodied-ai.github.io/", "kind": "leaf", "added": "2026-10", "cat": "仿真平台 · 11-M1", "intro": "面向机器人与具身 AI 的开源物理仿真平台。", "why": "与 MuJoCo / Isaac Lab 同类，可在选择仿真器时横向比较。", "dive": "看官方文档的快速开始，跑一个机械臂示例，比较上手成本与速度。", "level": "观望", "concept": null, "graduated": null}, {"name": "ProteinMPNN", "url": "https://github.com/dauparas/ProteinMPNN", "kind": "twig", "added": "2026-10", "cat": "AIDD 生成式设计 · 05-M4.3", "intro": "给定蛋白骨架设计氨基酸序列的深度学习方法。", "why": "与 RFdiffusion 组成“先生成骨架、再设计序列”的常见蛋白设计流程。", "dive": "读论文摘要与 README，理解输入（骨架）与输出（序列），不必深入训练细节。", "level": "观望", "concept": null, "graduated": null}, {"name": "WHO ICOPE（老年人整合照护）", "url": "https://www.who.int/health-topics/ageing", "kind": "twig", "added": "2026-10", "cat": "野生枝节", "intro": "WHO 提出的以内在能力为核心的老年人整合照护框架。", "why": "可为“居家监测 + 社区照护”系统提供以功能为中心的评估视角，与 CGA 互补。", "dive": "在 WHO 网站检索 ICOPE 指南与手册，先读评估路径部分。", "level": "观望", "concept": "内在能力（Intrinsic Capacity）：认知、运动、活力、感官、心理五维功能储备——建议挂在 12-M3 或 14-M2", "graduated": null}], "cards": [{"id": "card-lipinski", "name": "Lipinski 五规则（Rule of 5）", "target": "01-M2.3", "url": "https://doi.org/10.1016/S0169-409X(96)00423-1", "tags": ["口服类药性", "分子量", "logP", "氢键供体 / 受体"], "next": ["leaf-p-lipinski", "02-M2.1", "05-M2.2"], "madeBy": "让模型帮忙", "date": "1997"}, {"id": "card-alphafold2", "name": "AlphaFold 2", "target": "05-M3.1", "url": "https://www.nature.com/articles/s41586-021-03819-2", "tags": ["蛋白结构预测", "MSA", "Evoformer", "CASP14"], "next": ["card-alphafold3", "leaf-colabfold", "leaf-afdb"], "madeBy": "让模型帮忙", "date": "2021-07"}, {"id": "card-alphafold3", "name": "AlphaFold 3", "target": "05-M3.2", "url": "https://www.nature.com/articles/s41586-024-07487-w", "tags": ["复合物结构", "扩散模块", "蛋白—配体", "蛋白—核酸"], "next": ["card-alphafold2", "card-diffdock", "01-M4.3"], "madeBy": "让模型帮忙", "date": "2024-05"}, {"id": "card-esm2", "name": "ESM-2 / ESMFold", "target": "05-M1.2", "url": "https://github.com/facebookresearch/esm", "tags": ["蛋白语言模型", "单序列结构预测", "表示学习"], "next": ["card-alphafold2", "05-M3.1", "05-M2.3"], "madeBy": "让模型帮忙", "date": null}, {"id": "card-diffdock", "name": "DiffDock", "target": "05-M3.3", "url": "https://arxiv.org/abs/2210.01776", "tags": ["扩散模型", "盲对接", "姿态生成"], "next": ["leaf-diffdock", "leaf-vina", "leaf-p-dock"], "madeBy": "让模型帮忙", "date": "2022-10"}, {"id": "card-rfdiffusion", "name": "RFdiffusion", "target": "05-M4.3", "url": "https://www.nature.com/articles/s41586-023-06415-8", "tags": ["蛋白质从头设计", "扩散模型", "结合蛋白设计"], "next": ["leaf-rfdiffusion", "card-alphafold2", "05-M4.2"], "madeBy": "让模型帮忙", "date": "2023-07"}, {"id": "card-chemprop", "name": "Chemprop（D-MPNN）", "target": "05-M2.1", "url": "https://github.com/chemprop/chemprop", "tags": ["消息传递网络", "性质预测", "不确定性"], "next": ["leaf-tdc", "05-M2.4", "leaf-p-scaffold"], "madeBy": "让模型帮忙", "date": null}, {"id": "card-tdc", "name": "TDC 基准", "target": "leaf-tdc", "url": "https://tdcommons.ai/", "tags": ["ADMET 基准", "DTI", "数据划分"], "next": ["05-M1.4", "card-chemprop", "leaf-p-scaffold"], "madeBy": "让模型帮忙", "date": null}, {"id": "card-ich-gcp", "name": "ICH 指南体系（Q / S / E / M）", "target": "04-M2.1", "url": "https://www.ich.org/", "tags": ["质量 Q", "安全 S", "有效性 E（含 GCP）", "多学科 M"], "next": ["04-M2.3", "03-M3.1", "leaf-nmpa"], "madeBy": "让模型帮忙", "date": null}, {"id": "card-rt1", "name": "RT-1", "target": "10-M2.1", "url": "https://arxiv.org/abs/2212.06817", "tags": ["Robotics Transformer", "真实机器人大规模数据", "离散动作 token"], "next": ["card-rt2", "card-saycan", "09-M3.2"], "madeBy": "让模型帮忙", "date": "2022-12"}, {"id": "card-rt2", "name": "RT-2", "target": "10-M2.1", "url": "https://arxiv.org/abs/2307.15818", "tags": ["VLA", "VLM 联合微调", "动作即文本 token", "语义泛化"], "next": ["card-rt1", "card-openvla", "10-M1.2"], "madeBy": "让模型帮忙", "date": "2023-07"}, {"id": "card-oxe", "name": "Open X-Embodiment / RT-X", "target": "09-M3.2", "url": "https://arxiv.org/abs/2310.08864", "tags": ["跨本体数据集", "多机构协作", "RT-1-X / RT-2-X"], "next": ["leaf-oxe", "card-octo", "10-M1.3"], "madeBy": "让模型帮忙", "date": "2023-10"}, {"id": "card-openvla", "name": "OpenVLA", "target": "10-M2.2", "url": "https://arxiv.org/abs/2406.09246", "tags": ["开源 VLA", "7B", "LoRA 微调", "Open X-Embodiment 训练"], "next": ["leaf-openvla", "card-rt2", "10-M3.2"], "madeBy": "让模型帮忙", "date": "2024-06"}, {"id": "card-octo", "name": "Octo", "target": "10-M2.2", "url": "https://arxiv.org/abs/2405.12213", "tags": ["通用策略", "Transformer + 扩散动作头", "开源"], "next": ["leaf-octo", "card-openvla", "card-oxe"], "madeBy": "让模型帮忙", "date": "2024-05"}, {"id": "card-pi0", "name": "π0（pi-zero）", "target": "10-M2.3", "url": "https://arxiv.org/abs/2410.24164", "tags": ["VLM 主干", "流匹配动作专家", "高频连续控制", "跨本体"], "next": ["leaf-openpi", "card-diffusion-policy", "10-M3.1"], "madeBy": "让模型帮忙", "date": "2024-10"}, {"id": "card-diffusion-policy", "name": "Diffusion Policy", "target": "09-M2.3", "url": "https://arxiv.org/abs/2303.04137", "tags": ["扩散模型", "视觉运动策略", "多峰动作分布"], "next": ["leaf-dp", "card-act", "card-pi0"], "madeBy": "让模型帮忙", "date": "2023-03"}, {"id": "card-act", "name": "ACT / ALOHA", "target": "09-M2.2", "url": "https://arxiv.org/abs/2304.13705", "tags": ["动作分块", "低成本双臂遥操作", "精细操作"], "next": ["leaf-aloha", "leaf-lerobot", "card-diffusion-policy"], "madeBy": "让模型帮忙", "date": "2023-04"}, {"id": "card-saycan", "name": "SayCan", "target": "10-M2.4", "url": "https://arxiv.org/abs/2204.01691", "tags": ["LLM 高层规划", "可供性（affordance）", "技能库"], "next": ["card-palme", "08-M3.3", "10-M3.1"], "madeBy": "让模型帮忙", "date": "2022-04"}, {"id": "card-palme", "name": "PaLM-E", "target": "10-M2.4", "url": "https://arxiv.org/abs/2303.03378", "tags": ["具身多模态语言模型", "传感器嵌入", "规划"], "next": ["card-saycan", "card-rt2", "10-M1.1"], "madeBy": "让模型帮忙", "date": "2023-03"}, {"id": "card-mujoco", "name": "MuJoCo", "target": "11-M1.1", "url": "https://mujoco.org/", "tags": ["接触动力学", "MJCF", "Python 绑定", "开源"], "next": ["leaf-robosuite", "leaf-p-ppo", "11-M2.1"], "madeBy": "让模型帮忙", "date": null}, {"id": "card-lerobot", "name": "LeRobot", "target": "leaf-lerobot", "url": "https://github.com/huggingface/lerobot", "tags": ["数据集格式", "ACT / Diffusion Policy 实现", "低成本硬件"], "next": ["leaf-so100", "card-act", "leaf-p-bc"], "madeBy": "让模型帮忙", "date": null}, {"id": "card-beers", "name": "Beers 标准（AGS）", "target": "13-M2.1", "url": "https://www.americangeriatrics.org/", "tags": ["潜在不适当用药", "老年人", "定期更新", "需查看最新版原文"], "next": ["13-M2.2", "13-M2.4", "leaf-p-pim"], "madeBy": "让模型帮忙", "date": null}, {"id": "card-cga", "name": "老年综合评估（CGA）", "target": "12-M3.1", "url": "https://www.who.int/health-topics/ageing", "tags": ["多维评估", "ADL / IADL", "跨学科团队"], "next": ["12-M3.2", "12-M2.1", "13-M1.1"], "madeBy": "让模型帮忙", "date": null}, {"id": "card-paro", "name": "PARO 治疗型海豹机器人", "target": "16-M4.1", "url": "http://www.parorobots.com/", "tags": ["陪伴机器人", "认知症照护", "非药物干预", "伦理讨论"], "next": ["15-M1.2", "16-M1.1", "14-M2.4"], "madeBy": "让模型帮忙", "date": null}, {"id": "card-mediapipe-fall", "name": "姿态估计做跌倒检测", "target": "16-M3.1", "url": "https://ai.google.dev/edge/mediapipe", "tags": ["人体关键点", "误报 / 漏报", "隐私本地化"], "next": ["leaf-p-fall", "07-M4.2", "15-M2.2"], "madeBy": "让模型帮忙", "date": null}], "starters": [{"who": "AIDD 背景，想切入具身 + 养老", "desc": "从熟悉的药学/AIDD 出发，补机器人地基，再汇合到交叉应用", "steps": ["05 AIDD 复盘 + 13 老年药学", "06 机器人学基础 → 09 机器人学习 → 10 VLA", "16 交叉应用：选一个原型练习项开做"]}, {"who": "想先做出一个养老用药 Demo", "desc": "以场景驱动，边做边补理论", "steps": ["14 照护场景 + 13-M3 依从性", "07-M4 以人为中心的感知", "16-M2 用药管理原型 + 15 隐私伦理自查"]}, {"who": "零基础系统学习", "desc": "按枝干顺序推进，不跳跃", "steps": ["00 公共基础", "01–02 药学核心 / 06–08 机器人核心 / 12 老年医学", "05 / 10 / 13 三个交叉核心，再到 16"]}], "generated": "2026-10-17"}</script>
+<script id="progress-seed" type="application/json">null</script>
+<script>
+const T = JSON.parse(document.getElementById('tree-data').textContent);
+const $ = s => document.querySelector(s);
+
+// ---------- 个人进度（与公共内容分离）----------
+// 默认存浏览器 localStorage；可导出 / 导入 JSON（建议存为 progress/personal.local.json，已被 .gitignore 排除）。
+// 私有构建（export-dashboard.py --progress FILE）会把该文件内嵌为种子，仅在本机还没有进度时采用。
+const LS_KEY = 'pe-eldercare-tree:progress:v1';
+const emptyProgress = () => ({ schema: 'pe-eldercare-tree-progress', version: 1, updated: null, done: {}, notes: {} });
+function normalize(o) {
+  const p = emptyProgress();
+  if (o && typeof o === 'object') {
+    if (o.done && typeof o.done === 'object') for (const k in o.done) if (o.done[k]) p.done[k] = true;
+    if (o.notes && typeof o.notes === 'object') for (const k in o.notes) if (typeof o.notes[k] === 'string' && o.notes[k].trim()) p.notes[k] = o.notes[k];
+    p.updated = o.updated || null;
+  }
+  return p;
+}
+let P = emptyProgress(), storageOK = true, progressSource = '本机浏览器';
+try {
+  const raw = localStorage.getItem(LS_KEY);
+  if (raw) P = normalize(JSON.parse(raw));
+  else {
+    const seed = JSON.parse(document.getElementById('progress-seed').textContent || 'null');
+    if (seed) { P = normalize(seed); progressSource = '内嵌的私有进度文件'; }
+  }
+} catch (e) { storageOK = false; }
+function save() {
+  P.updated = new Date().toISOString();
+  try { localStorage.setItem(LS_KEY, JSON.stringify(P)); } catch (e) { storageOK = false; }
+}
+const isDone = k => !!P.done[k];
+function toggleDone(k) { if (P.done[k]) delete P.done[k]; else P.done[k] = true; save(); render(); }
+function editNote(k, label) {
+  const v = prompt('「' + label + '」的个人笔记（只保存在本机 / 你导出的 JSON 里；留空即删除）：', P.notes[k] || '');
+  if (v === null) return;
+  if (v.trim()) P.notes[k] = v; else delete P.notes[k];
+  save(); render();
+}
+function exportProgress() {
+  const blob = new Blob([JSON.stringify(Object.assign({}, P, { exported: new Date().toISOString() }), null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = 'personal.local.json';
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+function importProgress(file) {
+  const r = new FileReader();
+  r.onload = () => {
+    try {
+      const inc = normalize(JSON.parse(r.result));
+      Object.assign(P.done, inc.done); Object.assign(P.notes, inc.notes);
+      save(); progressSource = '已导入 ' + file.name; render();
+      alert('已导入：' + Object.keys(inc.done).length + ' 个完成项、' + Object.keys(inc.notes).length + ' 条笔记（与本机进度合并）');
+    } catch (e) { alert('导入失败：不是有效的进度 JSON'); }
+  };
+  r.readAsText(file);
+}
+const ck = (k) => `<input type="checkbox" class="ck" data-done="${esc(k)}" ${isDone(k) ? 'checked' : ''} title="标记为已完成（个人进度）">`;
+const noteBtn = (k, label) => `<button class="note-btn ${P.notes[k] ? 'has' : ''}" data-note="${esc(k)}" data-label="${esc(label)}" title="个人笔记">✎</button>`;
+const noteText = k => P.notes[k] ? `<span class="note">✎ ${esc(P.notes[k])}</span>` : '';
+
+// ---------- 节点索引：id/url -> 位置 ----------
+const idx = {};
+function reg(key, type, c, m, p) { if (key) idx[key] = { type, c, m, p }; }
+T.chapters.forEach((ch, c) => ch.modules.forEach((mo, m) => mo.points.forEach((pt, p) => {
+  reg(ch.id + '-' + pt.id, 'theory', c, m, p);
+  reg(pt.id, 'theory', c, m, p); // 章内简写
+})));
+// 叶子分组：树根 → 各篇章（理论地图顺序）→ 野生
+const chaptersById = {}; T.chapters.forEach(ch => chaptersById[ch.id] = ch.name);
+const LEAF_GROUPS = [];
+(function () {
+  const byKey = {};
+  T.leaves.forEach(l => {
+    const k = l.anchor === 'root' || l.anchor === 'wild' ? l.anchor : l.anchor.split('-')[0];
+    (byKey[k] = byKey[k] || []).push(l);
+  });
+  const names = { root: '树根 · 基础工具', wild: '野生叶子' };
+  ['root', ...T.chapters.map(c => c.id), 'wild'].forEach(k => {
+    if (byKey[k]) LEAF_GROUPS.push({ key: k, name: names[k] || (k + ' · ' + (chaptersById[k] || '')), opt: k === 'wild', items: byKey[k] });
+  });
+})();
+LEAF_GROUPS.forEach((g, gi) => g.items.forEach((l, i) => reg(l.id, 'list', gi, null, i)));
+T.inbox.forEach((it, i) => reg(it.url, 'inbox', i));
+T.cards.forEach((cd, i) => reg(cd.id, 'card', i));
+
+// 卡片 ↔ 叶子（同站点口径：卡片 target/next 与叶子 id/anchor/tags 相交即相关）
+function cardHits(c, l) {
+  const keys = new Set([c.target, ...c.next]);
+  return keys.has(l.id) || keys.has(l.anchor) || l.tags.some(t => keys.has(t));
+}
+const cardsByLeafId = {}, orphanCards = {};
+T.leaves.forEach(l => {
+  const cs = T.cards.filter(c => cardHits(c, l));
+  if (cs.length) cardsByLeafId[l.id] = cs;
+});
+T.cards.forEach(c => {
+  if (!T.leaves.some(l => cardHits(c, l))) {
+    const m = c.target.match(/^(\d{2})-M/);
+    const ch = m ? m[1] : 'root';
+    (orphanCards[ch] = orphanCards[ch] || []).push(c);
+  }
+});
+
+// 理论点 ← 叶子/卡片（反向引用，与网页版 TheoryMap 同口径）：叶子的 anchor 或 tags 指向点编号
+// 即挂在本枝节；卡片的 target/next 指向点编号即计入
+const PT_RE = /^\d{2}-M\d+\.\d+$/;
+const leavesByPoint = {}, cardIdsByPoint = {};
+T.leaves.forEach(l => {
+  const pts = new Set();
+  if (PT_RE.test(l.anchor)) pts.add(l.anchor);
+  l.tags.forEach(t => { if (PT_RE.test(t)) pts.add(t); });
+  pts.forEach(pid => { (leavesByPoint[pid] = leavesByPoint[pid] || []).push(l); });
+});
+T.cards.forEach(c => {
+  const seen = new Set();
+  [c.target, ...c.next].forEach(r => {
+    if (PT_RE.test(r) && !seen.has(r)) {
+      seen.add(r);
+      (cardIdsByPoint[r] = cardIdsByPoint[r] || []).push(c.id);
+    }
+  });
+});
+
+const esc = s => (s || '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const stars = n => '★'.repeat(n) + '<span style="opacity:.25">' + '★'.repeat(Math.max(0, 3 - n)) + '</span>';
+const chev = '<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>';
+
+let cur = 0, query = '';
+const TABS = [
+  { key: 'theory', name: '理论地图' },
+  { key: 'list', name: '叶子清单' },
+  { key: 'inbox', name: '收集箱' },
+  { key: 'cards', name: '学习卡片' },
+];
+const count = { theory: T.chapters.reduce((n, c) => n + c.modules.reduce((k, m) => k + m.points.length, 0), 0),
+  list: T.leaves.length, inbox: T.inbox.length, cards: T.cards.length };
+// 手风琴展开状态：理论地图篇章 / 叶子清单分组
+const openCh = new Set(), openGrp = new Set(['root']);
+function nodeBadge(key) {
+  if (!key) return '';
+  if (idx[key]) return `<span class="badge node" data-go="${esc(key)}" title="跳转到 ${esc(key)}">${esc(key)}</span>`;
+  return `<span class="badge broken" title="树上没有此节点——断链">${esc(key)}</span>`;
+}
+function match(...fields) { const q = query.toLowerCase(); return !q || fields.some(f => (f || '').toLowerCase().includes(q)); }
+
+function renderTabs() {
+  $('#tabs').innerHTML = TABS.map((t, i) =>
+    `<button class="tab" role="tab" aria-selected="${i === cur}" data-tab="${i}">${t.name}<span class="cnt">${count[t.key]}</span></button>`).join('');
+  const ptKeys = []; T.chapters.forEach(ch => ch.modules.forEach(mo => mo.points.forEach(pt => ptKeys.push(ch.id + '-' + pt.id))));
+  const dPt = ptKeys.filter(isDone).length, dLf = T.leaves.filter(l => isDone(l.id)).length, dCd = T.cards.filter(c => isDone(c.id)).length;
+  $('#stats').innerHTML = [
+    ['篇章', T.chapters.length], ['学习点', `${dPt}/${count.theory}`], ['叶子', `${dLf}/${count.list}`],
+    ['收集箱', count.inbox], ['卡片', `${dCd}/${count.cards}`], ['笔记', Object.keys(P.notes).length],
+  ].map(([k, v]) => `<span class="stat"><b>${v}</b>${k}</span>`).join('');
+  $('#pbar').style.width = (count.theory ? (100 * dPt / count.theory) : 0).toFixed(1) + '%';
+  $('#meta').textContent = '生成于 ' + T.generated + ' · 内容只读；勾选与笔记 = 个人进度';
+  $('#psrc').textContent = storageOK ? ('进度来源：' + progressSource + (P.updated ? ' · 最后更新 ' + new Date(P.updated).toLocaleString() : '')) : '⚠ 浏览器禁止 localStorage：请定期导出 JSON';
+}
+
+const DOMAIN = { '00': '公共基础', '01': '药学', '06': '具身智能', '12': '养老', '16': '交叉应用' };
+function panelTheory() {
+  return T.chapters.map((ch, c) => {
+    const chHit = match(ch.name, ch.summary, ch.p0);
+    const modsHtml = ch.modules.map((mo, m) => {
+      const rows = mo.points.map((pt, p) => ({ pt, p })).filter(({ pt }) =>
+        chHit || match(pt.name, pt.id, ch.id + '-' + pt.id)).map(({ pt, p }) => {
+        const key = ch.id + '-' + pt.id;
+        const here = leavesByPoint[key] || [];
+        const chips = here.length ? `<span class="chips">${here.map(l => l.url
+          ? `<span class="badge leafy node" data-go="${esc(l.id)}" title="叶子：${esc(l.intro)}，点击在叶子清单定位">${esc(l.name)} ↗</span>`
+          : `<span class="badge dash" title="练习项：${esc(l.intro)}">✎ ${esc(l.name)}</span>`).join('')}</span>` : '';
+        const leafCnt = here.length ? `<span class="cnt leafy" data-go="${esc(here[0].id)}" title="${here.length} 片叶子长在本枝节，点击在叶子清单定位">叶 ${here.length}</span>` : '';
+        const cardIds = cardIdsByPoint[key] || [];
+        const cardCnt = cardIds.length ? `<span class="cnt cardy" data-go="${esc(cardIds[0])}" title="${cardIds.length} 张学习卡片指向本点，点击跳去学习卡片">卡 ${cardIds.length}</span>` : '';
+        return `
+        <div class="pt ${isDone(key) ? 'is-done' : ''}" id="th-${c}-${m}-${p}">
+          ${ck(key)}<span class="id">${ch.id}-${pt.id}</span><span class="nm">${esc(pt.name)}${chips}${noteText(key)}</span>
+          <span>${stars(pt.freq)}</span>${leafCnt}${cardCnt}${noteBtn(key, pt.name)}
+        </div>`;
+      }).join('');
+      return rows ? `<div class="mod"><h4>${esc(mo.name)}</h4>${rows}</div>` : '';
+    }).join('');
+    if (query && !modsHtml) return '';
+    const total = ch.modules.reduce((n, mo) => n + mo.points.length, 0);
+    const doneN = ch.modules.reduce((n, mo) => n + mo.points.filter(pt => isDone(ch.id + '-' + pt.id)).length, 0);
+    const open = query ? true : openCh.has(ch.id);
+    return `${!query && DOMAIN[ch.id] ? `<div class="domain">${DOMAIN[ch.id]}</div>` : ''}<details class="ch" data-ch="${ch.id}" ${open ? 'open' : ''}>
+      <summary>${chev}<span>${ch.id} · ${esc(ch.name)}</span><span class="stars">${'★'.repeat(ch.weight)}</span>
+        <span class="sum">${esc(ch.summary)}</span><span class="n">${doneN}/${total} 点</span></summary>
+      <div class="ch-body">
+        ${ch.p0 ? `<p class="p0">优先学习配方：${esc(ch.p0)}</p>` : ''}
+        ${modsHtml}
+      </div>
+    </details>`;
+  }).join('') || '<div class="empty">没有匹配的学习点</div>';
+}
+
+function panelList() {
+  return LEAF_GROUPS.map((g, gi) => {
+    const items = g.items.filter(it => match(it.name, it.intro, it.id, it.anchor, it.tags.join(' '))).map((it, i) => `
+      <div class="leaf ${isDone(it.id) ? 'is-done' : ''}" id="li-${gi}-${i}">
+        ${ck(it.id)}<span style="flex:1;min-width:0">
+          <span class="nm">${it.url ? `<a href="${esc(it.url)}" target="_blank" rel="noopener">${esc(it.name)} ↗</a>` : esc(it.name)}</span>
+          ${it.practice ? '<span class="badge">练习</span>' : ''}
+          ${it.opt ? '<span class="badge">支线</span>' : ''}
+          <span class="intro"> — ${esc(it.intro)}</span>
+          ${(cardsByLeafId[it.id] || []).map(c => `<span class="badge leafy node" data-go="${esc(c.id)}" title="学习卡片「${esc(c.name)}」，点击跳转">${esc(c.name)}</span>`).join(' ')}
+          ${noteText(it.id)}
+        </span>${noteBtn(it.id, it.name)}
+        ${it.anchor.includes('-') ? nodeBadge(it.anchor) : ''}
+      </div>`).join('');
+    if (query && !items) return '';
+    const orphans = orphanCards[g.key] || [];
+    const orphanLine = orphans.length && !query ? `
+      <p class="orphan">本枝干知识卡片（暂未挂到具体叶子）：
+        ${orphans.map(c => `<span class="badge leafy node" data-go="${esc(c.id)}">${esc(c.name)}</span>`).join(' ')}</p>` : '';
+    const open = query ? true : openGrp.has(g.key);
+    return `<details class="ch grp" data-grp="${g.key}" ${open ? 'open' : ''}>
+      <summary>${chev}<span>${esc(g.name)}</span>${g.opt ? '<span class="badge">支线</span>' : ''}
+        <span class="n">${g.items.filter(x => isDone(x.id)).length}/${g.items.length} 片</span></summary>
+      <div class="ch-body">
+        ${g.key === 'wild' ? '<p class="gnote">已进树但未落户：树还没长出对应枝干，长出后移入正式分组。</p>' : ''}
+        ${items}${orphanLine}
+      </div>
+    </details>`;
+  }).join('') || '<div class="empty">没有匹配的叶子</div>';
+}
+
+function panelInbox() {
+  return T.inbox.filter(it => match(it.name, it.intro, it.cat, it.concept)).map((it, i) => `
+    <div class="cardx" id="ib-${i}">
+      <h3><a href="${esc(it.url)}" target="_blank" rel="noopener">${esc(it.name)} ↗</a>
+        <span class="badge ${it.kind === 'twig' ? 'kind-twig' : 'leafy'}">${it.kind === 'twig' ? '新枝节' : '新叶子'}</span>
+        <span class="badge lv-${esc(it.level)}">${esc(it.level)}</span>
+        ${it.graduated ? `<span class="badge grad">已毕业 ${esc(it.graduated)}</span>` : ''}</h3>
+      <div class="sub">${esc(it.cat)} · 收录于 ${esc(it.added)}</div>
+      <div class="kv"><b>是什么</b><span>${esc(it.intro)}</span></div>
+      <div class="kv"><b>为什么收</b><span>${esc(it.why)}</span></div>
+      <div class="kv"><b>怎么下潜</b><span>${esc(it.dive)}</span></div>
+      ${it.concept ? `<div class="kv"><b>新概念</b><span>${esc(it.concept)}（待入理论线）</span></div>` : ''}
+    </div>`).join('') || '<div class="empty">没有匹配的收集箱条目</div>';
+}
+
+function panelCards() {
+  return T.cards.filter(cd => match(cd.name, cd.tags.join(' '), cd.target)).map((cd, i) => {
+    const relLeaves = T.leaves.filter(l => cardHits(cd, l));
+    return `
+    <div class="cardx ${isDone(cd.id) ? 'is-done' : ''}" id="cd-${i}">
+      <h3>${ck(cd.id)}<a href="${esc(cd.url)}" target="_blank" rel="noopener">${esc(cd.name)} ↗</a>
+        ${cd.date ? `<span class="badge">${esc(cd.date)}</span>` : ''}
+        ${cd.madeBy ? `<span class="badge">${esc(cd.madeBy)}</span>` : ''}${noteBtn(cd.id, cd.name)}</h3>
+      ${noteText(cd.id)}
+      <div class="sub">挂载点 ${nodeBadge(cd.target)}</div>
+      <div class="kv"><b>技术栈</b><span class="tags">${cd.tags.map(t => `<span class="badge">${esc(t)}</span>`).join('')}</span></div>
+      ${relLeaves.length ? `<div class="kv"><b>相关叶子</b><span>${relLeaves.map(l => l.url
+        ? `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.name)} ↗</a>`
+        : `<span class="badge node" data-go="${esc(l.id)}">${esc(l.name)}</span>`).join('　')}</span></div>` : ''}
+      <div class="kv"><b>接下来</b><span>${cd.next.map(n => nodeBadge(n)).join(' ') || '—'}</span></div>
+    </div>`;
+  }).join('') || '<div class="empty">没有匹配的卡片</div>';
+}
+
+const panels = { theory: panelTheory, list: panelList, inbox: panelInbox, cards: panelCards };
+const panelEl = { theory: 'th', list: 'li', inbox: 'ib', cards: 'cd' };
+const TAB_INDEX = { theory: 0, list: 1, inbox: 2, card: 3 };
+
+function render() {
+  renderTabs();
+  $('#main').innerHTML = panels[TABS[cur].key]();
+  document.querySelectorAll('[data-tab]').forEach(b => b.onclick = () => { cur = +b.dataset.tab; render(); });
+  document.querySelectorAll('[data-go]').forEach(b => b.onclick = () => go(b.dataset.go));
+  document.querySelectorAll('[data-done]').forEach(b => b.onchange = () => toggleDone(b.dataset.done));
+  document.querySelectorAll('[data-note]').forEach(b => b.onclick = () => editNote(b.dataset.note, b.dataset.label));
+  // 手风琴状态写回（搜索时强制展开，不记状态）
+  document.querySelectorAll('details.ch[data-ch]').forEach(d =>
+    d.ontoggle = () => { if (!query) { d.open ? openCh.add(d.dataset.ch) : openCh.delete(d.dataset.ch); } });
+  document.querySelectorAll('details.ch[data-grp]').forEach(d =>
+    d.ontoggle = () => { if (!query) { d.open ? openGrp.add(d.dataset.grp) : openGrp.delete(d.dataset.grp); } });
+  if (location.hash.length > 1) go(decodeURIComponent(location.hash.slice(1)), true);
+}
+
+function go(key, fromHash) {
+  const t = idx[key];
+  if (!t) return;
+  if (t.type === 'theory') openCh.add(T.chapters[t.c].id);
+  if (t.type === 'list') openGrp.add(LEAF_GROUPS[t.c].key);
+  cur = TAB_INDEX[t.type];
+  render();
+  const el = document.getElementById(`${panelEl[TABS[cur].key]}-${t.c}${t.m == null ? '-' + t.p : '-' + t.m + '-' + t.p}`);
+  if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'center' }); el.classList.add('hl'); setTimeout(() => el.classList.remove('hl'), 1600); }
+  if (!fromHash) history.replaceState(null, '', '#' + encodeURIComponent(key));
+}
+
+$('#q').addEventListener('input', e => { query = e.target.value.trim(); render(); });
+$('#btn-export').onclick = exportProgress;
+$('#btn-import').onclick = () => $('#file-import').click();
+$('#file-import').onchange = e => { if (e.target.files[0]) importProgress(e.target.files[0]); e.target.value = ''; };
+$('#btn-clear').onclick = () => { if (confirm('清空本浏览器里的全部进度与笔记？建议先导出 JSON 备份。')) { P = emptyProgress(); save(); render(); } };
+$('#starters').innerHTML = (T.starters || []).map(s => `<div class="starter"><b>${esc(s.who)}</b>${esc(s.desc)}<ol>${s.steps.map(x => `<li>${esc(x)}</li>`).join('')}</ol></div>`).join('');
+// URL 参数：?expand=all 展开全部篇章；?tab=0..3 选择板块；?starters=1 展开入口路径（便于截图 / 分享）
+const QS = new URLSearchParams(location.search);
+if (QS.get('expand') === 'all') T.chapters.forEach(ch => openCh.add(ch.id));
+else if (QS.get('expand')) QS.get('expand').split(',').forEach(id => openCh.add(id));
+if (QS.get('tab')) cur = Math.max(0, Math.min(3, +QS.get('tab') || 0));
+if (QS.get('starters') === '1') $('#starters-box').open = true;
+render();
+</script>
+</body>
+</html>
