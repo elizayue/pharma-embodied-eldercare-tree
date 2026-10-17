@@ -502,141 +502,396 @@
 > 具身智能的物理地基：机构、运动学、动力学与系统软件
 > 优先学习配方：1.2 正逆运动学 ｜ 2.1 动力学 ｜ 3.1 ROS 2 ｜ 4.1 机器人形态
 
+**学习路线**：`06-M1.1` 位姿表示：旋转矩阵、欧拉角、四元数、齐次变换 → `06-M1.2` 正运动学与逆运动学 → `06-M1.3` 雅可比矩阵与奇异性 → `06-M1.4` 移动机器人运动学（差速、全向） → `06-M3.1` ROS 2：节点、话题、服务、动作 → `06-M3.2` URDF / MJCF 机器人描述 → `06-M3.3` 坐标系管理（TF）与时间同步 → `06-M2.1` 刚体动力学：牛顿—欧拉与拉格朗日方法 → `06-M2.2` 接触、摩擦与抓取力学 → `06-M4.1` 机器人形态：机械臂、移动底盘、移动操作、四足、人形 → `06-M4.2` 执行器：电机、减速器、力控 / 柔性驱动 → `06-M4.3` 传感器：编码器、IMU、力 / 力矩、触觉、相机、激光雷达 → `06-M4.5` 安全：协作机器人标准与人机交互安全 → `06-M4.4` 灵巧手与末端执行器 → `06-M2.3` 腿足与平衡（ZMP 等概念） → `06-M3.4` 实时性与嵌入式控制
+
 - **M1 运动学**
   - `06-M1.1` 位姿表示：旋转矩阵、欧拉角、四元数、齐次变换 ★★★
+    - 学什么：机器人中每个部件和目标都有自己的坐标系；用旋转矩阵、欧拉角、四元数表示姿态，用 4×4 齐次变换同时表示位置与姿态，并通过矩阵相乘串联多个坐标系。
+    - 学完能回答：旋转矩阵的列向量有什么几何含义？ ／ 四元数插值（如 slerp）为什么比欧拉角插值更平滑？ ／ “相对于固定系”与“相对于本体系”旋转，矩阵乘法顺序有何不同？
+    - 入门阅读：[Lynch & Park, Modern Robotics（第 3 章刚体运动，含视频）](https://modernrobotics.northwestern.edu/)
   - `06-M1.2` 正运动学与逆运动学 ★★★ 🍃 [Modern Robotics（教材与课程）](https://modernrobotics.northwestern.edu/)、手推一个 2 自由度平面机械臂的正逆运动学并用 Python 可视化（练习）
+    - 学什么：正运动学由关节角计算末端位姿，逆运动学由期望末端位姿反求关节角；逆解可能多解、无解，常用解析法或数值迭代法求解。
+    - 学完能回答：为什么逆运动学通常比正运动学难？ ／ 指数积（PoE）公式与 DH 参数法有何不同？ ／ 数值逆解失败的常见原因有哪些？
+    - 入门阅读：[Lynch & Park, Modern Robotics（第 4、6 章正 / 逆运动学）](https://modernrobotics.northwestern.edu/)
   - `06-M1.3` 雅可比矩阵与奇异性 ★★ 🍃 手推一个 2 自由度平面机械臂的正逆运动学并用 Python 可视化（练习）
+    - 学什么：雅可比矩阵把关节速度映射为末端速度，也把末端力映射为关节力矩；雅可比降秩时机器人处于奇异位形，某些方向无法运动且逆解会发散。
+    - 学完能回答：如何从雅可比判断机器人是否接近奇异？ ／ 为什么奇异位形附近关节速度会变得很大？ ／ 雅可比转置在力控中有什么用途？
+    - 入门阅读：[Lynch & Park, Modern Robotics（第 5 章速度运动学与静力学）](https://modernrobotics.northwestern.edu/)
   - `06-M1.4` 移动机器人运动学（差速、全向） ★★
+    - 学什么：移动机器人运动学描述轮速与底盘运动的关系：差速驱动受非完整约束不能侧移，全向轮 / 麦克纳姆轮底盘可在平面内任意方向移动。
+    - 学完能回答：什么是非完整约束？差速底盘为什么不能直接侧向平移？ ／ 如何由左右轮速计算差速底盘的线速度与角速度？ ／ 居家服务机器人选择底盘类型时要考虑哪些因素？
+    - 入门阅读：[Lynch & Park, Modern Robotics（第 13 章轮式移动机器人）](https://modernrobotics.northwestern.edu/)
 - **M2 动力学**
   - `06-M2.1` 刚体动力学：牛顿—欧拉与拉格朗日方法 ★★ 🍃 [Modern Robotics（教材与课程）](https://modernrobotics.northwestern.edu/)、[Pinocchio](https://github.com/stack-of-tasks/pinocchio)
+    - 学什么：刚体动力学描述力 / 力矩与运动的关系；牛顿—欧拉法逐个连杆递推，拉格朗日法从能量出发，最终都得到“质量矩阵 × 加速度 + 科氏 / 离心项 + 重力项 = 关节力矩”的形式。
+    - 学完能回答：动力学方程中各项分别代表什么物理意义？ ／ 正动力学与逆动力学分别用于仿真还是控制？ ／ 为什么递推牛顿—欧拉法计算效率高？
+    - 入门阅读：[Lynch & Park, Modern Robotics（第 8 章开链动力学）](https://modernrobotics.northwestern.edu/)；[Pinocchio（高效刚体动力学库）](https://github.com/stack-of-tasks/pinocchio)
   - `06-M2.2` 接触、摩擦与抓取力学 ★★ 🍃 [Drake](https://drake.mit.edu/)
+    - 学什么：操作任务离不开接触：摩擦锥描述不打滑的接触力范围，力封闭 / 形封闭描述抓取能否抵抗任意外力，接触建模也是仿真与 sim2real 的难点。
+    - 学完能回答：库仑摩擦锥的含义是什么？ ／ 力封闭与形封闭有何区别？ ／ 为什么接触丰富的任务在仿真中容易失真？
+    - 入门阅读：[Bicchi & Kumar, Robotic grasping and contact: a review（ICRA 2000）](https://doi.org/10.1109/ROBOT.2000.844081)；[Lynch & Park, Modern Robotics（第 12 章抓取与操作）](https://modernrobotics.northwestern.edu/)
   - `06-M2.3` 腿足与平衡（ZMP 等概念） ★
+    - 学什么：腿足与人形机器人需要在支撑多边形内维持平衡；零力矩点（ZMP）是经典的步行稳定性判据，现代方法还结合模型预测控制与强化学习。
+    - 学完能回答：ZMP 与支撑多边形是什么关系？ ／ 静态平衡与动态平衡有何区别？ ／ 为什么强化学习近年在腿足运动控制中表现突出？
+    - 入门阅读：[Vukobratović & Borovac, Zero-Moment Point — Thirty Five Years of Its Life（2004）](https://doi.org/10.1142/S0219843604000083)
 - **M3 机器人软件系统**
   - `06-M3.1` ROS 2：节点、话题、服务、动作 ★★★ 🍃 [ROS 2](https://docs.ros.org/)、[MoveIt](https://moveit.ai/)、[Nav2](https://docs.nav2.org/)
+    - 学什么：ROS 2 是机器人软件的通用中间件：节点之间通过话题（发布 / 订阅）、服务（请求 / 响应）和动作（带反馈的长任务）通信，底层基于 DDS。
+    - 学完能回答：话题、服务、动作分别适合什么场景？ ／ QoS 设置（可靠性、历史深度）会影响什么？ ／ 如何用命令行工具查看正在运行的节点和话题？
+    - 入门阅读：[ROS 2 文档：Concepts](https://docs.ros.org/en/rolling/Concepts.html)
   - `06-M3.2` URDF / MJCF 机器人描述 ★★ 🍃 [MuJoCo](https://mujoco.org/)
+    - 学什么：URDF（ROS 常用）与 MJCF（MuJoCo）用 XML 描述机器人的连杆、关节、惯性参数、碰撞与可视几何，是仿真、规划与控制共享的模型基础。
+    - 学完能回答：URDF 中 link 与 joint 各包含哪些信息？ ／ 碰撞几何与可视几何为什么常分开定义？ ／ 惯性参数不准会对仿真与控制造成什么影响？
+    - 入门阅读：[ROS 2 文档：URDF 教程](https://docs.ros.org/en/rolling/Tutorials/Intermediate/URDF/URDF-Main.html)；[MuJoCo XML Reference（MJCF）](https://mujoco.readthedocs.io/en/stable/XMLreference.html)
   - `06-M3.3` 坐标系管理（TF）与时间同步 ★★
+    - 学什么：机器人系统里有大量随时间变化的坐标系（地图、底盘、相机、夹爪等），TF2 负责维护它们之间带时间戳的变换；多传感器数据还需时间同步才能正确融合。
+    - 学完能回答：TF 树为什么必须是树结构？ ／ 查询“过去某一时刻”的变换有什么用？ ／ 相机与机械臂之间的手眼标定解决什么问题？
+    - 入门阅读：[ROS 2 文档：About tf2](https://docs.ros.org/en/rolling/Concepts/Intermediate/About-Tf2.html)
   - `06-M3.4` 实时性与嵌入式控制 ★
+    - 学什么：底层电机控制需要确定周期内完成计算（实时性）；常见做法是实时操作系统或实时内核 + 固定频率控制回路，上层规划与感知则在非实时部分运行。
+    - 学完能回答：软实时与硬实时有何区别？ ／ 控制周期抖动会对系统造成什么影响？ ／ ros2_control 在硬件抽象中扮演什么角色？
+    - 入门阅读：[ros2_control 文档](https://control.ros.org/)
 - **M4 硬件与形态**
   - `06-M4.1` 机器人形态：机械臂、移动底盘、移动操作、四足、人形 ★★
+    - 学什么：常见机器人形态包括固定机械臂、移动底盘、移动操作（底盘 + 机械臂）、四足与人形；形态决定可达空间、负载、安全性与成本，养老场景常需移动操作能力。
+    - 学完能回答：移动操作机器人相比固定机械臂多了哪些技术难点？ ／ 人形形态在家居环境中的潜在优势与代价是什么？ ／ 为什么许多落地的养老产品选择更简单的形态？
+    - 入门阅读：[Billard & Kragic, Trends and challenges in robot manipulation（Science 2019）](https://doi.org/10.1126/science.aat8414)
   - `06-M4.2` 执行器：电机、减速器、力控 / 柔性驱动 ★★
+    - 学什么：执行器把电能转为运动：电机 + 减速器是主流方案；串联弹性、准直驱等设计提升力控性能与碰撞安全性，是人机交互机器人的关键。
+    - 学完能回答：高减速比带来哪些好处与坏处？ ／ 串联弹性执行器为什么有利于力控和安全？ ／ 反向驱动性（backdrivability）对人机交互有什么意义？
+    - 入门阅读：[Pratt & Williamson, Series elastic actuators（IROS 1995）](https://doi.org/10.1109/IROS.1995.525827)
   - `06-M4.3` 传感器：编码器、IMU、力 / 力矩、触觉、相机、激光雷达 ★★
+    - 学什么：机器人的感觉来自编码器（关节位置）、IMU（姿态与加速度）、力 / 力矩与触觉传感器、相机与深度相机、激光雷达等，不同传感器在精度、成本与隐私影响上差别很大。
+    - 学完能回答：编码器和 IMU 分别能测什么、不能测什么？ ／ 触觉传感对灵巧操作有何价值？ ／ 在居家场景中，哪些传感器更容易引发隐私担忧？
+    - 入门阅读：[Dahiya et al., Tactile Sensing—From Humans to Humanoids（IEEE TRO 2010）](https://doi.org/10.1109/TRO.2009.2033627)
   - `06-M4.4` 灵巧手与末端执行器 ★
+    - 学什么：末端执行器从简单的二指夹爪、吸盘到多指灵巧手不等；灵巧手自由度高、可做精细操作，但控制、感知与成本挑战也更大。
+    - 学完能回答：二指夹爪能完成哪些家务任务？哪些任务需要多指手？ ／ 欠驱动手的设计思路是什么？ ／ 为什么灵巧操作是机器人学习的热点和难点？
+    - 入门阅读：[Billard & Kragic, Trends and challenges in robot manipulation（Science 2019）](https://doi.org/10.1126/science.aat8414)
   - `06-M4.5` 安全：协作机器人标准与人机交互安全 ★★★
+    - 学什么：与人近距离工作的机器人必须限制速度、力和能量，并能检测碰撞后安全响应；协作机器人相关要求见 ISO 10218 系列与 ISO/TS 15066 等标准（以 ISO 官网最新版本为准）。
+    - 学完能回答：碰撞检测、隔离与识别分别指什么？ ／ 速度与距离监控、功率与力限制是两种什么样的协作安全思路？ ／ 面对体弱老人时，安全阈值的设计需要额外考虑什么？
+    - 入门阅读：[Haddadin et al., Robot Collisions: A Survey on Detection, Isolation, and Identification（IEEE TRO 2017）](https://doi.org/10.1109/TRO.2017.2723903)
 
 #### 07 · 机器人感知 ★★
 
 > 让机器人看懂、听懂、摸懂环境与人
 > 优先学习配方：1.2 目标检测分割 ｜ 2.1 三维视觉 ｜ 3.1 SLAM ｜ 4.1 人体姿态
 
+**学习路线**：`07-M1.1` 相机模型与标定 → `07-M1.2` 目标检测与分割（含开放词汇方法） → `07-M1.3` 视觉基础模型（CLIP 类、SAM 类、DINO 类） → `07-M2.1` 深度相机与点云处理 → `07-M2.2` 6D 位姿估计 → `07-M3.1` SLAM 基础（视觉 / 激光） → `07-M2.3` 三维场景表示（体素、NeRF、3D 高斯） → `07-M3.2` 语义地图与场景图 → `07-M4.1` 人体姿态估计与动作识别 → `07-M4.2` 跌倒检测：视觉、可穿戴、雷达等方案对比 → `07-M4.3` 语音识别与自然语言交互 → `07-M5.2` 多传感器融合与卡尔曼滤波 → `07-M5.1` 触觉感知 → `07-M4.4` 情绪与认知状态识别（局限与伦理）
+
 - **M1 二维视觉**
   - `07-M1.1` 相机模型与标定 ★★ 🍃 [OpenCV](https://opencv.org/)
+    - 学什么：针孔相机模型用内参（焦距、主点）和畸变参数描述成像，外参描述相机在世界中的位姿；标定用已知图案估计这些参数，是测距与手眼协调的前提。
+    - 学完能回答：内参与外参分别描述什么？ ／ 镜头畸变有哪几类？如何校正？ ／ 标定误差会如何影响抓取精度？
+    - 入门阅读：[OpenCV: Camera Calibration（官方教程）](https://docs.opencv.org/4.x/dc/dbb/tutorial_py_calibration.html)
   - `07-M1.2` 目标检测与分割（含开放词汇方法） ★★★
+    - 学什么：目标检测输出物体类别与框，实例分割输出逐像素掩码；开放词汇方法用文本描述指定任意类别，让机器人能找“蓝色药盒”这类训练集中未必出现的物体。
+    - 学完能回答：检测、语义分割、实例分割的输出有何不同？ ／ 开放词汇检测是如何利用图文预训练的？ ／ 在杂乱家居场景中，检测的主要失败来源有哪些？
+    - 入门阅读：[Liu et al., Grounding DINO（开放集目标检测）](https://arxiv.org/abs/2303.05499)；[Minderer et al., Simple Open-Vocabulary Object Detection with Vision Transformers（OWL-ViT）](https://arxiv.org/abs/2205.06230)
   - `07-M1.3` 视觉基础模型（CLIP 类、SAM 类、DINO 类） ★★★
+    - 学什么：视觉基础模型在大规模数据上预训练，提供通用视觉能力：CLIP 类模型对齐图像与文本，SAM 类模型可按提示分割任意物体，DINO 类自监督模型提供通用视觉特征。
+    - 学完能回答：CLIP 的对比学习目标是什么？ ／ SAM 接受哪些类型的提示？ ／ 机器人策略为什么常用预训练视觉编码器而不是从零训练？
+    - 入门阅读：[Radford et al., Learning Transferable Visual Models From Natural Language Supervision（CLIP）](https://arxiv.org/abs/2103.00020)；[Kirillov et al., Segment Anything](https://arxiv.org/abs/2304.02643)
 - **M2 三维感知**
   - `07-M2.1` 深度相机与点云处理 ★★ 🍃 [Open3D](https://www.open3d.org/)
+    - 学什么：深度相机（结构光、ToF、双目）提供每个像素的距离，可转换为点云；点云处理包括滤波、降采样、配准、分割与法向估计，深度学习方法可直接处理点集。
+    - 学完能回答：不同深度传感原理在透明、反光物体上为何容易失效？ ／ ICP 配准的基本思路是什么？ ／ PointNet 如何实现对点顺序不敏感？
+    - 入门阅读：[Open3D 文档](https://www.open3d.org/docs/release/)；[Qi et al., PointNet](https://arxiv.org/abs/1612.00593)
   - `07-M2.2` 6D 位姿估计 ★★
+    - 学什么：6D 位姿估计求物体相对相机的三维位置和三维姿态，是精确抓取与放置的基础；新方法可处理训练时未见过的物体。
+    - 学完能回答：基于模型（有 CAD）与无模型的位姿估计有何区别？ ／ 对称物体为什么让位姿估计变得困难？ ／ 如何评价位姿估计的精度？
+    - 入门阅读：[Wen et al., FoundationPose](https://arxiv.org/abs/2312.08344)；[BOP: Benchmark for 6D Object Pose Estimation](https://bop.felk.cvut.cz/)
   - `07-M2.3` 三维场景表示（体素、NeRF、3D 高斯） ★
+    - 学什么：三维场景可用体素、网格、点云，或神经辐射场（NeRF）、3D 高斯泼溅等表示；新型表示能从多视角图像重建逼真场景，也被用于构建仿真与数字孪生。
+    - 学完能回答：NeRF 和 3D 高斯泼溅在渲染速度与表示方式上有何不同？ ／ 这些表示用于机器人时有哪些局限（如动态物体、几何精度）？ ／ 如何把重建场景用于仿真训练？
+    - 入门阅读：[Mildenhall et al., NeRF](https://arxiv.org/abs/2003.08934)；[Kerbl et al., 3D Gaussian Splatting for Real-Time Radiance Field Rendering](https://arxiv.org/abs/2308.04079)
 - **M3 定位与建图**
   - `07-M3.1` SLAM 基础（视觉 / 激光） ★★
+    - 学什么：SLAM 同时估计机器人位姿并构建环境地图，按传感器分为视觉、视觉惯性和激光 SLAM；回环检测与图优化用于消除累积误差。
+    - 学完能回答：为什么定位和建图需要“同时”进行？ ／ 回环检测解决什么问题？ ／ 居家环境（家具移动、光照变化）对 SLAM 有什么挑战？
+    - 入门阅读：[Cadena et al., Past, Present, and Future of SLAM](https://arxiv.org/abs/1606.05830)；[Campos et al., ORB-SLAM3](https://arxiv.org/abs/2007.11898)
   - `07-M3.2` 语义地图与场景图 ★★
+    - 学什么：语义地图在几何地图上标注物体与区域含义，三维场景图把房间、物体及其关系组织成图结构，便于机器人理解“药在卧室床头柜上”这类指令。
+    - 学完能回答：场景图中的节点和边分别可以表示什么？ ／ 开放词汇场景图如何借助视觉语言模型构建？ ／ 语义地图如何服务于 LLM 任务规划？
+    - 入门阅读：[Gu et al., ConceptGraphs: Open-Vocabulary 3D Scene Graphs](https://arxiv.org/abs/2309.16650)；[Hughes et al., Hydra: A Real-time Spatial Perception System for 3D Scene Graph Construction](https://arxiv.org/abs/2201.13360)
 - **M4 以人为中心的感知**
   - `07-M4.1` 人体姿态估计与动作识别 ★★★ 🍃 [MediaPipe](https://ai.google.dev/edge/mediapipe)、原型：摄像头 + 语音的服药提醒与服药确认 Demo（练习）
+    - 学什么：人体姿态估计从图像中检测关节关键点，进一步结合时间序列可识别动作；它是跌倒检测、康复评估与人机交互的基础。
+    - 学完能回答：自顶向下与自底向上的多人姿态估计有何区别？ ／ 2D 关键点用于动作识别有哪些局限？ ／ 遮挡和非常规视角会如何影响结果？
+    - 入门阅读：[Cao et al., OpenPose](https://arxiv.org/abs/1812.08008)；[MediaPipe（端侧姿态估计等方案）](https://ai.google.dev/edge/mediapipe)
   - `07-M4.2` 跌倒检测：视觉、可穿戴、雷达等方案对比 ★★★ 🍃 原型：基于姿态估计的跌倒检测并评估误报率（练习）
+    - 学什么：跌倒检测可基于可穿戴传感器、环境传感器（雷达、红外、压力等）或视觉；各方案在准确率、误报、佩戴依从性、隐私与成本上各有取舍。
+    - 学完能回答：可穿戴方案为什么常面临依从性问题？ ／ 视觉方案的隐私风险如何缓解？ ／ 评价跌倒检测系统时为什么要特别关注误报率？
+    - 入门阅读：[Mubashir, Shao & Seed, A survey on fall detection: Principles and approaches（Neurocomputing 2013）](https://doi.org/10.1016/j.neucom.2011.09.037)；[MSD Manual: Falls in Older Adults（了解跌倒的临床背景）](https://www.msdmanuals.com/professional/geriatrics/falls-in-older-adults/falls-in-older-adults)
   - `07-M4.3` 语音识别与自然语言交互 ★★
+    - 学什么：语音识别把语音转为文字，配合语言模型实现自然对话；老年人的口音、语速、构音障碍以及家中噪声都会影响识别效果。
+    - 学完能回答：大规模弱监督训练的语音识别模型有什么优势？ ／ 老年用户语音交互的常见失败场景有哪些？ ／ 语音交互中如何设计确认机制来避免误操作？
+    - 入门阅读：[Radford et al., Robust Speech Recognition via Large-Scale Weak Supervision（Whisper）](https://arxiv.org/abs/2212.04356)
   - `07-M4.4` 情绪与认知状态识别（局限与伦理） ★
+    - 学什么：情绪与认知状态识别试图从表情、语音、行为推断内在状态，但面部动作与情绪之间并非一一对应，结论需审慎，并涉及明显的伦理与隐私问题。
+    - 学完能回答：为什么“从表情读情绪”的科学依据存在争议？ ／ 在照护场景误判情绪可能带来什么后果？ ／ 什么情况下这类技术只应作为辅助提示？
+    - 入门阅读：[Barrett et al., Emotional Expressions Reconsidered（Psychol Sci Public Interest 2019）](https://doi.org/10.1177/1529100619832930)
 - **M5 多模态融合**
   - `07-M5.1` 触觉感知 ★
+    - 学什么：触觉传感提供接触位置、压力分布与滑动信息，弥补视觉在遮挡和精细接触中的不足，对抓取易碎物体和人体接触尤为重要。
+    - 学完能回答：触觉传感器有哪些常见原理？ ／ 触觉信息如何帮助检测抓取滑动？ ／ 触觉数据为何难以大规模采集与建模？
+    - 入门阅读：[Dahiya et al., Tactile Sensing—From Humans to Humanoids（IEEE TRO 2010）](https://doi.org/10.1109/TRO.2009.2033627)
   - `07-M5.2` 多传感器融合与卡尔曼滤波 ★★
+    - 学什么：多传感器融合结合不同传感器的优势；卡尔曼滤波及其扩展在“预测—更新”框架下融合带噪声的观测，是定位与状态估计的基础工具。
+    - 学完能回答：卡尔曼滤波的预测步和更新步分别做什么？ ／ 扩展卡尔曼滤波如何处理非线性？ ／ IMU 与轮式里程计融合能解决什么问题？
+    - 入门阅读：[Labbe, Kalman and Bayesian Filters in Python（开源交互式教材）](https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python)
 
 #### 08 · 控制与规划 ★★
 
 > 从“想做什么”到“精确地做出来”
 > 优先学习配方：1.1 PID ｜ 2.1 运动规划 ｜ 3.1 任务规划 ｜ 1.3 力控
 
+**学习路线**：`08-M1.1` PID 与经典控制 → `08-M2.1` 采样式规划（RRT、PRM） → `08-M2.3` 移动导航（全局 / 局部规划、避障） → `08-M2.2` 轨迹优化 → `08-M1.2` 模型预测控制（MPC） → `08-M1.3` 阻抗 / 导纳控制与力控 → `08-M2.4` 抓取规划 → `08-M3.2` 行为树与状态机 → `08-M3.3` LLM 作为任务规划器（高层规划 + 底层技能） → `08-M3.1` 任务与运动规划（TAMP） → `08-M4.1` 人机共融的安全控制（限速、限力、碰撞检测） → `08-M4.2` 人类意图预测与共享控制 → `08-M4.3` 辅助移动与搀扶类机器人控制要点 → `08-M1.4` 全身控制（WBC）概念
+
 - **M1 控制**
   - `08-M1.1` PID 与经典控制 ★★★ 🍃 在仿真里给单关节调 PID（练习）
+    - 学什么：PID 控制根据误差的比例、积分和微分计算控制量，是最常用的反馈控制方法；经典控制还关注稳定性、响应速度、超调与稳态误差。
+    - 学完能回答：P、I、D 三项各自对响应有什么影响？ ／ 积分饱和（windup）是什么？如何处理？ ／ 为什么微分项对噪声敏感？
+    - 入门阅读：[Ang, Chong & Li, PID control system analysis, design, and technology（IEEE TCST 2005）](https://doi.org/10.1109/TCST.2005.847331)
   - `08-M1.2` 模型预测控制（MPC） ★★
+    - 学什么：模型预测控制（MPC）在每个控制周期基于系统模型预测未来一段时间的行为，求解带约束的优化问题，只执行第一步控制并滚动重复。
+    - 学完能回答：“滚动时域”是什么意思？ ／ MPC 为什么天然适合处理约束？ ／ MPC 的计算开销对控制频率有什么影响？
+    - 入门阅读：[Rawlings, Mayne & Diehl, Model Predictive Control: Theory, Computation, and Design（作者公开电子版）](https://sites.engineering.ucsb.edu/~jbraw/mpc/)
   - `08-M1.3` 阻抗 / 导纳控制与力控 ★★
+    - 学什么：阻抗 / 导纳控制不直接控制位置或力，而是让机器人表现出期望的“弹簧—阻尼”动态特性，使其在接触环境或与人交互时柔顺、安全。
+    - 学完能回答：阻抗控制与导纳控制的输入输出有何不同？ ／ 刚度设置过高或过低分别会有什么问题？ ／ 为什么人机物理交互常需要柔顺控制？
+    - 入门阅读：[Hogan, Impedance Control: An Approach to Manipulation（1985）](https://doi.org/10.1115/1.3140702)
   - `08-M1.4` 全身控制（WBC）概念 ★
+    - 学什么：全身控制（WBC）为高自由度机器人（人形、移动操作）同时协调多个任务（平衡、手部轨迹、避碰等），常通过优先级分层或二次规划求解关节指令。
+    - 学完能回答：多任务冲突时，优先级分层如何处理？ ／ 为什么 WBC 常表述为二次规划（QP）？ ／ WBC 与上层学习策略可以如何结合？
+    - 入门阅读：[Sentis & Khatib, Synthesis of Whole-Body Behaviors through Hierarchical Control of Behavioral Primitives（2005）](https://doi.org/10.1142/S0219843605000594)
 - **M2 运动规划**
   - `08-M2.1` 采样式规划（RRT、PRM） ★★ 🍃 [MoveIt](https://moveit.ai/)
+    - 学什么：采样式规划在高维构型空间随机采样无碰撞状态并连接成路径，RRT 适合单次查询，PRM 适合同一环境多次查询；算法具有概率完备性。
+    - 学完能回答：构型空间（C-space）是什么？ ／ RRT 与 PRM 的构建方式有何不同？ ／ 为什么采样式方法在高维机械臂规划中比网格搜索更实用？
+    - 入门阅读：[OMPL: The Open Motion Planning Library](https://ompl.kavrakilab.org/)
   - `08-M2.2` 轨迹优化 ★★ 🍃 [Drake](https://drake.mit.edu/)
+    - 学什么：轨迹优化把运动规划写成优化问题，在满足动力学、碰撞与关节限制的前提下最小化时间、能量或平滑度等代价，常与采样式规划互补。
+    - 学完能回答：直接法与间接法轨迹优化有何区别？ ／ 为什么轨迹优化容易陷入局部最优？ ／ 采样式规划的结果如何作为轨迹优化的初值？
+    - 入门阅读：[Underactuated Robotics（MIT 公开课程讲义，含轨迹优化）](https://underactuated.mit.edu/)
   - `08-M2.3` 移动导航（全局 / 局部规划、避障） ★★ 🍃 [Nav2](https://docs.nav2.org/)
+    - 学什么：移动导航由全局规划（在地图上找路径）与局部规划（实时避障、跟踪路径）组成，配合定位与代价地图在动态环境中运行。
+    - 学完能回答：全局规划与局部规划各解决什么问题？ ／ 代价地图中的膨胀层有什么作用？ ／ 家中有人走动、宠物和杂物时，导航需要注意什么？
+    - 入门阅读：[Nav2 文档（ROS 2 导航框架）](https://docs.nav2.org/)
   - `08-M2.4` 抓取规划 ★★ 🍃 原型：在仿真中让机械臂从药架取药盒并递到人手（练习）
+    - 学什么：抓取规划确定在物体哪里、以什么姿态抓取；可基于物体模型分析，也可用深度学习从点云或图像直接生成抓取候选并评估成功率。
+    - 学完能回答：抓取质量指标通常考虑哪些因素？ ／ 基于学习的 6 自由度抓取生成与平面抓取有何不同？ ／ 抓取药盒、水杯这类日常物体有哪些特殊难点？
+    - 入门阅读：[Mahler et al., Dex-Net 2.0](https://arxiv.org/abs/1703.09312)；[Sundermeyer et al., Contact-GraspNet](https://arxiv.org/abs/2103.14127)
 - **M3 任务规划与决策**
   - `08-M3.1` 任务与运动规划（TAMP） ★
+    - 学什么：任务与运动规划（TAMP）同时决定“做哪些动作、按什么顺序”（离散的任务层）和“具体怎么动”（连续的运动层），用于长程操作任务。
+    - 学完能回答：为什么任务规划与运动规划需要联合考虑？ ／ 符号规划语言（如 PDDL）在 TAMP 中的作用是什么？ ／ LLM 能否替代传统任务规划器？有哪些风险？
+    - 入门阅读：[Garrett et al., Integrated Task and Motion Planning](https://arxiv.org/abs/2010.01083)
   - `08-M3.2` 行为树与状态机 ★★
+    - 学什么：行为树与状态机是组织机器人行为的两种方式；行为树以树形结构组合顺序、选择与并行节点，模块化好、易于扩展和调试，广泛用于导航与服务机器人。
+    - 学完能回答：行为树的 Sequence 与 Fallback 节点分别如何工作？ ／ 行为树相比有限状态机的优势是什么？ ／ 如何在行为树中加入“失败后请求人工帮助”的分支？
+    - 入门阅读：[Colledanchise & Ögren, Behavior Trees in Robotics and AI: An Introduction](https://arxiv.org/abs/1709.00084)；[BehaviorTree.CPP 文档](https://www.behaviortree.dev/)
   - `08-M3.3` LLM 作为任务规划器（高层规划 + 底层技能） ★★★
+    - 学什么：大语言模型可把自然语言指令分解为技能序列或生成调用机器人 API 的代码，再由底层技能执行；关键是把语言计划与机器人实际能力、环境状态对齐。
+    - 学完能回答：SayCan 如何把 LLM 的建议与技能可执行性结合？ ／ “代码即策略”方法有哪些优点和安全隐患？ ／ LLM 规划出错时，系统应如何检测与恢复？
+    - 入门阅读：[Ahn et al., Do As I Can, Not As I Say（SayCan）](https://arxiv.org/abs/2204.01691)；[Liang et al., Code as Policies](https://arxiv.org/abs/2209.07753)
 - **M4 人机协作**
   - `08-M4.1` 人机共融的安全控制（限速、限力、碰撞检测） ★★
+    - 学什么：人机共融的安全控制通过限速、限力、保持距离和碰撞检测后的安全反应，降低机器人对人的伤害风险；相关要求见协作机器人国际标准（以官方最新版为准）。
+    - 学完能回答：碰撞后机器人有哪些常见的安全反应策略？ ／ 速度与距离监控需要哪些感知能力？ ／ 为什么老年人和儿童需要更保守的安全参数？
+    - 入门阅读：[Haddadin et al., Robot Collisions: A Survey on Detection, Isolation, and Identification（IEEE TRO 2017）](https://doi.org/10.1109/TRO.2017.2723903)
   - `08-M4.2` 人类意图预测与共享控制 ★
+    - 学什么：共享控制让人和机器人共同决定动作：机器人推断人的意图，在人的输入与自主行为之间做仲裁，并把自身意图反馈给人。
+    - 学完能回答：意图检测可以利用哪些信号？ ／ 仲裁策略如何在“听人的”与“机器人自主”之间平衡？ ／ 共享控制在助行或喂食辅助中如何应用？
+    - 入门阅读：[Losey et al., A Review of Intent Detection, Arbitration, and Communication Aspects of Shared Control for Physical Human–Robot Interaction（2018）](https://doi.org/10.1115/1.4039145)
   - `08-M4.3` 辅助移动与搀扶类机器人控制要点 ★
+    - 学什么：助行、搀扶与移位辅助机器人直接承受人的部分体重，控制需结合人的步态与意图，提供恰当的支撑与柔顺性，并严格防止失稳与跌倒。
+    - 学完能回答：助行机器人需要感知使用者的哪些状态？ ／ 支撑力过大或过小分别会带来什么风险？ ／ 这类设备为什么往往要按医疗器械或康复器械管理？
+    - 入门阅读：[Losey et al., A Review of Intent Detection, Arbitration, and Communication Aspects of Shared Control for Physical Human–Robot Interaction（2018）](https://doi.org/10.1115/1.4039145)；[MSD Manual: Gait Disorders in Older Adults](https://www.msdmanuals.com/professional/geriatrics/gait-disorders-in-older-adults/gait-disorders-in-older-adults)
 
 #### 09 · 机器人学习：强化学习与模仿学习 ★★★
 
 > 从数据和试错中学技能
 > 优先学习配方：1.2 策略梯度 ｜ 2.1 行为克隆 ｜ 2.3 扩散策略 ｜ 3.1 示教数据采集
 
+**学习路线**：`09-M1.1` MDP、价值函数与贝尔曼方程 → `09-M1.2` 策略梯度与 PPO → `09-M1.3` off-policy 方法（DQN / SAC） → `09-M1.4` 奖励设计与安全约束 → `09-M2.1` 行为克隆与分布偏移（DAgger） → `09-M3.1` 示教数据采集：遥操作、主从臂、VR、手持采集设备 → `09-M2.2` 动作分块（Action Chunking）与 ACT → `09-M2.3` 扩散策略（Diffusion Policy）与流匹配策略 → `09-M3.2` 数据格式与大规模数据集（Open X-Embodiment 等） → `09-M1.5` 离线强化学习 → `09-M2.4` 逆强化学习概念 → `09-M3.3` 人类视频学习 → `09-M4.1` 世界模型与基于模型的强化学习 → `09-M4.2` 视频生成模型作为模拟器
+
 - **M1 强化学习**
   - `09-M1.1` MDP、价值函数与贝尔曼方程 ★★★ 🍃 [Gymnasium](https://gymnasium.farama.org/)
+    - 学什么：马尔可夫决策过程（MDP）用状态、动作、转移、奖励和折扣因子形式化序贯决策；价值函数衡量长期回报，贝尔曼方程给出价值的递归关系。
+    - 学完能回答：状态价值函数与动作价值函数有何区别？ ／ 折扣因子取值大小对智能体行为有何影响？ ／ 贝尔曼最优方程与策略迭代 / 价值迭代是什么关系？
+    - 入门阅读：[OpenAI Spinning Up in Deep RL（入门讲解与代码）](https://spinningup.openai.com/)
   - `09-M1.2` 策略梯度与 PPO ★★★ 🍃 [Stable-Baselines3](https://stable-baselines3.readthedocs.io/)、用 SB3 在 MuJoCo 环境里训一个 PPO 智能体（练习）
+    - 学什么：策略梯度方法直接优化参数化策略的期望回报；PPO 通过限制每次更新的幅度提高训练稳定性，是机器人仿真训练中最常用的算法之一。
+    - 学完能回答：策略梯度中的优势函数起什么作用？ ／ PPO 的裁剪目标如何限制策略更新幅度？ ／ 为什么 PPO 适合大规模并行仿真？
+    - 入门阅读：[Schulman et al., Proximal Policy Optimization Algorithms](https://arxiv.org/abs/1707.06347)；[OpenAI Spinning Up: PPO 讲解](https://spinningup.openai.com/)
   - `09-M1.3` off-policy 方法（DQN / SAC） ★★
+    - 学什么：离策略（off-policy）方法可复用历史经验：DQN 用深度网络近似动作价值并依靠经验回放与目标网络稳定训练，SAC 在最大化回报的同时最大化策略熵，适合连续控制。
+    - 学完能回答：经验回放与目标网络分别解决什么问题？ ／ 为什么 DQN 不直接适用于连续动作空间？ ／ SAC 中熵正则项的作用是什么？
+    - 入门阅读：[Mnih et al., Human-level control through deep reinforcement learning（Nature 2015）](https://doi.org/10.1038/nature14236)；[Haarnoja et al., Soft Actor-Critic](https://arxiv.org/abs/1801.01290)
   - `09-M1.4` 奖励设计与安全约束 ★★
+    - 学什么：奖励函数决定智能体学到什么；设计不当会导致“奖励投机”。安全强化学习在训练和部署中加入约束或风险考量，避免危险行为。
+    - 学完能回答：稀疏奖励与稠密奖励各有什么优缺点？ ／ 举一个奖励投机的例子，并说明如何修正。 ／ 约束 MDP 如何表达安全要求？
+    - 入门阅读：[García & Fernández, A Comprehensive Survey on Safe Reinforcement Learning（JMLR 2015）](https://jmlr.org/papers/v16/garcia15a.html)
   - `09-M1.5` 离线强化学习 ★
+    - 学什么：离线强化学习只用预先收集的数据集学习策略、不与环境交互，适合真实机器人等交互昂贵的场景，主要难点是数据分布之外动作的价值高估。
+    - 学完能回答：离线 RL 与行为克隆有何区别？ ／ 分布外动作为什么会导致价值高估？ ／ 保守 / 约束类方法如何缓解这一问题？
+    - 入门阅读：[Levine et al., Offline Reinforcement Learning: Tutorial, Review, and Perspectives on Open Problems](https://arxiv.org/abs/2005.01643)
 - **M2 模仿学习**
   - `09-M2.1` 行为克隆与分布偏移（DAgger） ★★★ 🍃 [LeRobot](https://github.com/huggingface/lerobot)、用 LeRobot 在仿真数据上训一个行为克隆策略（练习）
+    - 学什么：行为克隆把示教数据当作监督学习，直接学习“观测 → 动作”；它的主要问题是分布偏移：小误差会把机器人带到示教中没出现过的状态并持续累积，DAgger 通过在线收集专家纠正来缓解。
+    - 学完能回答：为什么行为克隆的误差会随时间累积？ ／ DAgger 的数据收集流程是怎样的？ ／ 增加示教的多样性为什么能提升鲁棒性？
+    - 入门阅读：[Ross, Gordon & Bagnell, A Reduction of Imitation Learning and Structured Prediction to No-Regret Online Learning（DAgger）](https://arxiv.org/abs/1011.0686)
   - `09-M2.2` 动作分块（Action Chunking）与 ACT ★★ 🍃 [ALOHA 项目页](https://tonyzhaozh.github.io/aloha/)、用 LeRobot 在仿真数据上训一个行为克隆策略（练习） 🃏 [ACT / ALOHA](https://arxiv.org/abs/2304.13705)
+    - 学什么：动作分块（action chunking）一次预测未来一段动作序列而非单步动作，降低误差累积与抖动；ACT 用 Transformer（CVAE 结构）实现这一思路，在精细双臂操作上效果显著。
+    - 学完能回答：动作分块为什么能缓解误差累积？ ／ ACT 中 CVAE 的隐变量起什么作用？ ／ 时间集成（temporal ensembling）解决了什么问题？
+    - 入门阅读：[Zhao et al., Learning Fine-Grained Bimanual Manipulation with Low-Cost Hardware（ACT / ALOHA）](https://arxiv.org/abs/2304.13705)
   - `09-M2.3` 扩散策略（Diffusion Policy）与流匹配策略 ★★★ 🍃 [Diffusion Policy 项目页](https://diffusion-policy.cs.columbia.edu/) 🃏 [Diffusion Policy](https://arxiv.org/abs/2303.04137)
+    - 学什么：扩散策略把动作生成建模为条件去噪过程，能表达多峰的动作分布；流匹配是另一类生成方法，可用更少的采样步生成连续动作，也被用于 VLA 的动作头。
+    - 学完能回答：为什么普通回归在多峰示教（如绕左或绕右）下会失败？ ／ 扩散策略推理时的采样步数如何影响控制频率？ ／ 流匹配与扩散模型的训练目标有何不同？
+    - 入门阅读：[Chi et al., Diffusion Policy](https://arxiv.org/abs/2303.04137)；[Lipman et al., Flow Matching for Generative Modeling](https://arxiv.org/abs/2210.02747)
   - `09-M2.4` 逆强化学习概念 ★
+    - 学什么：逆强化学习从专家示教中反推奖励函数，再据此学习策略；相比直接模仿，它试图理解“专家为什么这样做”，从而更好地泛化。
+    - 学完能回答：为什么同一组示教可以对应多个奖励函数？ ／ 学徒学习（apprenticeship learning）的基本思路是什么？ ／ 逆强化学习与生成对抗模仿学习有何联系？
+    - 入门阅读：[Abbeel & Ng, Apprenticeship learning via inverse reinforcement learning（ICML 2004）](https://doi.org/10.1145/1015330.1015430)
 - **M3 数据**
   - `09-M3.1` 示教数据采集：遥操作、主从臂、VR、手持采集设备 ★★★ 🍃 [SO-ARM100 开源机械臂](https://github.com/TheRobotStudio/SO-ARM100)、[ALOHA 项目页](https://tonyzhaozh.github.io/aloha/)
+    - 学什么：示教数据可通过遥操作（手柄、主从臂、VR）或手持采集设备获取；采集方式决定数据质量、成本与可扩展性，是模仿学习效果的关键。
+    - 学完能回答：主从臂遥操作与 VR 遥操作各有什么优缺点？ ／ 手持采集设备如何在没有机器人的情况下收集示教？ ／ 示教质量（犹豫、失败片段）会如何影响策略？
+    - 入门阅读：[Chi et al., Universal Manipulation Interface（手持示教采集）](https://arxiv.org/abs/2402.10329)；[ALOHA 项目页（低成本主从双臂遥操作）](https://tonyzhaozh.github.io/aloha/)
   - `09-M3.2` 数据格式与大规模数据集（Open X-Embodiment 等） ★★ 🍃 [Open X-Embodiment](https://robotics-transformer-x.github.io/) 🃏 [Open X-Embodiment / RT-X](https://arxiv.org/abs/2310.08864)
+    - 学什么：大规模机器人数据集汇集多种机器人与任务的示教，以统一格式发布，用于预训练通用策略；数据格式、标注与质量控制同样重要。
+    - 学完能回答：跨本体数据集需要统一哪些信息（观测、动作空间、语言指令）？ ／ 示教数据中的哪些因素对离线学习影响最大？ ／ 如何从大数据集中挑选与自己任务相关的子集？
+    - 入门阅读：[Open X-Embodiment Collaboration, Open X-Embodiment: Robotic Learning Datasets and RT-X Models](https://arxiv.org/abs/2310.08864)；[Mandlekar et al., What Matters in Learning from Offline Human Demonstrations for Robot Manipulation（robomimic）](https://arxiv.org/abs/2108.03298)
   - `09-M3.3` 人类视频学习 ★
+    - 学什么：人类视频（如第一人称日常活动视频）数量巨大，可用来预训练视觉表示或学习任务结构，但缺少机器人动作标签，且人与机器人身体差异大。
+    - 学完能回答：人类视频能为机器人学习提供哪些信息？ ／ 人与机器人的“本体差异”如何影响迁移？ ／ 预训练视觉表示通常如何接入下游策略？
+    - 入门阅读：[Nair et al., R3M: A Universal Visual Representation for Robot Manipulation](https://arxiv.org/abs/2203.12601)
 - **M4 世界模型**
   - `09-M4.1` 世界模型与基于模型的强化学习 ★★
+    - 学什么：世界模型学习环境如何随动作变化，智能体可以在“想象”中规划或训练策略；基于模型的强化学习通常比无模型方法更省数据。
+    - 学完能回答：世界模型通常预测什么（像素、隐状态、奖励）？ ／ 模型误差会如何影响基于模型的规划？ ／ 在隐空间中想象训练有什么优势？
+    - 入门阅读：[Ha & Schmidhuber, World Models](https://arxiv.org/abs/1803.10122)；[Hafner et al., Mastering Diverse Domains through World Models（DreamerV3）](https://arxiv.org/abs/2301.04104)
   - `09-M4.2` 视频生成模型作为模拟器 ★
+    - 学什么：动作条件的视频生成模型可作为“可交互的模拟器”，根据动作生成未来画面，用于策略训练或评估；目前物理一致性与可控性仍是主要限制。
+    - 学完能回答：视频生成模拟器与物理仿真器各有什么优缺点？ ／ 如何检验生成视频中的物理是否可信？ ／ 这类模拟器在评估机器人策略时可能产生什么偏差？
+    - 入门阅读：[Yang et al., Learning Interactive Real-World Simulators（UniSim）](https://arxiv.org/abs/2310.06114)
 
 #### 10 · 具身大模型与 VLA ★★★
 
 > 把大模型的语义能力接到机器人身体上
 > 优先学习配方：1.1 VLA 定义 ｜ 2.1 RT-2 ｜ 2.3 π0 ｜ 3.1 分层架构
 
+**学习路线**：`10-M1.1` 视觉—语言—动作模型（VLA）的定义与动机 → `10-M2.1` RT-1 / RT-2 与 RT-X → `10-M1.2` 动作表示：离散化 token、连续动作头、扩散 / 流匹配 → `10-M2.2` OpenVLA 与 Octo（开源通用策略） → `10-M1.3` 跨本体（cross-embodiment）泛化 → `10-M2.3` π0 系列（流匹配动作专家） → `10-M2.4` SayCan、PaLM-E 等“语言规划 + 技能” → `10-M3.1` 分层架构：高层 VLM 推理 + 底层快速控制 → `10-M3.2` 微调与部署：LoRA 微调、量化、推理频率 → `10-M3.3` 具身智能体：记忆、工具调用与长程任务 → `10-M4.1` 仿真基准与真实评测 → `10-M4.2` 泛化维度：物体、场景、指令、本体 → `10-M4.3` 安全性与失败模式分析 → `10-M2.5` 人形机器人基础模型（行业进展跟踪）
+
 - **M1 概念**
   - `10-M1.1` 视觉—语言—动作模型（VLA）的定义与动机 ★★★
+    - 学什么：视觉—语言—动作模型（VLA）以图像和语言指令为输入、直接输出机器人动作，希望把视觉语言模型从网络数据中学到的语义知识迁移到机器人控制上。
+    - 学完能回答：VLA 与“LLM 规划 + 传统技能库”的系统有何区别？ ／ 网络预训练知识能为机器人带来哪些泛化能力？ ／ VLA 目前主要的局限有哪些？
+    - 入门阅读：[Ma et al., A Survey on Vision-Language-Action Models for Embodied AI](https://arxiv.org/abs/2405.14093)；[Brohan et al., RT-2](https://arxiv.org/abs/2307.15818)
   - `10-M1.2` 动作表示：离散化 token、连续动作头、扩散 / 流匹配 ★★★
+    - 学什么：VLA 输出动作的方式主要有三类：把连续动作离散化为 token 让语言模型逐个生成；用回归式连续动作头；用扩散或流匹配生成连续动作块。
+    - 学完能回答：动作离散化 token 的优缺点是什么？ ／ 为什么高频灵巧操作更偏好连续动作块？ ／ 动作表示如何影响推理速度？
+    - 入门阅读：[Black et al., π0: A Vision-Language-Action Flow Model for General Robot Control](https://arxiv.org/abs/2410.24164)；[Brohan et al., RT-2](https://arxiv.org/abs/2307.15818)
   - `10-M1.3` 跨本体（cross-embodiment）泛化 ★★ 🍃 [Open X-Embodiment](https://robotics-transformer-x.github.io/)
+    - 学什么：跨本体泛化指一个模型能控制形态、传感器和动作空间不同的多种机器人；通常靠多机器人混合数据预训练，再在目标机器人上少量微调。
+    - 学完能回答：不同机器人在动作空间上的差异如何统一或适配？ ／ 跨本体数据为什么可能帮助单个机器人的性能？ ／ 迁移到新机器人时通常需要多少、什么样的数据？
+    - 入门阅读：[Open X-Embodiment Collaboration, Open X-Embodiment: Robotic Learning Datasets and RT-X Models](https://arxiv.org/abs/2310.08864)；[Octo Model Team, Octo: An Open-Source Generalist Robot Policy](https://arxiv.org/abs/2405.12213)
 - **M2 代表性工作**
   - `10-M2.1` RT-1 / RT-2 与 RT-X ★★★ 🃏 [RT-1](https://arxiv.org/abs/2212.06817)、[RT-2](https://arxiv.org/abs/2307.15818)
+    - 学什么：RT-1 用 Transformer 在大规模真实机器人示教数据上学习“图像 + 指令 → 离散动作”；RT-2 在此基础上把视觉语言模型与机器人数据联合微调，展现出更强的语义泛化；RT-X 用跨机构数据训练。
+    - 学完能回答：RT-1 与 RT-2 的模型来源和训练数据有何不同？ ／ RT-2 的“涌现”语义能力体现在哪些评测上？ ／ 为什么这两个模型的思路影响了后续开源 VLA？
+    - 入门阅读：[Brohan et al., RT-1: Robotics Transformer for Real-World Control at Scale](https://arxiv.org/abs/2212.06817)；[Brohan et al., RT-2](https://arxiv.org/abs/2307.15818)
   - `10-M2.2` OpenVLA 与 Octo（开源通用策略） ★★★ 🍃 [OpenVLA](https://openvla.github.io/)、[Octo](https://octo-models.github.io/) 🃏 [OpenVLA](https://arxiv.org/abs/2406.09246)、[Octo](https://arxiv.org/abs/2405.12213)
+    - 学什么：OpenVLA 是开源的 7B 参数 VLA，基于预训练视觉语言模型输出离散动作 token；Octo 是较轻量的开源通用策略，用扩散头输出动作；二者都在 Open X-Embodiment 数据上训练并支持微调。
+    - 学完能回答：OpenVLA 与 Octo 在模型规模与动作头设计上有何不同？ ／ 在自己的机器人上微调它们需要准备哪些数据？ ／ 开源权重对研究可复现性有什么意义？
+    - 入门阅读：[Kim et al., OpenVLA: An Open-Source Vision-Language-Action Model](https://arxiv.org/abs/2406.09246)；[Octo Model Team, Octo: An Open-Source Generalist Robot Policy](https://arxiv.org/abs/2405.12213)
   - `10-M2.3` π0 系列（流匹配动作专家） ★★★ 🍃 [openpi](https://github.com/Physical-Intelligence/openpi) 🃏 [π0（pi-zero）](https://arxiv.org/abs/2410.24164)
+    - 学什么：π0 在预训练视觉语言模型上接一个用流匹配生成连续动作块的“动作专家”，在多种机器人数据上训练，面向高频、灵巧的操作任务；代码与权重通过 openpi 开源。
+    - 学完能回答：“动作专家”与 VLM 主干之间如何分工？ ／ 流匹配动作头相比离散 token 有什么优势？ ／ 用 openpi 微调需要准备什么格式的数据？
+    - 入门阅读：[Black et al., π0: A Vision-Language-Action Flow Model for General Robot Control](https://arxiv.org/abs/2410.24164)；[openpi（官方代码与权重）](https://github.com/Physical-Intelligence/openpi)
   - `10-M2.4` SayCan、PaLM-E 等“语言规划 + 技能” ★★ 🃏 [SayCan](https://arxiv.org/abs/2204.01691)、[PaLM-E](https://arxiv.org/abs/2303.03378)
+    - 学什么：“语言规划 + 技能”路线中，大模型负责理解指令、分解任务，底层技能负责执行：SayCan 用价值函数约束 LLM 的建议，PaLM-E 把传感器输入直接注入语言模型进行具身推理。
+    - 学完能回答：SayCan 中的“可供性（affordance）”是如何估计的？ ／ PaLM-E 如何把图像等连续输入接入语言模型？ ／ 这一路线与端到端 VLA 相比有哪些优劣？
+    - 入门阅读：[Ahn et al., Do As I Can, Not As I Say（SayCan）](https://arxiv.org/abs/2204.01691)；[Driess et al., PaLM-E: An Embodied Multimodal Language Model](https://arxiv.org/abs/2303.03378)
   - `10-M2.5` 人形机器人基础模型（行业进展跟踪） ★
+    - 学什么：人形机器人基础模型是快速变化的行业方向，多家公司与研究机构发布了面向人形的通用模型；学习时以公开技术报告为准，关注数据来源、架构与评测方式，避免轻信宣传。
+    - 学完能回答：人形基础模型常用哪些数据来源（真机、仿真、人类视频）？ ／ 如何区分技术报告中的可复现结果与演示视频？ ／ 人形机器人在养老场景落地还有哪些现实障碍？
+    - 入门阅读：[NVIDIA, GR00T N1: An Open Foundation Model for Generalist Humanoid Robots（技术报告示例）](https://arxiv.org/abs/2503.14734)
 - **M3 系统设计**
   - `10-M3.1` 分层架构：高层 VLM 推理 + 底层快速控制 ★★★ 🍃 原型：在仿真中让机械臂从药架取药盒并递到人手（练习）
+    - 学什么：分层架构让慢速的大模型做高层理解与规划，快速的底层策略或控制器负责高频执行，兼顾语义能力与实时性，是当前具身系统的常见设计。
+    - 学完能回答：高层与底层之间用什么接口（语言子任务、目标位姿、技能编号）？ ／ 为什么不能让大模型直接以控制频率输出所有动作？ ／ 分层系统中错误如何在层间传播与恢复？
+    - 入门阅读：[Ahn et al., Do As I Can, Not As I Say（SayCan）](https://arxiv.org/abs/2204.01691)；[Black et al., π0](https://arxiv.org/abs/2410.24164)
   - `10-M3.2` 微调与部署：LoRA 微调、量化、推理频率 ★★ 🍃 [LeRobot](https://github.com/huggingface/lerobot)、[OpenVLA](https://openvla.github.io/)、[openpi](https://github.com/Physical-Intelligence/openpi)
+    - 学什么：把 VLA 用到自己的机器人上通常需要微调：LoRA 等参数高效方法降低显存需求；部署时还需考虑量化、推理延迟与控制频率之间的平衡。
+    - 学完能回答：LoRA 为什么能大幅减少需要训练的参数？ ／ 量化会对动作精度产生什么影响？ ／ 推理延迟过高时有哪些工程手段（动作分块、异步执行）？
+    - 入门阅读：[Hu et al., LoRA: Low-Rank Adaptation of Large Language Models](https://arxiv.org/abs/2106.09685)；[Kim et al., OpenVLA（含微调与部署实验）](https://arxiv.org/abs/2406.09246)
   - `10-M3.3` 具身智能体：记忆、工具调用与长程任务 ★★
+    - 学什么：具身智能体在模型之外还需要记忆、工具调用、环境反馈与长程任务管理，例如根据执行结果反思并修正计划、积累可复用的技能。
+    - 学完能回答：环境反馈如何帮助语言模型修正计划？ ／ 技能库的积累对长程任务有什么帮助？ ／ 照护场景中，智能体需要记住哪些长期信息？如何保护隐私？
+    - 入门阅读：[Huang et al., Inner Monologue: Embodied Reasoning through Planning with Language Models](https://arxiv.org/abs/2207.05608)；[Wang et al., Voyager: An Open-Ended Embodied Agent with Large Language Models](https://arxiv.org/abs/2305.16291)
 - **M4 评测**
   - `10-M4.1` 仿真基准与真实评测 ★★
+    - 学什么：评测 VLA 需结合仿真基准与真机实验：仿真基准可复现、成本低，但与真实表现存在差距；一些工作专门研究如何让仿真评测更贴近真机结果。
+    - 学完能回答：仿真评测与真机评测各有什么局限？ ／ 一个好的机器人基准应包含哪些要素？ ／ 如何报告真机实验以便他人判断可信度？
+    - 入门阅读：[Liu et al., LIBERO: Benchmarking Knowledge Transfer for Lifelong Robot Learning](https://arxiv.org/abs/2306.03310)；[Li et al., Evaluating Real-World Robot Manipulation Policies in Simulation（SimplerEnv）](https://arxiv.org/abs/2405.05941)
   - `10-M4.2` 泛化维度：物体、场景、指令、本体 ★★
+    - 学什么：VLA 的泛化可从多个维度考察：新物体、新场景与光照、新的语言指令表述、新任务组合以及新的机器人本体，不同维度的难度差别很大。
+    - 学完能回答：为什么“换一种说法”的指令也可能让模型失败？ ／ 设计泛化测试集时如何避免与训练数据重叠？ ／ 对养老场景来说，哪些泛化维度最关键？
+    - 入门阅读：[Kim et al., OpenVLA（含多维泛化评测）](https://arxiv.org/abs/2406.09246)；[Brohan et al., RT-2（含语义泛化评测）](https://arxiv.org/abs/2307.15818)
   - `10-M4.3` 安全性与失败模式分析 ★★★
+    - 学什么：具身模型可能误解指令、动作失误或在不确定时仍贸然执行；安全设计包括失败模式分析、不确定性估计、必要时向人求助，以及硬件层面的安全限制。
+    - 学完能回答：机器人在什么情况下应该主动向人求助？ ／ 如何系统地收集和分类失败案例？ ／ 软件层安全措施为什么不能替代硬件安全设计？
+    - 入门阅读：[Ren et al., Robots That Ask For Help: Uncertainty Alignment for Large Language Model Planners](https://arxiv.org/abs/2307.01928)；[Ma et al., A Survey on Vision-Language-Action Models for Embodied AI](https://arxiv.org/abs/2405.14093)
 
 #### 11 · 仿真、数据与 Sim2Real ★★
 
 > 低成本地大量试错，再把能力搬到真机
 > 优先学习配方：1.1 物理仿真器 ｜ 2.1 域随机化 ｜ 3.1 合成数据 ｜ 1.3 家居场景仿真
 
+**学习路线**：`11-M1.1` 物理仿真器：MuJoCo、Isaac Sim / Isaac Lab、PyBullet → `11-M1.2` 机器人学习环境：Gymnasium、robosuite、ManiSkill → `11-M3.3` 低成本开源硬件平台（如 SO-100 机械臂）入门 → `11-M2.1` 域随机化 → `11-M2.2` 系统辨识 → `11-M1.3` 家居与具身导航仿真（Habitat 等） → `11-M3.1` 合成数据与程序化场景生成 → `11-M3.2` 数据质量、标注与清洗 → `11-M2.3` Real2Sim 与数字孪生
+
 - **M1 仿真平台**
   - `11-M1.1` 物理仿真器：MuJoCo、Isaac Sim / Isaac Lab、PyBullet ★★★ 🍃 在仿真里给单关节调 PID（练习）、[MuJoCo](https://mujoco.org/)、[Isaac Lab](https://isaac-sim.github.io/IsaacLab/)、[PyBullet](https://pybullet.org/)、用 SB3 在 MuJoCo 环境里训一个 PPO 智能体（练习） 🃏 [MuJoCo](https://mujoco.org/)
+    - 学什么：物理仿真器模拟刚体动力学、接触与传感器，让机器人在虚拟环境中低成本、大规模地试错；MuJoCo 以接触仿真精确高效著称，Isaac Sim / Isaac Lab 支持 GPU 大规模并行，PyBullet 轻量易上手。
+    - 学完能回答：选择仿真器时要考虑哪些因素（精度、速度、渲染、生态）？ ／ GPU 并行仿真为什么能加快强化学习训练？ ／ 接触参数设置不当会产生哪些仿真伪影？
+    - 入门阅读：[MuJoCo 文档](https://mujoco.readthedocs.io/)；[Isaac Lab 文档](https://isaac-sim.github.io/IsaacLab/main/index.html)
   - `11-M1.2` 机器人学习环境：Gymnasium、robosuite、ManiSkill ★★ 🍃 [Gymnasium](https://gymnasium.farama.org/)、[robosuite](https://robosuite.ai/)、[ManiSkill](https://github.com/haosulab/ManiSkill)
+    - 学什么：机器人学习环境在仿真器之上封装任务、观测、奖励与重置逻辑，并提供统一接口与基准任务，方便复现和比较算法。
+    - 学完能回答：Gymnasium 的 reset / step 接口包含哪些返回值？ ／ 操作基准通常提供哪些任务与评测指标？ ／ 自定义一个新任务环境需要实现哪些部分？
+    - 入门阅读：[Gymnasium 文档](https://gymnasium.farama.org/)；[robosuite 官网](https://robosuite.ai/)
   - `11-M1.3` 家居与具身导航仿真（Habitat 等） ★★ 🍃 [AI Habitat](https://aihabitat.org/)
+    - 学什么：家居与具身导航仿真提供逼真的室内场景，支持导航、物体重排和人机共处等任务，适合研究居家服务与养老场景中的机器人行为。
+    - 学完能回答：家居仿真中的场景数据从哪里来？ ／ 仿真中加入“人类角色”能研究哪些问题？ ／ 家居仿真与真实家庭在哪些方面差距最大？
+    - 入门阅读：[AI Habitat 官网](https://aihabitat.org/)；[Puig et al., Habitat 3.0: A Co-Habitat for Humans, Avatars and Robots](https://arxiv.org/abs/2310.13724)
 - **M2 Sim2Real**
   - `11-M2.1` 域随机化 ★★★ 🍃 [Isaac Lab](https://isaac-sim.github.io/IsaacLab/)
+    - 学什么：域随机化在训练时随机改变仿真中的视觉外观、物理参数和传感器噪声，使策略把真实世界当作又一种“随机变体”，从而提高仿真到真机的迁移能力。
+    - 学完能回答：视觉随机化与动力学随机化分别针对什么差距？ ／ 随机化范围过大或过小分别有什么问题？ ／ 域随机化与域自适应有何区别？
+    - 入门阅读：[Tobin et al., Domain Randomization for Transferring Deep Neural Networks from Simulation to the Real World](https://arxiv.org/abs/1703.06907)；[Peng et al., Sim-to-Real Transfer of Robotic Control with Dynamics Randomization](https://arxiv.org/abs/1710.06537)
   - `11-M2.2` 系统辨识 ★★
+    - 学什么：系统辨识用真实数据估计机器人或环境的模型参数（质量、摩擦、执行器特性等），让仿真更接近真实；也可以用神经网络学习难以建模的部分（如执行器动态）。
+    - 学完能回答：哪些参数最常需要辨识？ ／ 用神经网络建模执行器动态解决了什么问题？ ／ 系统辨识与域随机化可以如何结合？
+    - 入门阅读：[Hwangbo et al., Learning agile and dynamic motor skills for legged robots](https://arxiv.org/abs/1901.08652)
   - `11-M2.3` Real2Sim 与数字孪生 ★
+    - 学什么：Real2Sim 从真实场景重建仿真环境（数字孪生），在其中训练或微调策略再部署回真机，用于缩小场景层面的差距。
+    - 学完能回答：构建数字孪生需要哪些信息（几何、外观、物理属性）？ ／ Real-to-Sim-to-Real 流程比纯仿真训练有什么优势？ ／ 数字孪生维护成本高在哪里？
+    - 入门阅读：[Torne et al., Reconciling Reality through Simulation: A Real-to-Sim-to-Real Approach](https://arxiv.org/abs/2403.03949)
 - **M3 数据工程**
   - `11-M3.1` 合成数据与程序化场景生成 ★★
+    - 学什么：合成数据与程序化场景生成可大规模、自动地产生多样化训练数据和标注，弥补真实数据的不足，但需要注意与真实分布之间的差距。
+    - 学完能回答：程序化生成如何保证场景合理（如物体摆放符合常识）？ ／ 合成数据最适合补充哪类任务的训练？ ／ 如何检验模型从合成数据中学到的能力能迁移到真实世界？
+    - 入门阅读：[Deitke et al., ProcTHOR: Large-Scale Embodied AI Using Procedural Generation](https://arxiv.org/abs/2206.06994)；[Tobin et al., Domain Randomization](https://arxiv.org/abs/1703.06907)
   - `11-M3.2` 数据质量、标注与清洗 ★★
+    - 学什么：机器人数据的质量直接决定模仿学习效果：示教者水平、动作是否流畅一致、失败片段与标注质量都会影响策略，数据清洗与筛选是重要工程环节。
+    - 学完能回答：示教者熟练度差异如何影响离线学习结果？ ／ 哪些自动化指标可以帮助筛选低质量示教？ ／ 为什么要保留并标注失败片段？
+    - 入门阅读：[Mandlekar et al., What Matters in Learning from Offline Human Demonstrations for Robot Manipulation（robomimic）](https://arxiv.org/abs/2108.03298)
   - `11-M3.3` 低成本开源硬件平台（如 SO-100 机械臂）入门 ★★ 🍃 [LeRobot](https://github.com/huggingface/lerobot)、[SO-ARM100 开源机械臂](https://github.com/TheRobotStudio/SO-ARM100)
+    - 学什么：低成本开源硬件（如 SO-100 机械臂）配合开源软件栈，让个人和小团队也能完成“采集示教 → 训练策略 → 真机部署”的完整闭环，是入门具身智能的实用起点。
+    - 学完能回答：用低成本机械臂做研究有哪些局限（精度、负载、重复性）？ ／ 一次完整的示教采集与训练流程包括哪些步骤？ ／ 如何把实验结果整理成可复现的开源数据集？
+    - 入门阅读：[LeRobot 文档](https://huggingface.co/docs/lerobot/index)；[SO-ARM100 开源机械臂](https://github.com/TheRobotStudio/SO-ARM100)
 
 ### 〔养老〕
 
