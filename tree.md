@@ -900,97 +900,279 @@
 > 理解服务对象：老年人的身体、认知与功能
 > 优先学习配方：1.1 衰老生理 ｜ 2.1 老年综合征 ｜ 3.1 综合评估 ｜ 4.1 认知障碍
 
+**学习路线**：`12-M1.3` 人口老龄化趋势与健康老龄化理念 → `12-M1.1` 衰老的生理变化与器官储备下降 → `12-M1.2` 老年药代 / 药效变化（肾功能下降、体成分改变、敏感性改变） → `12-M3.1` CGA 的维度：躯体、功能、认知、心理、社会 → `12-M3.2` 日常生活能力评估：ADL / IADL → `12-M3.3` 常用量表思路：认知筛查、跌倒风险、营养筛查 → `12-M2.1` 衰弱（Frailty） → `12-M2.3` 肌少症与营养不良 → `12-M2.2` 跌倒及其危险因素 → `12-M2.4` 尿失禁、睡眠障碍、谵妄 → `12-M2.5` 吞咽障碍 → `12-M4.1` 认知障碍与阿尔茨海默病 → `12-M4.2` 高血压、糖尿病、冠心病与心衰 → `12-M4.3` 帕金森病与卒中后康复 → `12-M4.4` 骨质疏松与骨关节病 → `12-M4.5` 慢阻肺与感染防控 → `12-M4.6` 共病与以人为中心的照护目标
+
 - **M1 衰老生理**
   - `12-M1.1` 衰老的生理变化与器官储备下降 ★★
+    - 学什么：衰老伴随各器官系统的渐进变化，核心特征是“储备下降”：平时尚能代偿，但在疾病、手术或用药等应激下更容易失代偿；要区分正常衰老与疾病表现。
+    - 学完能回答：什么是“生理储备”？为什么储备下降会让小问题演变成大问题？ ／ 举出两个容易被误认为“正常老化”的疾病表现。 ／ 老年人疾病为什么常出现不典型表现？
+    - 入门阅读：[MSD Manual: Physical Changes With Aging](https://www.msdmanuals.com/professional/geriatrics/approach-to-the-geriatric-patient/physical-changes-with-aging)
   - `12-M1.2` 老年药代 / 药效变化（肾功能下降、体成分改变、敏感性改变） ★★★
+    - 学什么：老年人肾功能下降、体脂比例增加、肌肉和体液减少、肝代谢能力可能降低，影响药物的分布与清除；部分药物（如中枢神经系统药物）的敏感性也会改变，因此常需调整剂量。
+    - 学完能回答：体成分改变如何影响脂溶性与水溶性药物的分布？ ／ 为什么老年人用药时要关注肾功能评估？ ／ 药代变化与药效敏感性变化有何区别？各举一例。
+    - 入门阅读：[MSD Manual: Pharmacokinetics in Older Adults](https://www.msdmanuals.com/professional/geriatrics/pharmacologic-therapy-in-older-adults/pharmacokinetics-in-older-adults)；[MSD Manual: Pharmacodynamics in Older Adults](https://www.msdmanuals.com/professional/geriatrics/pharmacologic-therapy-in-older-adults/pharmacodynamics-in-older-adults)
   - `12-M1.3` 人口老龄化趋势与健康老龄化理念 ★★ 🍃 [WHO 老龄与健康主题页](https://www.who.int/health-topics/ageing)
+    - 学什么：人口老龄化是全球性趋势；世界卫生组织提出“健康老龄化”，强调发展和维护老年人的功能发挥（内在能力与环境的结合），而不仅是没有疾病。
+    - 学完能回答：“内在能力”与“功能发挥”分别指什么？ ／ 健康老龄化理念对养老服务和技术设计有何启示？ ／ 查阅最新官方统计时应关注哪些指标？
+    - 入门阅读：[WHO: Ageing and health（事实清单，数据以官网最新版本为准）](https://www.who.int/news-room/fact-sheets/detail/ageing-and-health)；[WHO: UN Decade of Healthy Ageing](https://www.who.int/initiatives/decade-of-healthy-ageing)
 - **M2 老年综合征**
   - `12-M2.1` 衰弱（Frailty） ★★★
+    - 学什么：衰弱是多系统储备下降导致对应激的易损性增加的状态，可用表型模型（如体重下降、乏力、活动少、步速慢、握力弱）或累积缺陷模型评估；衰弱可能部分逆转，运动和营养干预是重点。
+    - 学完能回答：衰弱表型模型与累积缺陷（衰弱指数）模型有何不同？ ／ 衰弱与失能、共病是什么关系？ ／ 哪些干预被认为有助于预防或延缓衰弱？
+    - 入门阅读：[Fried et al., Frailty in Older Adults: Evidence for a Phenotype（2001）](https://doi.org/10.1093/gerona/56.3.M146)；[Clegg et al., Frailty in elderly people（Lancet 2013）](https://doi.org/10.1016/S0140-6736(12)62167-9)
   - `12-M2.2` 跌倒及其危险因素 ★★★
+    - 学什么：跌倒通常是多因素共同作用的结果，包括平衡与步态障碍、肌力下降、视力问题、认知障碍、体位性低血压、某些药物和环境危险等；多因素评估与干预是预防的核心。
+    - 学完能回答：跌倒的内在因素与外在因素各有哪些？ ／ 哪些类别的药物会增加跌倒风险？ ／ 跌倒后为什么要关注“害怕跌倒”这一心理问题？
+    - 入门阅读：[MSD Manual: Falls in Older Adults](https://www.msdmanuals.com/professional/geriatrics/falls-in-older-adults/falls-in-older-adults)；[WHO: Falls（事实清单）](https://www.who.int/news-room/fact-sheets/detail/falls)
   - `12-M2.3` 肌少症与营养不良 ★★
+    - 学什么：肌少症是与年龄相关的骨骼肌质量、力量和功能下降，常用肌力、肌量和身体表现来诊断；营养不良会加重肌少症与衰弱，两者常需要一起筛查和干预。
+    - 学完能回答：肌少症诊断中为什么把肌力放在重要位置？ ／ 营养不良与肌少症如何相互影响？ ／ 抗阻运动与蛋白质摄入在干预中各起什么作用？
+    - 入门阅读：[Cruz-Jentoft et al., Sarcopenia: revised European consensus on definition and diagnosis（2018）](https://doi.org/10.1093/ageing/afy169)；[MSD Manual: Protein-Energy Undernutrition](https://www.msdmanuals.com/professional/nutritional-disorders/undernutrition/protein-energy-undernutrition-peu)
   - `12-M2.4` 尿失禁、睡眠障碍、谵妄 ★★
+    - 学什么：尿失禁、睡眠障碍和谵妄都是常见老年综合征；谵妄是急性起病、注意力障碍、病情波动的急性脑功能紊乱，常由感染、药物、手术等诱发，可预防但容易漏诊。
+    - 学完能回答：谵妄与痴呆在起病和病程上有何区别？ ／ 哪些药物可能诱发谵妄？ ／ 尿失禁和夜间睡眠问题为什么会增加跌倒风险？
+    - 入门阅读：[Inouye, Westendorp & Saczynski, Delirium in elderly people（Lancet 2014）](https://doi.org/10.1016/S0140-6736(13)60688-1)；[MSD Manual: Urinary Incontinence in Adults](https://www.msdmanuals.com/professional/genitourinary-disorders/voiding-disorders/urinary-incontinence-in-adults)
   - `12-M2.5` 吞咽障碍 ★★
+    - 学什么：吞咽障碍在卒中、帕金森病、痴呆和衰弱老人中常见，可导致误吸、肺炎、营养不良和脱水；评估后可调整食物质地与进食姿势，并注意口服药的剂型与服用方式。
+    - 学完能回答：误吸有哪些表现？“隐性误吸”为什么危险？ ／ 吞咽困难的老人服药时有哪些注意事项（如能否掰开或碾碎）？ ／ 照护者在喂食时应注意什么？
+    - 入门阅读：[MSD Manual: Dysphagia](https://www.msdmanuals.com/professional/gastrointestinal-disorders/esophageal-and-swallowing-disorders/dysphagia)
 - **M3 老年综合评估（CGA）**
   - `12-M3.1` CGA 的维度：躯体、功能、认知、心理、社会 ★★★ 🃏 [老年综合评估（CGA）](https://www.who.int/health-topics/ageing)
+    - 学什么：老年综合评估（CGA）是多维度、多学科的诊断与干预过程，从躯体、功能、认知、心理和社会支持等方面评估老人，并据此制定和跟进照护计划。
+    - 学完能回答：CGA 与普通门诊问诊有何不同？ ／ 为什么 CGA 强调多学科团队？ ／ 评估结果如何转化为具体的照护计划？
+    - 入门阅读：[MSD Manual: Comprehensive Geriatric Assessment](https://www.msdmanuals.com/professional/geriatrics/approach-to-the-geriatric-patient/comprehensive-geriatric-assessment)；[Ellis et al., Comprehensive geriatric assessment for older adults admitted to hospital（Cochrane 2017）](https://doi.org/10.1002/14651858.CD006211.pub3)
   - `12-M3.2` 日常生活能力评估：ADL / IADL ★★★
+    - 学什么：日常生活能力评估分为基本日常生活活动（ADL，如进食、穿衣、如厕、洗浴、转移）和工具性日常生活活动（IADL，如购物、做饭、理财、服药管理），是判断照护需求的基础。
+    - 学完能回答：为什么“自己管理服药”属于 IADL？ ／ IADL 通常比 ADL 更早受损，这对早期发现问题有什么意义？ ／ ADL 评估结果如何用于确定照护等级？
+    - 入门阅读：[Katz et al., Studies of Illness in the Aged: The Index of ADL（JAMA 1963）](https://doi.org/10.1001/jama.1963.03060120024016)；[Lawton & Brody, Assessment of Older People: Self-Maintaining and Instrumental Activities of Daily Living（1969）](https://doi.org/10.1093/geront/9.3_Part_1.179)
   - `12-M3.3` 常用量表思路：认知筛查、跌倒风险、营养筛查 ★★
+    - 学什么：常用筛查量表帮助快速发现问题：认知筛查（如 MoCA）、跌倒风险评估、营养筛查等。筛查阳性只提示需要进一步评估，不能直接作为诊断。
+    - 学完能回答：筛查工具与诊断工具有什么区别？ ／ 文化程度、语言等因素如何影响认知筛查结果？ ／ 把量表做成数字化或机器人交互版本时需要注意什么？
+    - 入门阅读：[Nasreddine et al., The Montreal Cognitive Assessment, MoCA（2005）](https://doi.org/10.1111/j.1532-5415.2005.53221.x)；[MSD Manual: Comprehensive Geriatric Assessment（含常用评估工具）](https://www.msdmanuals.com/professional/geriatrics/approach-to-the-geriatric-patient/comprehensive-geriatric-assessment)
 - **M4 常见慢病**
   - `12-M4.1` 认知障碍与阿尔茨海默病 ★★★
+    - 学什么：痴呆是以认知功能下降并影响日常生活为特征的综合征，阿尔茨海默病是最常见的病因；除认知症状外，精神行为症状（BPSD）对照护影响很大，非药物干预优先。
+    - 学完能回答：轻度认知障碍与痴呆如何区分？ ／ 精神行为症状有哪些？为什么首选非药物干预？ ／ 痴呆照护中，技术产品可以在哪些方面提供帮助？
+    - 入门阅读：[MSD Manual: Alzheimer Disease](https://www.msdmanuals.com/professional/neurologic-disorders/delirium-and-dementia/alzheimer-disease)；[Livingston et al., Dementia prevention, intervention, and care: 2024 report of the Lancet standing Commission](https://doi.org/10.1016/S0140-6736(24)01296-0)
   - `12-M4.2` 高血压、糖尿病、冠心病与心衰 ★★
+    - 学什么：高血压、糖尿病、冠心病与心力衰竭在老年人中常见且常并存；老年人的治疗目标需要个体化，兼顾获益、低血压与低血糖等风险，以及多重用药负担。
+    - 学完能回答：为什么老年人的血压和血糖控制目标需要个体化？ ／ 低血糖和体位性低血压对老年人有哪些特殊危害？ ／ 心衰老人居家管理中，体重和症状监测有什么作用？
+    - 入门阅读：[WHO: Hypertension（事实清单）](https://www.who.int/news-room/fact-sheets/detail/hypertension)；[WHO: Diabetes（事实清单）](https://www.who.int/news-room/fact-sheets/detail/diabetes)
   - `12-M4.3` 帕金森病与卒中后康复 ★★
+    - 学什么：帕金森病以运动迟缓、静止性震颤、肌强直和姿势不稳为主要表现，并有多种非运动症状；卒中后常遗留运动、语言、吞咽等功能障碍，康复训练对功能恢复很重要。
+    - 学完能回答：帕金森病药物为什么需要严格按时服用？ ／ 卒中后康复包括哪些方面？ ／ 这两类患者在跌倒和吞咽方面有哪些共同风险？
+    - 入门阅读：[MSD Manual: Parkinson Disease](https://www.msdmanuals.com/professional/neurologic-disorders/movement-and-cerebellar-disorders/parkinson-disease)；[MSD Manual: Overview of Stroke](https://www.msdmanuals.com/professional/neurologic-disorders/stroke/overview-of-stroke)
   - `12-M4.4` 骨质疏松与骨关节病 ★★
+    - 学什么：骨质疏松使骨强度下降、骨折风险增加，与跌倒叠加时风险更高；骨关节炎导致关节疼痛与活动受限，影响老人的活动能力和生活质量。
+    - 学完能回答：为什么骨质疏松常被称为“沉默的疾病”？ ／ 预防骨折为什么要同时关注骨骼与跌倒？ ／ 骨关节炎的疼痛管理中，老年人用药需注意哪些风险？
+    - 入门阅读：[MSD Manual: Osteoporosis](https://www.msdmanuals.com/professional/musculoskeletal-and-connective-tissue-disorders/osteoporosis/osteoporosis)；[WHO: Osteoarthritis（事实清单）](https://www.who.int/news-room/fact-sheets/detail/osteoarthritis)
   - `12-M4.5` 慢阻肺与感染防控 ★
+    - 学什么：慢阻肺是以持续气流受限为特征的常见慢性呼吸系统疾病，吸入装置的正确使用至关重要；老年人和照护机构居民易发生呼吸道等感染，需要疫苗接种与感染防控。
+    - 学完能回答：为什么吸入装置使用错误会影响疗效？ ／ 养老机构中常见的感染防控措施有哪些？ ／ 慢阻肺急性加重有哪些早期信号？
+    - 入门阅读：[WHO: Chronic obstructive pulmonary disease（事实清单）](https://www.who.int/news-room/fact-sheets/detail/chronic-obstructive-pulmonary-disease-(copd))；[GOLD 慢阻肺全球倡议（指南以官网最新版本为准）](https://goldcopd.org/)
   - `12-M4.6` 共病与以人为中心的照护目标 ★★
+    - 学什么：共病指同时患有多种慢病，单病种指南叠加容易造成治疗负担过重和药物相互作用；以人为中心的照护根据老人的意愿、预期寿命和优先事项确定治疗目标。
+    - 学完能回答：为什么单病种指南直接叠加可能对共病老人不利？ ／ 如何了解老人自己最看重的健康目标？ ／ 治疗目标调整后，用药方案可以如何相应改变？
+    - 入门阅读：[American Geriatrics Society Expert Panel, Guiding Principles for the Care of Older Adults with Multimorbidity（2012）](https://doi.org/10.1111/j.1532-5415.2012.04188.x)；[MSD Manual: Therapeutic Objectives in Older Adults](https://www.msdmanuals.com/professional/geriatrics/aging-and-quality-of-life/therapeutic-objectives-in-older-adults)
 
 #### 13 · 老年药学：多重用药与依从性 ★★★
 
 > 药学 × 养老的核心交叉：让老人用对药、按时用药
 > 优先学习配方：1.1 多重用药 ｜ 2.1 Beers 标准 ｜ 3.1 依从性 ｜ 4.1 药物重整
 
+**学习路线**：`13-M1.1` 多重用药的定义与危害 → `13-M1.2` 处方瀑布（Prescribing Cascade） → `13-M1.3` 抗胆碱能负荷与跌倒风险药物 → `13-M2.1` Beers 标准（美国老年医学会） → `13-M2.2` STOPP / START 标准 → `13-M2.3` 中国老年人潜在不适当用药判断标准 → `13-M2.4` 减药 / 停药（Deprescribing）流程 → `13-M3.1` 依从性的影响因素：认知、视力、手功能、经济、方案复杂度 → `13-M3.2` 依从性测量：自报、药盒计数、电子监测、药房取药记录 → `13-M3.3` 提升依从性：简化方案、分装药盒、提醒、家属与照护者参与 → `13-M4.1` 社区与机构场景的药物重整与用药清单 → `13-M4.2` 养老机构用药管理流程（领药、分药、给药、记录） → `13-M4.3` 用药相关不良事件的识别与上报 → `13-M4.4` 临床决策支持系统（CDSS）中的老年用药规则
+
 - **M1 多重用药**
   - `13-M1.1` 多重用药的定义与危害 ★★★
+    - 学什么：多重用药通常指同时使用多种药物，文献中定义并不统一（常见以药物数量为界，也有强调“是否适当”的定义）；它与药物不良反应、相互作用、跌倒、住院和依从性下降等风险相关。
+    - 学完能回答：为什么单纯以药物数量定义多重用药不够？ ／ “适当的多重用药”与“不适当的多重用药”有何区别？ ／ 多重用药会带来哪些具体风险？
+    - 入门阅读：[Masnoon et al., What is polypharmacy? A systematic review of definitions（2017）](https://doi.org/10.1186/s12877-017-0621-2)；[MSD Manual: Medication-Related Problems in Older Adults](https://www.msdmanuals.com/professional/geriatrics/pharmacologic-therapy-in-older-adults/medication-related-problems-in-older-adults)
   - `13-M1.2` 处方瀑布（Prescribing Cascade） ★★
+    - 学什么：处方瀑布指一种药物的不良反应被误认为新的疾病，于是又开出另一种药来治疗，导致用药不断叠加；识别它的关键是把新症状和近期用药变化联系起来。
+    - 学完能回答：举一个处方瀑布的典型例子。 ／ 新出现的症状时，为什么要先问“最近换过或加过什么药”？ ／ 用药记录系统如何帮助识别处方瀑布？
+    - 入门阅读：[Rochon & Gurwitz, Optimising drug treatment for elderly people: the prescribing cascade（BMJ 1997）](https://doi.org/10.1136/bmj.315.7115.1096)
   - `13-M1.3` 抗胆碱能负荷与跌倒风险药物 ★★★ 🍃 整理一份 10 种老年常见潜在不适当用药的速查表（练习）
+    - 学什么：许多药物具有抗胆碱能作用，多种叠加形成“抗胆碱能负荷”，可能导致认知下降、谵妄、便秘、尿潴留与跌倒；镇静催眠药、部分精神类药物和降压药等也与跌倒风险相关。
+    - 学完能回答：抗胆碱能不良反应有哪些典型表现？ ／ 抗胆碱能负荷量表的用途和局限是什么？ ／ 哪些类别的药物常被称为“增加跌倒风险的药物”？
+    - 入门阅读：[Salahudeen, Duffull & Nishtala, Anticholinergic burden quantified by anticholinergic risk scales and adverse outcomes in older people: a systematic review（2015）](https://doi.org/10.1186/s12877-015-0029-9)；[MSD Manual: Drug Categories of Concern in Older Adults](https://www.msdmanuals.com/professional/geriatrics/pharmacologic-therapy-in-older-adults/drug-categories-of-concern-in-older-adults)
 - **M2 潜在不适当用药（PIM）评估**
   - `13-M2.1` Beers 标准（美国老年医学会） ★★★ 🍃 [美国老年医学会（AGS）](https://www.americangeriatrics.org/)、整理一份 10 种老年常见潜在不适当用药的速查表（练习） 🃏 [Beers 标准（AGS）](https://www.americangeriatrics.org/)
+    - 学什么：Beers 标准由美国老年医学会定期更新，列出老年人一般应避免、特定疾病下应避免、需谨慎使用、需注意相互作用或按肾功能调整剂量的药物；它是辅助判断的工具，不能替代个体化评估。
+    - 学完能回答：Beers 标准包括哪几类表格？ ／ 为什么说 Beers 标准不是“禁用清单”？ ／ 使用时为什么要确认采用的是最新版本？
+    - 入门阅读：[American Geriatrics Society, 2023 Updated AGS Beers Criteria（以 AGS 最新发布版本为准）](https://doi.org/10.1111/jgs.18372)
   - `13-M2.2` STOPP / START 标准 ★★ 🍃 整理一份 10 种老年常见潜在不适当用药的速查表（练习）
+    - 学什么：STOPP / START 标准源自欧洲，STOPP 列出潜在不适当处方，START 列出可能被遗漏的应用药物，按生理系统组织，同时关注“用错药”和“该用未用”。
+    - 学完能回答：START 部分关注的“处方遗漏”为什么同样重要？ ／ STOPP/START 与 Beers 标准在设计上有什么不同？ ／ 把这些标准写成规则引擎时会遇到哪些困难？
+    - 入门阅读：[O'Mahony et al., STOPP/START criteria for potentially inappropriate prescribing in older people: version 3（2023）](https://doi.org/10.1007/s41999-023-00777-y)
   - `13-M2.3` 中国老年人潜在不适当用药判断标准 ★★
+    - 学什么：中国也制定了本土的老年人潜在不适当用药判断标准，考虑国内常用药品与临床实践，并区分风险强度和用药优先级；学习时应查找相关学会发布的最新版原文，并与国际标准对照。
+    - 学完能回答：为什么需要符合本国药品目录和临床习惯的 PIM 标准？ ／ 国内标准与 Beers、STOPP/START 相比可能有哪些差异？ ／ 在国内做老年用药规则系统时，应以哪些文件为依据？
+    - 入门阅读：[American Geriatrics Society, 2023 Updated AGS Beers Criteria（国际对照）](https://doi.org/10.1111/jgs.18372)；[O'Mahony et al., STOPP/START version 3（国际对照）](https://doi.org/10.1007/s41999-023-00777-y)
   - `13-M2.4` 减药 / 停药（Deprescribing）流程 ★★★
+    - 学什么：减药 / 停药是有计划地在医疗人员指导下减少或停用获益不再大于风险的药物，一般包括梳理用药、评估每种药的风险获益、确定可停用药物、制定逐步减停计划并监测。
+    - 学完能回答：减药流程通常包含哪些步骤？ ／ 为什么有些药物不能突然停用？ ／ 减药过程中如何与老人和家属沟通？
+    - 入门阅读：[Scott et al., Reducing Inappropriate Polypharmacy: The Process of Deprescribing（JAMA Intern Med 2015）](https://doi.org/10.1001/jamainternmed.2015.0324)；[Deprescribing.org（减药指南与工具）](https://deprescribing.org/)
 - **M3 用药依从性**
   - `13-M3.1` 依从性的影响因素：认知、视力、手功能、经济、方案复杂度 ★★★ 🍃 访谈 2–3 位老人或照护者，画一张用药日常流程图（练习）
+    - 学什么：依从性受多方面因素影响：认知与记忆、视力与听力、手部功能（开瓶、掰药）、经济负担、对疾病和药物的认知、副作用，以及方案的复杂程度（次数、种类、特殊服法）。
+    - 学完能回答：区分“有意不依从”和“无意不依从”。 ／ 方案复杂度为什么是可以优先改进的因素？ ／ 设计提醒产品时，如何考虑老人的视力与手部功能？
+    - 入门阅读：[Osterberg & Blaschke, Adherence to Medication（NEJM 2005）](https://doi.org/10.1056/NEJMra050100)；[MSD Manual: Adherence to a Medication Regimen](https://www.msdmanuals.com/professional/clinical-pharmacology/factors-affecting-response-to-medications/adherence-to-a-medication-regimen)
   - `13-M3.2` 依从性测量：自报、药盒计数、电子监测、药房取药记录 ★★
+    - 学什么：依从性测量方法各有优缺点：自报简便但易高估，药片计数和药房取药记录较客观但不能证明真正服下，电子监测记录开盖时间但成本较高。
+    - 学完能回答：为什么自报的依从性往往偏高？ ／ 智能药盒记录“开盖”是否等于“已服药”？ ／ 研究中如何组合多种测量方法？
+    - 入门阅读：[Osterberg & Blaschke, Adherence to Medication（NEJM 2005）](https://doi.org/10.1056/NEJMra050100)
   - `13-M3.3` 提升依从性：简化方案、分装药盒、提醒、家属与照护者参与 ★★★
+    - 学什么：提升依从性的常用策略包括简化方案（减少次数、使用复方或长效制剂）、分装药盒、提醒工具、用药教育，以及家属和照护者参与；通常需要多种措施组合。
+    - 学完能回答：简化方案时需要哪些专业人员参与？ ／ 提醒工具的效果为什么常因人而异？ ／ 照护者参与用药管理时应注意什么？
+    - 入门阅读：[MSD Manual: Adherence to a Medication Regimen](https://www.msdmanuals.com/professional/clinical-pharmacology/factors-affecting-response-to-medications/adherence-to-a-medication-regimen)；[MSD Manual: Pharmacists and Older Adults](https://www.msdmanuals.com/professional/geriatrics/providing-care-to-older-adults/pharmacists-and-older-adults)
 - **M4 用药安全管理**
   - `13-M4.1` 社区与机构场景的药物重整与用药清单 ★★
+    - 学什么：药物重整是在转诊、入院、出院等交接时，把患者实际使用的全部药物（含非处方药和保健品）与新医嘱逐一核对，发现并解决差异；准确的用药清单是基础。
+    - 学完能回答：为什么交接环节最容易出现用药差错？ ／ 完整的用药清单应包括哪些信息？ ／ 社区药师在药物重整中能发挥什么作用？
+    - 入门阅读：[AHRQ PSNet: Medication Reconciliation](https://psnet.ahrq.gov/primer/medication-reconciliation)
   - `13-M4.2` 养老机构用药管理流程（领药、分药、给药、记录） ★★★
+    - 学什么：养老机构用药管理覆盖领药、储存、分药、给药、记录和观察各环节，常用核对原则（如核对对象、药品、剂量、时间、途径）减少差错，并需要药师和医护的支持。
+    - 学完能回答：用药管理中最容易出错的环节有哪些？ ／ 给药记录为什么要及时、可追溯？ ／ 引入自动分药或扫码给药时，原有流程需要哪些调整？
+    - 入门阅读：[MSD Manual: Medication Errors](https://www.msdmanuals.com/professional/clinical-pharmacology/concepts-in-pharmacotherapy/medication-errors)；[WHO: Medication Without Harm](https://www.who.int/initiatives/medication-without-harm)
   - `13-M4.3` 用药相关不良事件的识别与上报 ★★ 🍃 [WHO 用药无害（Medication Without Harm）](https://www.who.int/initiatives/medication-without-harm)
+    - 学什么：老年人的药物不良事件表现常不典型（如意识改变、跌倒、食欲下降），需要照护者留意；识别后应按规定向医疗人员和药品不良反应监测系统报告。
+    - 学完能回答：老人出现新症状时，照护者应如何考虑药物原因？ ／ 不良反应、不良事件和用药差错有何区别？ ／ 为什么要重视上报，即使不确定是否由药物引起？
+    - 入门阅读：[MSD Manual: Adverse Drug Reactions](https://www.msdmanuals.com/professional/clinical-pharmacology/concepts-in-pharmacotherapy/adverse-drug-reactions)；[WHO: Medication Without Harm](https://www.who.int/initiatives/medication-without-harm)
   - `13-M4.4` 临床决策支持系统（CDSS）中的老年用药规则 ★★ 🍃 原型：老年用药清单的 DDI / PIM 规则检查 + LLM 解释（练习）
+    - 学什么：临床决策支持系统可把 PIM 标准、剂量调整和相互作用规则嵌入处方流程中给出提醒；设计时要避免“警报疲劳”，并明确系统只辅助、由专业人员决策。监管上，部分 CDS 软件可能属于医疗器械（以官方最新要求为准）。
+    - 学完能回答：什么是警报疲劳？如何减少无效提醒？ ／ 把 Beers 标准写成规则时需要哪些患者数据？ ／ 哪些 CDS 功能可能被监管机构视为医疗器械软件？
+    - 入门阅读：[FDA: Clinical Decision Support Software（指南以官网最新版本为准）](https://www.fda.gov/regulatory-information/search-fda-guidance-documents/clinical-decision-support-software)；[American Geriatrics Society, 2023 Updated AGS Beers Criteria](https://doi.org/10.1111/jgs.18372)
 
 #### 14 · 照护服务与智慧养老 ★★
 
 > 理解场景：谁在照护、在哪照护、痛点在哪
 > 优先学习配方：1.1 养老服务体系 ｜ 2.1 照护需求 ｜ 3.1 智慧养老技术 ｜ 3.4 适老化设计
 
+**学习路线**：`14-M1.1` 居家、社区、机构养老与医养结合 → `14-M1.2` 长期护理保险与照护等级评估 → `14-M1.3` 照护人力短缺与照护者负担 → `14-M2.1` 生活照料：进食、如厕、洗浴、转移 → `14-M2.2` 失能与认知症照护要点 → `14-M2.3` 康复与功能维持 → `14-M2.4` 孤独感、社会参与与心理支持 → `14-M2.5` 安宁疗护 → `14-M4.1` 老年用户研究方法：访谈、观察、参与式设计 → `14-M3.4` 适老化设计：界面、语音交互、无障碍标准 → `14-M3.1` 可穿戴设备与生命体征监测 → `14-M3.2` 智能家居与非接触式监测（毫米波雷达、红外、门磁等） → `14-M3.3` 远程医疗与慢病远程管理 → `14-M3.5` 养老信息系统与健康档案 → `14-M4.2` 技术接受度与数字鸿沟 → `14-M4.3` 效果评估：临床结局、生活质量、成本效益
+
 - **M1 养老服务体系**
   - `14-M1.1` 居家、社区、机构养老与医养结合 ★★★ 🍃 [WHO 老龄与健康主题页](https://www.who.int/health-topics/ageing)
+    - 学什么：养老服务一般分为居家、社区和机构三种形态，医养结合把医疗服务与养老服务衔接起来；不同形态在服务内容、费用与适合人群上各不相同，技术方案需要匹配具体场景。
+    - 学完能回答：居家、社区与机构养老分别适合什么样的老人？ ／ 医养结合要解决的核心问题是什么？ ／ 同一款产品放在居家和机构场景中，需求会有哪些不同？
+    - 入门阅读：[MSD Manual: Overview of Geriatric Care](https://www.msdmanuals.com/professional/geriatrics/providing-care-to-older-adults/overview-of-geriatric-care)；[WHO: Framework for countries to achieve an integrated continuum of long-term care](https://www.who.int/publications/i/item/9789240038844)
   - `14-M1.2` 长期护理保险与照护等级评估 ★★
+    - 学什么：长期护理保险为失能人员的长期照护提供资金保障，通常以失能等级评估确定待遇；我国自试点以来逐步推进，具体政策与评估标准以国家医保局等官方最新文件为准。
+    - 学完能回答：失能等级评估通常依据哪些维度？ ／ 长期护理保险与医疗保险覆盖的内容有何不同？ ／ 照护等级评估结果会如何影响服务提供方式？
+    - 入门阅读：[国家医疗保障局官网（长期护理保险政策以官网最新文件为准）](https://www.nhsa.gov.cn/)；[WHO: Framework for countries to achieve an integrated continuum of long-term care](https://www.who.int/publications/i/item/9789240038844)
   - `14-M1.3` 照护人力短缺与照护者负担 ★★
+    - 学什么：照护工作劳动强度大、专业要求高，照护人力普遍短缺；家庭照护者常承受身体、心理、经济和社交上的负担，照护者支持本身就是养老服务的重要组成部分。
+    - 学完能回答：照护者负担包括哪些方面？如何评估？ ／ 喘息服务对家庭照护者有什么意义？ ／ 技术应该替代照护者，还是减轻他们的负担？两者有何区别？
+    - 入门阅读：[MSD Manual: Family Caregiving for Older Adults](https://www.msdmanuals.com/professional/geriatrics/social-issues-in-older-adults/family-caregiving-for-older-adults)；[Zarit, Reever & Bach-Peterson, Relatives of the Impaired Elderly: Correlates of Feelings of Burden（1980）](https://doi.org/10.1093/geront/20.6.649)
 - **M2 照护需求与场景**
   - `14-M2.1` 生活照料：进食、如厕、洗浴、转移 ★★
+    - 学什么：生活照料覆盖进食、如厕、洗浴、穿衣和转移等日常活动，是失能老人最基本的照护需求；照料时既要保证安全，也要尽量保留老人的自主能力与尊严。
+    - 学完能回答：哪些生活照料环节最容易发生跌倒或受伤？ ／ “帮得太多”为什么可能加速功能退化？ ／ 机器人辅助生活照料时，隐私和尊严方面要注意什么？
+    - 入门阅读：[Katz et al., Studies of Illness in the Aged: The Index of ADL（JAMA 1963）](https://doi.org/10.1001/jama.1963.03060120024016)；[MSD Manual: Home Health Care](https://www.msdmanuals.com/professional/geriatrics/providing-care-to-older-adults/home-health-care)
   - `14-M2.2` 失能与认知症照护要点 ★★
+    - 学什么：失能与认知症照护需要关注安全（走失、跌倒、误服）、日常结构与沟通方式，以及精神行为症状的识别与应对；以人为中心的照护理念强调理解老人的生活史与偏好。
+    - 学完能回答：与认知症老人沟通时有哪些技巧？ ／ 精神行为症状常有哪些诱因？照护者可以如何应对？ ／ 防走失技术需要在安全与自由之间如何平衡？
+    - 入门阅读：[MSD Manual: Behavioral and Psychologic Symptoms of Dementia](https://www.msdmanuals.com/professional/neurologic-disorders/delirium-and-dementia/behavioral-and-psychologic-symptoms-of-dementia)；[WHO: Dementia（事实清单）](https://www.who.int/news-room/fact-sheets/detail/dementia)
   - `14-M2.3` 康复与功能维持 ★★
+    - 学什么：康复与功能维持旨在帮助老人恢复或保持活动、自理与参与能力，包括运动训练、作业治疗、言语与吞咽训练等，需要持续进行并融入日常生活。
+    - 学完能回答：康复与功能维持在目标上有什么不同？ ／ 为什么居家康复的长期坚持很困难？ ／ 康复机器人与游戏化训练可能在哪些方面提高坚持率？
+    - 入门阅读：[WHO: Rehabilitation（事实清单）](https://www.who.int/news-room/fact-sheets/detail/rehabilitation)；[MSD Manual: Prevention of Frailty](https://www.msdmanuals.com/professional/geriatrics/prevention-of-disease-and-disability-in-older-adults/prevention-of-frailty)
   - `14-M2.4` 孤独感、社会参与与心理支持 ★★
+    - 学什么：孤独感（主观感受）与社会隔离（客观社会联系少）在老年人中常见，并与身心健康不良结局相关；社会参与和心理支持是照护的重要内容。
+    - 学完能回答：孤独感与社会隔离有什么区别？ ／ 独居老人面临哪些特殊风险？ ／ 陪伴技术能否真正缓解孤独？可能有哪些副作用？
+    - 入门阅读：[WHO: Social Isolation and Loneliness](https://www.who.int/teams/social-determinants-of-health/demographic-change-and-healthy-ageing/social-isolation-and-loneliness)；[NASEM, Social Isolation and Loneliness in Older Adults（2020）](https://doi.org/10.17226/25663)
   - `14-M2.5` 安宁疗护 ★
+    - 学什么：安宁疗护为生命末期患者提供缓解痛苦和症状、心理与灵性支持以及家属支持，重视患者的意愿与生活质量，而非延长生命本身。
+    - 学完能回答：安宁疗护与一般临终照顾有何不同？ ／ 预立医疗照护计划为什么重要？ ／ 技术在安宁疗护中应扮演什么角色？有哪些不应做的事？
+    - 入门阅读：[WHO: Palliative care（事实清单）](https://www.who.int/news-room/fact-sheets/detail/palliative-care)
 - **M3 智慧养老技术**
   - `14-M3.1` 可穿戴设备与生命体征监测 ★★★ 🍃 [PhysioNet](https://physionet.org/)
+    - 学什么：可穿戴设备（手环、手表、贴片等）可连续监测心率、活动、睡眠与跌倒等信息；在老年人中使用需考虑佩戴依从性、充电、准确性以及数据如何被真正用于照护决策。
+    - 学完能回答：消费级可穿戴设备与医疗级设备有何区别？ ／ 老人为什么常常不愿长期佩戴设备？ ／ 大量监测数据如何转化为照护者能用的提醒，而不是噪声？
+    - 入门阅读：[Majumder, Mondal & Deen, Wearable Sensors for Remote Health Monitoring（2017）](https://doi.org/10.3390/s17010130)
   - `14-M3.2` 智能家居与非接触式监测（毫米波雷达、红外、门磁等） ★★ 🍃 [Home Assistant](https://www.home-assistant.io/)
+    - 学什么：非接触式监测利用毫米波雷达、红外、门磁、床垫传感器等识别活动、睡眠与异常情况，无需佩戴、对隐私的影响通常小于摄像头，但识别准确率与误报需要评估。
+    - 学完能回答：毫米波雷达能感知哪些信息？有哪些局限？ ／ 为什么非接触式方案常被认为比摄像头更易被接受？ ／ 误报和漏报分别会对照护造成什么影响？
+    - 入门阅读：[Mubashir, Shao & Seed, A survey on fall detection: Principles and approaches（含环境传感类方法）](https://doi.org/10.1016/j.neucom.2011.09.037)
   - `14-M3.3` 远程医疗与慢病远程管理 ★★
+    - 学什么：远程医疗与慢病远程管理通过视频问诊、远程监测和随访，让老人在家中获得持续的医疗支持，适合血压、血糖、心衰等慢病管理，但需要考虑数字能力与照护者协助。
+    - 学完能回答：远程监测数据异常时，应由谁、如何响应？ ／ 哪些老人可能难以使用远程医疗？如何弥补？ ／ 远程医疗与线下就诊如何衔接？
+    - 入门阅读：[WHO: Integrated care for older people（ICOPE）指南](https://www.who.int/publications/i/item/9789241550109)；[Choi & DiNitto, The Digital Divide Among Low-Income Homebound Older Adults（2013）](https://doi.org/10.2196/jmir.2645)
   - `14-M3.4` 适老化设计：界面、语音交互、无障碍标准 ★★★ 🍃 [WCAG 无障碍指南](https://www.w3.org/WAI/standards-guidelines/wcag/)、原型：摄像头 + 语音的服药提醒与服药确认 Demo（练习）
+    - 学什么：适老化设计考虑视力、听力、运动和认知变化：大字号与高对比度、简洁的界面层级、容错设计、语音交互等；无障碍标准（如 WCAG）提供可参考的具体要求（以 W3C 最新版本为准）。
+    - 学完能回答：老年用户在使用触屏界面时常遇到哪些困难？ ／ 语音交互对老人有哪些优势和局限？ ／ WCAG 的哪些原则与老年用户最相关？
+    - 入门阅读：[W3C WAI: Older Users and Web Accessibility](https://www.w3.org/WAI/older-users/)；[W3C: Web Content Accessibility Guidelines (WCAG) 2.2（以最新版本为准）](https://www.w3.org/TR/WCAG22/)
   - `14-M3.5` 养老信息系统与健康档案 ★
+    - 学什么：养老信息系统管理老人档案、照护计划、服务记录与用药记录，与医疗机构的健康档案互联可以支持连续照护；数据标准（如 HL7 FHIR）有助于系统之间交换信息。
+    - 学完能回答：养老信息系统需要记录哪些核心数据？ ／ 为什么不同系统间的数据互通很困难？ ／ 健康档案共享时如何保护隐私？
+    - 入门阅读：[HL7 FHIR 标准（以官网最新版本为准）](https://hl7.org/fhir/)
 - **M4 用户研究与评估**
   - `14-M4.1` 老年用户研究方法：访谈、观察、参与式设计 ★★ 🍃 访谈 2–3 位老人或照护者，画一张用药日常流程图（练习）
+    - 学什么：老年用户研究常用访谈、实地观察、日记研究和参与式设计等方法，让老人、照护者和机构人员参与需求定义与原型评估，避免设计者想当然。
+    - 学完能回答：为什么要同时研究老人和照护者？ ／ 与认知障碍老人开展研究时有哪些伦理与方法上的注意事项？ ／ 参与式设计与普通可用性测试有何区别？
+    - 入门阅读：[Chen & Chan, Gerontechnology acceptance by elderly Hong Kong Chinese: a senior technology acceptance model（STAM, 2014）](https://doi.org/10.1080/00140139.2014.895855)；[W3C WAI: Older Users and Web Accessibility](https://www.w3.org/WAI/older-users/)
   - `14-M4.2` 技术接受度与数字鸿沟 ★★
+    - 学什么：技术接受度模型解释人们是否愿意使用一项技术（如感知有用性、易用性、社会影响、便利条件）；数字鸿沟指不同人群在接入、技能和使用效果上的差距，老年人往往处于不利位置。
+    - 学完能回答：UTAUT 模型包含哪些核心因素？ ／ 老年人技术接受度模型增加了哪些与老人相关的因素？ ／ 产品设计可以如何减小数字鸿沟？
+    - 入门阅读：[Venkatesh et al., User Acceptance of Information Technology: Toward a Unified View（UTAUT, 2003）](https://doi.org/10.2307/30036540)；[Choi & DiNitto, The Digital Divide Among Low-Income Homebound Older Adults（2013）](https://doi.org/10.2196/jmir.2645)
   - `14-M4.3` 效果评估：临床结局、生活质量、成本效益 ★★
+    - 学什么：评估养老技术的效果需要从临床结局（如跌倒、住院）、功能与生活质量、照护者负担以及成本效益等多维度考察，并选择合适的研究设计。
+    - 学完能回答：为什么“用户满意”不能代替临床结局评估？ ／ 复杂干预的评估为什么需要关注实施过程？ ／ 成本效益分析需要收集哪些数据？
+    - 入门阅读：[Skivington et al., A new framework for developing and evaluating complex interventions（MRC 框架，BMJ 2021）](https://doi.org/10.1136/bmj.n2061)
 
 #### 15 · 伦理、隐私、政策与标准 ★★
 
 > 做之前先想清楚：能不能做、该不该做、怎样合规地做
 > 优先学习配方：1.1 自主与知情同意 ｜ 2.1 健康数据隐私 ｜ 3.1 产业政策 ｜ 3.3 机器人安全标准
 
+**学习路线**：`15-M1.1` 自主性、知情同意与认知障碍者的代理决策 → `15-M1.2` 陪伴机器人的伦理争议：欺骗、依赖、替代人际关怀 → `15-M1.3` 算法偏见与年龄歧视 → `15-M1.4` 责任归属：机器人或 AI 出错时谁负责 → `15-M2.1` 健康数据隐私与个人信息保护（个人信息保护法等） → `15-M2.2` 家庭摄像头 / 传感器监测的隐私权衡与本地化处理 → `15-M2.3` 医疗 AI 数据治理与去标识化 → `15-M3.1` 国家银发经济与智慧健康养老相关政策（跟踪最新文件） → `15-M3.2` 医疗器械分类与 AI 医疗软件注册 → `15-M3.3` 服务机器人安全标准（如 ISO 13482 个人护理机器人） → `15-M3.4` 无障碍与适老化标准（如 WCAG）
+
 - **M1 伦理**
   - `15-M1.1` 自主性、知情同意与认知障碍者的代理决策 ★★★
+    - 学什么：尊重自主意味着在充分知情的基础上由本人做决定；认知障碍者的决策能力可能因事而异，需要评估具体决策能力，并在必要时依法由代理人决策，同时尽量让本人参与。
+    - 学完能回答：决策能力评估通常考察哪些方面？ ／ 为什么决策能力是“针对具体决定”的？ ／ 为认知障碍老人部署监测设备时，如何尽可能尊重其意愿？
+    - 入门阅读：[Appelbaum, Assessment of Patients' Competence to Consent to Treatment（NEJM 2007）](https://doi.org/10.1056/NEJMcp074045)
   - `15-M1.2` 陪伴机器人的伦理争议：欺骗、依赖、替代人际关怀 ★★
+    - 学什么：陪伴机器人引发的伦理争议包括：让认知障碍者误以为机器人是活物是否构成欺骗、可能造成情感依赖、可能被用来减少真人陪伴，以及隐私和尊严问题。
+    - 学完能回答：对认知障碍老人使用拟人化机器人是否构成“欺骗”？ ／ 如何避免机器人成为减少人际关怀的借口？ ／ 哪些设计做法可以降低这些伦理风险？
+    - 入门阅读：[Sharkey & Sharkey, Granny and the robots: ethical issues in robot care for the elderly（2010 在线发表）](https://doi.org/10.1007/s10676-010-9234-6)
   - `15-M1.3` 算法偏见与年龄歧视 ★★
+    - 学什么：AI 系统可能因训练数据中老年人代表性不足或带有年龄刻板印象而表现更差或做出歧视性决定；世界卫生组织专门讨论了健康 AI 中的年龄歧视问题。
+    - 学完能回答：训练数据中老年人代表性不足会导致什么后果？ ／ 如何评估一个模型在不同年龄组上的表现差异？ ／ 产品团队可以采取哪些措施减少年龄偏见？
+    - 入门阅读：[WHO: Ageism in artificial intelligence for health（2022）](https://www.who.int/publications/i/item/9789240040793)
   - `15-M1.4` 责任归属：机器人或 AI 出错时谁负责 ★★
+    - 学什么：机器人或 AI 出错时，责任可能涉及制造商、开发者、部署机构、操作者与使用者；学习型系统的行为难以完全预测，带来所谓“责任鸿沟”，需要通过设计、记录和制度安排来明确责任。
+    - 学完能回答：什么是“责任鸿沟”？ ／ 日志记录与可追溯性如何帮助事故后的责任认定？ ／ 在养老机构部署机器人时，应提前明确哪些责任分工？
+    - 入门阅读：[Matthias, The responsibility gap: Ascribing responsibility for the actions of learning automata（2004）](https://doi.org/10.1007/s10676-004-3422-1)；[WHO: Ethics and governance of artificial intelligence for health](https://www.who.int/publications/i/item/9789240029200)
 - **M2 隐私与数据合规**
   - `15-M2.1` 健康数据隐私与个人信息保护（个人信息保护法等） ★★★
+    - 学什么：健康数据属于敏感个人信息，处理时需要合法依据、明确目的、最小必要和充分告知，并采取安全保护措施；我国《个人信息保护法》对敏感个人信息有专门规定（以官方发布文本为准）。
+    - 学完能回答：什么是敏感个人信息？健康数据为什么属于此类？ ／ 处理敏感个人信息需要满足哪些额外条件？ ／ 老人家属代为同意时需要注意什么？
+    - 入门阅读：[中华人民共和国个人信息保护法（网信办转载全文，以官方发布文本为准）](https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm)
   - `15-M2.2` 家庭摄像头 / 传感器监测的隐私权衡与本地化处理 ★★ 🍃 原型：基于姿态估计的跌倒检测并评估误报率（练习）
+    - 学什么：家庭中的摄像头和传感器可提升安全，但也会侵入私人空间；常用的权衡做法包括选择隐私侵入较低的传感器、在设备端本地处理只上传事件、让老人知情并可控制。
+    - 学完能回答：摄像头、毫米波雷达和门磁在隐私影响上有何差异？ ／ “本地处理、只上传事件”如何降低隐私风险？ ／ 浴室、卧室等私密区域的监测应遵循什么原则？
+    - 入门阅读：[WHO: Ethics and governance of artificial intelligence for health](https://www.who.int/publications/i/item/9789240029200)；[中华人民共和国个人信息保护法（以官方发布文本为准）](https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm)
   - `15-M2.3` 医疗 AI 数据治理与去标识化 ★★
+    - 学什么：医疗 AI 的数据治理涵盖数据来源与授权、质量与标注、访问控制、去标识化与再识别风险评估，以及模型全生命周期的监督。去标识化不等于绝对匿名。
+    - 学完能回答：去标识化与匿名化有何区别？ ／ 为什么组合多个看似无害的字段可能导致再识别？ ／ 数据治理应在模型开发的哪些阶段介入？
+    - 入门阅读：[WHO: Ethics and governance of artificial intelligence for health](https://www.who.int/publications/i/item/9789240029200)
 - **M3 政策与标准**
   - `15-M3.1` 国家银发经济与智慧健康养老相关政策（跟踪最新文件） ★★
+    - 学什么：我国近年出台了发展银发经济、智慧健康养老等相关政策文件，为养老产业和适老化技术提供方向；政策更新较快，应持续跟踪官方最新文件。
+    - 学完能回答：银发经济政策中与智慧养老和康复辅具相关的方向有哪些？ ／ 如何快速查找某项政策的原文及配套文件？ ／ 政策导向对产品立项有什么影响？
+    - 入门阅读：[国务院办公厅关于发展银发经济增进老年人福祉的意见（以官方最新文件为准）](https://www.gov.cn/zhengce/content/202401/content_6926087.htm)
   - `15-M3.2` 医疗器械分类与 AI 医疗软件注册 ★★ 🍃 [国家药品监督管理局（NMPA）](https://www.nmpa.gov.cn/)
+    - 学什么：医疗器械按风险分类管理；具有医疗用途的软件（包括 AI 软件）可能作为医疗器械需要注册或审批。判断依据是预期用途和风险，具体以各国监管机构最新规定为准。
+    - 学完能回答：什么是“软件即医疗器械（SaMD）”？ ／ 同一款健康 App，什么情况下会被视为医疗器械？ ／ AI 医疗软件在上市后更新模型时可能面临什么监管问题？
+    - 入门阅读：[FDA: Software as a Medical Device (SaMD)](https://www.fda.gov/medical-devices/digital-health-center-excellence/software-medical-device-samd)；[FDA: Artificial Intelligence-Enabled Medical Devices](https://www.fda.gov/medical-devices/software-medical-device-samd/artificial-intelligence-enabled-medical-devices)
   - `15-M3.3` 服务机器人安全标准（如 ISO 13482 个人护理机器人） ★★
+    - 学什么：服务机器人安全标准规定了与人近距离互动的机器人的风险评估与安全要求，ISO 13482 针对个人护理机器人（移动服务机器人、身体辅助机器人、载人机器人等类型）；标准原文需通过 ISO 或国家标准机构获取，以最新版本为准。
+    - 学完能回答：个人护理机器人与工业机器人在安全要求上有何不同？ ／ 风险评估一般包括哪些步骤？ ／ 在公共或家庭空间运行的移动机器人有哪些主要风险？
+    - 入门阅读：[Salvini, Paez-Granados & Billard, On the Safety of Mobile Robots Serving in Public Spaces（2021）](https://doi.org/10.1145/3442678)；[Haddadin et al., Robot Collisions: A Survey on Detection, Isolation, and Identification](https://doi.org/10.1109/TRO.2017.2723903)
   - `15-M3.4` 无障碍与适老化标准（如 WCAG） ★ 🍃 [WCAG 无障碍指南](https://www.w3.org/WAI/standards-guidelines/wcag/)
+    - 学什么：WCAG 是 W3C 发布的网页内容无障碍指南，以可感知、可操作、可理解、健壮四项原则组织；适老化改造可以参考 WCAG 以及国内相关适老化标准（以最新版本为准）。
+    - 学完能回答：WCAG 的四项原则分别是什么？ ／ 符合级别 A、AA、AAA 有何区别？ ／ 适老化改造除了放大字体，还应关注哪些方面？
+    - 入门阅读：[W3C: Web Content Accessibility Guidelines (WCAG) 2.2（以最新版本为准）](https://www.w3.org/TR/WCAG22/)；[W3C WAI: Older Users and Web Accessibility](https://www.w3.org/WAI/older-users/)
 
 ### 〔交叉应用〕
 
@@ -999,32 +1181,97 @@
 > 三条主线的汇合点：做一个真正有用的养老+用药系统
 > 优先学习配方：2.1 用药提醒 ｜ 2.3 自动化药房 ｜ 3.1 跌倒检测 ｜ 5.1 系统集成
 
+**学习路线**：`16-M1.1` 养老机器人分类：陪伴社交、生活辅助、康复、护理移位、巡检 → `16-M1.2` 需求优先级：安全 > 健康 > 便利 > 陪伴 → `16-M1.3` 已有产品与落地经验的复盘方法（成功与失败案例） → `16-M2.1` 用药提醒与服药确认（视觉 / 智能药盒 / 语音） → `16-M2.2` 智能药盒与分装：分药、计数、漏服检测 → `16-M2.3` 自动化药房、药品配送机器人与机构内物流 → `16-M2.4` 机器人取药递药：识别、抓取、交接人手 → `16-M2.5` 老年用药 DDI / PIM 规则引擎与 LLM 用药问答（安全边界） → `16-M3.1` 跌倒检测与报警系统 → `16-M3.2` 夜间与睡眠异常监测 → `16-M3.3` 生命体征趋势分析与预警 → `16-M3.4` 认知衰退的数字生物标志物（研究阶段，审慎使用） → `16-M4.1` 陪伴机器人与对话 Agent（记忆、个性化、情感支持） → `16-M4.2` 认知训练与康复游戏 → `16-M4.3` 照护者辅助：交接班记录、照护计划生成 → `16-M4.4` 移位、喂食、穿衣等物理辅助操作（研究前沿） → `16-M5.1` 系统集成：感知 + 规则 + 大模型 + 机器人 + 人工兜底 → `16-M5.2` 人在回路与升级机制（何时必须叫人） → `16-M5.3` 合规评估：医疗器械边界、隐私、安全认证 → `16-M5.4` 小规模试点与真实场景评估方法 → `16-M5.5` AIDD × 养老：老年适应症药物研发与老年人群 PK 建模
+
 - **M1 场景地图**
   - `16-M1.1` 养老机器人分类：陪伴社交、生活辅助、康复、护理移位、巡检 ★★★
+    - 学什么：养老机器人按功能可分为陪伴社交、生活辅助、康复训练、护理移位和巡检监测等类别；不同类别在技术难度、安全风险、监管要求和成熟度上差别很大。
+    - 学完能回答：各类养老机器人分别面向什么需求？ ／ 哪类机器人与人有物理接触？这意味着什么额外要求？ ／ 为什么陪伴类机器人往往比物理辅助类更早落地？
+    - 入门阅读：[Broekens, Heerink & Rosendal, Assistive social robots in elderly care: a review](https://doi.org/10.4017/gt.2009.08.02.002.00)；[PARO 治疗型海豹机器人（AIST 介绍页）](https://unit.aist.go.jp/hiiri/topics/03-en.html)
   - `16-M1.2` 需求优先级：安全 > 健康 > 便利 > 陪伴 ★★ 🍃 访谈 2–3 位老人或照护者，画一张用药日常流程图（练习）
+    - 学什么：本树采用“安全 > 健康 > 便利 > 陪伴”作为排序需求的思考框架：首先避免伤害（跌倒、误服、机器人碰撞），再支持健康管理，然后提升便利，最后是陪伴与情感需求。它是辅助取舍的经验框架，不是固定规则。
+    - 学完能回答：为什么安全需求应优先于便利与陪伴？ ／ 举一个“便利功能引入新安全风险”的例子。 ／ 老人自己的优先级与家属、机构的优先级可能有何不同？
+    - 入门阅读：[WHO: Falls（事实清单）](https://www.who.int/news-room/fact-sheets/detail/falls)；[WHO: Integrated care for older people（ICOPE）指南](https://www.who.int/publications/i/item/9789241550109)
   - `16-M1.3` 已有产品与落地经验的复盘方法（成功与失败案例） ★★
+    - 学什么：复盘已有养老产品时，可以从目标用户与场景、真实使用率与流失原因、照护流程的融合程度、成本与付费方、安全事件和证据质量等方面系统分析成功与失败案例。
+    - 学完能回答：为什么很多演示效果好的产品在真实场景中使用率低？ ／ 复盘时应收集哪些一手资料？ ／ 谁为产品付费、谁使用产品，这一区别会带来什么问题？
+    - 入门阅读：[Skivington et al., A new framework for developing and evaluating complex interventions（MRC 框架，BMJ 2021）](https://doi.org/10.1136/bmj.n2061)；[Broekens, Heerink & Rosendal, Assistive social robots in elderly care: a review](https://doi.org/10.4017/gt.2009.08.02.002.00)
 - **M2 用药管理机器人与系统**
   - `16-M2.1` 用药提醒与服药确认（视觉 / 智能药盒 / 语音） ★★★ 🍃 原型：摄像头 + 语音的服药提醒与服药确认 Demo（练习）
+    - 学什么：用药提醒告诉老人“该吃药了”，服药确认则判断“是否真的吃了”；确认可借助视觉识别、智能药盒开盖记录或语音应答，但每种方式都只能提供间接证据。
+    - 学完能回答：提醒与确认解决的分别是哪类依从性问题？ ／ 视觉确认服药可能有哪些误判和隐私问题？ ／ 漏服时应该提醒谁、如何升级通知？
+    - 入门阅读：[Osterberg & Blaschke, Adherence to Medication（NEJM 2005）](https://doi.org/10.1056/NEJMra050100)；[MSD Manual: Adherence to a Medication Regimen](https://www.msdmanuals.com/professional/clinical-pharmacology/factors-affecting-response-to-medications/adherence-to-a-medication-regimen)
   - `16-M2.2` 智能药盒与分装：分药、计数、漏服检测 ★★
+    - 学什么：智能药盒按时间分格、自动分药或记录开盖时间，用于减少错服和发现漏服；分装环节本身也可能出错，需要药师或照护者复核。
+    - 学完能回答：自动分药和人工分装各有哪些出错点？ ／ 智能药盒的数据能说明什么，不能说明什么？ ／ 如何为视力或手部功能差的老人设计药盒？
+    - 入门阅读：[Osterberg & Blaschke, Adherence to Medication（含电子监测的讨论）](https://doi.org/10.1056/NEJMra050100)；[MSD Manual: Medication Errors](https://www.msdmanuals.com/professional/clinical-pharmacology/concepts-in-pharmacotherapy/medication-errors)
   - `16-M2.3` 自动化药房、药品配送机器人与机构内物流 ★★
+    - 学什么：自动化药房系统（自动发药、自动分包、智能药柜）和机构内配送机器人可减少人工调配差错和重复劳动，但需要重新设计流程，并处理故障和例外情况。
+    - 学完能回答：自动化发药系统主要减少哪些类型的差错？ ／ 引入自动化后可能出现哪些新的差错类型？ ／ 机构内配送机器人需要与哪些人员和系统协同？
+    - 入门阅读：[Batson et al., Automation of in-hospital pharmacy dispensing: a systematic review（2020）](https://doi.org/10.1136/ejhpharm-2019-002081)；[WHO: Medication Without Harm](https://www.who.int/initiatives/medication-without-harm)
   - `16-M2.4` 机器人取药递药：识别、抓取、交接人手 ★★ 🍃 原型：在仿真中让机械臂从药架取药盒并递到人手（练习）
+    - 学什么：机器人取药递药需要识别正确药品、可靠抓取，并把物品安全地交到人手中；人机交接涉及时机、位置、握力释放和对人意图的判断，对老年人尤其需要慢速与柔顺。
+    - 学完能回答：人机交接中，机器人何时应松手？ ／ 识别药品时为什么不能只依靠外观？ ／ 面对手部颤抖或反应较慢的老人，交接策略要如何调整？
+    - 入门阅读：[Ortenzi et al., Object Handovers: A Review for Robotics（IEEE TRO 2021）](https://doi.org/10.1109/TRO.2021.3075365)；[Sundermeyer et al., Contact-GraspNet](https://arxiv.org/abs/2103.14127)
   - `16-M2.5` 老年用药 DDI / PIM 规则引擎与 LLM 用药问答（安全边界） ★★★ 🍃 做一个调用 RDKit / PubChem 的药物问答小 Agent（练习）、原型：老年用药清单的 DDI / PIM 规则检查 + LLM 解释（练习）
+    - 学什么：规则引擎可把 PIM 标准和药物相互作用知识编码为可追溯的检查规则；大语言模型适合把结果解释成通俗语言，但可能产生错误信息，因此结论应以规则和专业人员审核为准，并明确提示咨询医生或药师。
+    - 学完能回答：为什么用药结论不应只依赖大语言模型生成？ ／ 规则引擎与 LLM 应如何分工？ ／ LLM 用药问答应设置哪些安全边界和拒答场景？
+    - 入门阅读：[American Geriatrics Society, 2023 Updated AGS Beers Criteria](https://doi.org/10.1111/jgs.18372)；[Singhal et al., Large language models encode clinical knowledge（Nature 2023）](https://doi.org/10.1038/s41586-023-06291-2)
 - **M3 居家健康监测与安全**
   - `16-M3.1` 跌倒检测与报警系统 ★★★ 🍃 [MediaPipe](https://ai.google.dev/edge/mediapipe)、原型：基于姿态估计的跌倒检测并评估误报率（练习） 🃏 [姿态估计做跌倒检测](https://ai.google.dev/edge/mediapipe)
+    - 学什么：跌倒检测可基于可穿戴设备、环境传感器（雷达、压力、振动）或视觉；系统需要在误报与漏报之间权衡，并设计好报警后的响应流程。检测不能替代跌倒预防。
+    - 学完能回答：三类跌倒检测方案各有哪些优缺点？ ／ 误报过多会对照护造成什么影响？ ／ 老人跌倒后长时间无法起身为什么危险？
+    - 入门阅读：[Mubashir, Shao & Seed, A survey on fall detection: Principles and approaches](https://doi.org/10.1016/j.neucom.2011.09.037)；[MSD Manual: Falls in Older Adults](https://www.msdmanuals.com/professional/geriatrics/falls-in-older-adults/falls-in-older-adults)
   - `16-M3.2` 夜间与睡眠异常监测 ★★
+    - 学什么：夜间是跌倒和突发事件的高风险时段；监测离床、夜间如厕和睡眠模式变化可以帮助发现风险，但睡眠指标需结合临床背景解读，不宜过度解读消费级设备数据。
+    - 学完能回答：夜间离床监测在养老机构中的常见用途是什么？ ／ 失眠与镇静催眠药使用之间有什么值得关注的关系？ ／ 消费级设备的睡眠指标有哪些局限？
+    - 入门阅读：[MSD Manual: Insomnia and Excessive Daytime Sleepiness](https://www.msdmanuals.com/professional/neurologic-disorders/sleep-and-wakefulness-disorders/insomnia-and-excessive-daytime-sleepiness-eds)；[Majumder, Mondal & Deen, Wearable Sensors for Remote Health Monitoring](https://doi.org/10.3390/s17010130)
   - `16-M3.3` 生命体征趋势分析与预警 ★★ 🍃 [PhysioNet](https://physionet.org/)
+    - 学什么：生命体征趋势分析关注个体相对自身基线的变化，而非单次测量；早期预警评分（如 NEWS2）把多项生命体征综合为风险提示，居家使用时需要明确响应流程与数据质量要求。
+    - 学完能回答：为什么个体基线变化比人群阈值更有意义？ ／ 早期预警评分包括哪些生命体征？ ／ 居家测量的数据质量问题如何处理？
+    - 入门阅读：[Royal College of Physicians: National Early Warning Score (NEWS) 2](https://www.rcp.ac.uk/improving-care/resources/national-early-warning-score-news-2/)；[Majumder, Mondal & Deen, Wearable Sensors for Remote Health Monitoring](https://doi.org/10.3390/s17010130)
   - `16-M3.4` 认知衰退的数字生物标志物（研究阶段，审慎使用） ★
+    - 学什么：数字生物标志物利用手机、可穿戴设备或日常行为数据（如步态、打字、说话、活动模式）尝试发现认知衰退迹象；目前多处于研究阶段，需审慎解读并避免造成不必要的焦虑。
+    - 学完能回答：有哪些日常行为数据被研究用于发现认知衰退？ ／ 为什么研究阶段的指标不能直接用于诊断？ ／ 向老人和家属反馈此类结果时应注意什么？
+    - 入门阅读：[Kourtis et al., Digital biomarkers for Alzheimer's disease: the mobile/wearable devices opportunity（2019）](https://doi.org/10.1038/s41746-019-0084-2)；[Livingston et al., Dementia prevention, intervention, and care: 2024 report of the Lancet standing Commission](https://doi.org/10.1016/S0140-6736(24)01296-0)
 - **M4 陪护与交互**
   - `16-M4.1` 陪伴机器人与对话 Agent（记忆、个性化、情感支持） ★★ 🃏 [PARO 治疗型海豹机器人](https://unit.aist.go.jp/hiiri/topics/03-en.html)
+    - 学什么：陪伴机器人与对话智能体通过记忆个人信息、个性化对话和情感回应提供陪伴与支持；需要关注依赖、欺骗感、隐私和替代真人关怀等伦理问题。
+    - 学完能回答：对话智能体的“记忆”功能能带来哪些好处与风险？ ／ 如何让陪伴技术促进而不是替代人际交往？ ／ 对话中出现情绪危机或健康风险信号时，系统应如何处理？
+    - 入门阅读：[Broekens, Heerink & Rosendal, Assistive social robots in elderly care: a review](https://doi.org/10.4017/gt.2009.08.02.002.00)；[Sharkey & Sharkey, Granny and the robots: ethical issues in robot care for the elderly](https://doi.org/10.1007/s10676-010-9234-6)
   - `16-M4.2` 认知训练与康复游戏 ★
+    - 学什么：认知训练与康复游戏通过数字化任务训练记忆、注意等能力或促进身体活动；证据质量参差不齐，宣传时应避免夸大“预防痴呆”等效果。
+    - 学完能回答：训练任务上的进步能否迁移到日常生活能力？ ／ 现有系统评价对计算机化认知训练的证据如何评价？ ／ 游戏化设计如何兼顾趣味性与适老性？
+    - 入门阅读：[Gates et al., Computerised cognitive training for preventing dementia in people with mild cognitive impairment（Cochrane 2019）](https://doi.org/10.1002/14651858.cd012279.pub2)；[WHO: Rehabilitation（事实清单）](https://www.who.int/news-room/fact-sheets/detail/rehabilitation)
   - `16-M4.3` 照护者辅助：交接班记录、照护计划生成 ★★
+    - 学什么：AI 可以帮助照护者整理交接班记录、生成照护计划草稿和提醒待办事项，减轻文书负担；生成内容必须由照护人员审核，并注意隐私保护。
+    - 学完能回答：交接班记录中哪些信息最关键、最不能出错？ ／ 如何防止 AI 生成内容中的错误被直接采用？ ／ 照护者在什么情况下会信任或拒绝 AI 工具？
+    - 入门阅读：[MSD Manual: Family Caregiving for Older Adults](https://www.msdmanuals.com/professional/geriatrics/social-issues-in-older-adults/family-caregiving-for-older-adults)；[Singhal et al., Large language models encode clinical knowledge（含局限讨论）](https://doi.org/10.1038/s41586-023-06291-2)
   - `16-M4.4` 移位、喂食、穿衣等物理辅助操作（研究前沿） ★★
+    - 学什么：移位、喂食、穿衣等物理辅助需要机器人与人的身体直接接触，涉及柔顺控制、个体差异、舒适性与安全，是研究前沿，距离大规模应用仍有距离。
+    - 学完能回答：喂食机器人需要解决哪些感知与操作难题？ ／ 穿衣辅助为什么特别依赖对衣物和人体的建模？ ／ 物理辅助机器人如何让使用者保持控制感？
+    - 入门阅读：[Feng et al., Robot-Assisted Feeding: Generalizing Skewering Strategies across Food Items on a Plate](https://arxiv.org/abs/1906.02350)；[Borràs, Effective grasping enables successful robot-assisted dressing（Science Robotics 2022 评述文章）](https://doi.org/10.1126/scirobotics.abo7229)
 - **M5 系统落地**
   - `16-M5.1` 系统集成：感知 + 规则 + 大模型 + 机器人 + 人工兜底 ★★★
+    - 学什么：一个实用的养老 + 用药系统通常由多层组成：传感与感知、规则与知识库、大模型交互与解释、机器人执行，以及人工兜底；关键在于各层接口清晰、失败可检测、责任可追溯。
+    - 学完能回答：为什么需要“人工兜底”这一层？ ／ 各层之间应传递哪些信息？如何记录日志？ ／ 某一层失效时系统应如何降级运行？
+    - 入门阅读：[Ren et al., Robots That Ask For Help: Uncertainty Alignment for Large Language Model Planners](https://arxiv.org/abs/2307.01928)；[WHO: Ethics and governance of artificial intelligence for health](https://www.who.int/publications/i/item/9789240029200)
   - `16-M5.2` 人在回路与升级机制（何时必须叫人） ★★★
+    - 学什么：人在回路设计要预先定义升级机制：哪些情况必须通知照护者或医疗人员（如跌倒、生命体征异常、疑似用药错误、系统不确定），通知谁、多快响应，以及无人响应时怎么办。
+    - 学完能回答：列出至少三类“必须叫人”的情形。 ／ 系统不确定时为什么应主动求助而不是猜测？ ／ 如何避免过多升级导致照护者忽视通知？
+    - 入门阅读：[Ren et al., Robots That Ask For Help](https://arxiv.org/abs/2307.01928)；[FDA: Clinical Decision Support Software（关于人员复核的监管考虑，以官网最新版本为准）](https://www.fda.gov/regulatory-information/search-fda-guidance-documents/clinical-decision-support-software)
   - `16-M5.3` 合规评估：医疗器械边界、隐私、安全认证 ★★
+    - 学什么：落地前需进行合规评估：功能是否构成医疗器械、个人信息与健康数据处理是否合规、机器人与电气安全是否满足相关标准；各项要求以所在地区监管机构最新规定为准。
+    - 学完能回答：同一个产品，哪些功能描述可能使其被视为医疗器械？ ／ 健康数据处理需要完成哪些合规步骤？ ／ 机器人安全认证通常需要准备哪些材料？
+    - 入门阅读：[FDA: Software as a Medical Device (SaMD)](https://www.fda.gov/medical-devices/digital-health-center-excellence/software-medical-device-samd)；[中华人民共和国个人信息保护法（以官方发布文本为准）](https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm)
   - `16-M5.4` 小规模试点与真实场景评估方法 ★★
+    - 学什么：小规模试点在真实场景中检验可行性、可接受性与安全性，评估设计需要提前确定结局指标、对照方式、数据收集和伦理审查，并关注实施过程与使用者反馈。
+    - 学完能回答：可行性研究与效果研究的目标有何不同？ ／ 试点中应收集哪些定量与定性数据？ ／ 为什么涉及老人的试点通常需要伦理审查与知情同意？
+    - 入门阅读：[Skivington et al., A new framework for developing and evaluating complex interventions（MRC 框架，BMJ 2021）](https://doi.org/10.1136/bmj.n2061)
   - `16-M5.5` AIDD × 养老：老年适应症药物研发与老年人群 PK 建模 ★★ 🍃 [Open Systems Pharmacology（PK-Sim / MoBi）](https://www.open-systems-pharmacology.org/)
+    - 学什么：老年人在临床试验中常代表性不足，而他们的药代与药效可能与年轻人不同；群体药代动力学（PopPK）建模可利用稀疏数据描述年龄、肾功能等因素对暴露量的影响，AI 方法也在辅助老年适应症药物研发。
+    - 学完能回答：为什么需要在药物研发中纳入足够的老年受试者？ ／ 群体药代动力学模型中的协变量是什么？年龄与肾功能如何体现？ ／ AI 在老年适应症药物研发中可能发挥什么作用？有哪些局限？
+    - 入门阅读：[FDA: Population Pharmacokinetics（指南以官网最新版本为准）](https://www.fda.gov/regulatory-information/search-fda-guidance-documents/population-pharmacokinetics)；[ICH Efficacy Guidelines（含 E7 老年人群研究，以官网最新版本为准）](https://www.ich.org/page/efficacy-guidelines)
 
 ## 叶子清单
 
