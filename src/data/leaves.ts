@@ -38,7 +38,7 @@ export const LEAVES: Leaf[] = [
   { id: 'leaf-p-dock', name: '对一个已知复合物做重对接并计算 RMSD', url: '', anchor: '01-M4.4', tags: ['05-M3.3', '对接评估'], intro: '从 PDB 取共晶结构，重对接配体，体会对接打分与姿态误差', practice: true },
 
   // ---- 02 药理与 PK ----
-  { id: 'leaf-swissadme', name: 'SwissADME', url: 'http://www.swissadme.ch/', anchor: '02-M2.1', tags: ['ADME 估算', '05-M2.2'], intro: '在线估算理化性质、药代与类药性的免费工具' },
+  { id: 'leaf-swissadme', name: 'SwissADME', url: 'https://www.swissadme.ch/', anchor: '02-M2.1', tags: ['ADME 估算', '05-M2.2'], intro: '在线估算理化性质、药代与类药性的免费工具' },
   { id: 'leaf-osp', name: 'Open Systems Pharmacology（PK-Sim / MoBi）', url: 'https://www.open-systems-pharmacology.org/', anchor: '02-M2.5', tags: ['PBPK', '16-M5.5'], intro: '开源的生理药代动力学建模平台' },
   { id: 'leaf-p-pk', name: '用 Python 写一个一室模型并拟合血药浓度曲线', url: '', anchor: '02-M2.4', tags: ['02-M2.3', 'scipy'], intro: '手写一室口服吸收模型，求半衰期、清除率、AUC', practice: true },
 
@@ -61,7 +61,7 @@ export const LEAVES: Leaf[] = [
   { id: 'leaf-p-agent', name: '做一个调用 RDKit / PubChem 的药物问答小 Agent', url: '', anchor: '05-M5.3', tags: ['16-M2.5', '工具调用'], intro: '让 LLM 通过工具查分子性质与相互作用，并标注信息来源', practice: true },
 
   // ---- 06–08 机器人 ----
-  { id: 'leaf-modernrobotics', name: 'Modern Robotics（教材与课程）', url: 'http://hades.mech.northwestern.edu/index.php/Modern_Robotics', anchor: '06-M1.2', tags: ['运动学', '06-M2.1'], intro: '西北大学 Lynch & Park 的机器人学教材与配套课程' },
+  { id: 'leaf-modernrobotics', name: 'Modern Robotics（教材与课程）', url: 'https://modernrobotics.northwestern.edu/', anchor: '06-M1.2', tags: ['运动学', '06-M2.1'], intro: '西北大学 Lynch & Park 的机器人学教材与配套课程' },
   { id: 'leaf-pinocchio', name: 'Pinocchio', url: 'https://github.com/stack-of-tasks/pinocchio', anchor: '06-M2.1', tags: ['刚体动力学库'], intro: '高效的刚体动力学与运动学 C++/Python 库' },
   { id: 'leaf-drake', name: 'Drake', url: 'https://drake.mit.edu/', anchor: '08-M2.2', tags: ['轨迹优化', '06-M2.2'], intro: 'MIT 发起的机器人建模、仿真与优化工具箱' },
   { id: 'leaf-moveit', name: 'MoveIt', url: 'https://moveit.ai/', anchor: '08-M2.1', tags: ['机械臂规划', '06-M3.1'], intro: 'ROS 生态的机械臂运动规划框架' },

@@ -29,26 +29,76 @@
 > 三条主线共用的地基：数学、Python、深度学习与文献方法
 > 优先学习配方：1.2 概率统计 ｜ 2.1 Python 科学计算 ｜ 3.1 深度学习基础 ｜ 4.1 文献检索与阅读
 
+**学习路线**：`00-M2.1` Python 科学计算（NumPy / pandas / Matplotlib） → `00-M2.2` Linux、Git 与环境管理 → `00-M1.1` 线性代数（矩阵、特征分解、SVD） → `00-M1.2` 概率统计与贝叶斯推断 → `00-M1.3` 微积分与优化（梯度、凸优化） → `00-M3.1` 深度学习基础（反向传播、优化器、正则化） → `00-M3.5` 评估方法（数据划分、交叉验证、不确定性） → `00-M3.2` CNN / GNN / Transformer 架构 → `00-M3.3` 生成模型（VAE / 扩散模型 / 自回归） → `00-M3.4` 大语言模型与多模态模型基础 → `00-M2.4` 实验管理与可复现（配置、随机种子、日志） → `00-M1.4` 刚体变换与李群初步（旋转矩阵、四元数） → `00-M2.3` C++ 基础（机器人系统常用） → `00-M4.1` 文献检索与阅读（PubMed / arXiv / Google Scholar） → `00-M4.2` 实验设计与统计检验 → `00-M4.3` 跨学科沟通：医学、药学、工程术语对齐
+
 - **M1 数学基础**
   - `00-M1.1` 线性代数（矩阵、特征分解、SVD） ★★
+    - 学什么：向量、矩阵与线性变换是表示分子特征、图像和机器人位姿的共同语言；特征分解与奇异值分解（SVD）揭示矩阵的主要方向与秩。
+    - 学完能回答：矩阵乘法为什么可以理解为“线性变换的复合”？ ／ 特征分解与 SVD 的适用条件有何不同？SVD 与 PCA 是什么关系？ ／ 矩阵的秩、零空间在最小二乘问题里意味着什么？
+    - 入门阅读：[MIT OCW 18.06 Linear Algebra（Gilbert Strang）](https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/)；[3Blue1Brown：线性代数的本质（可视化系列）](https://www.3blue1brown.com/topics/linear-algebra)
   - `00-M1.2` 概率统计与贝叶斯推断 ★★★
+    - 学什么：用概率描述不确定性：随机变量与分布、条件概率、期望与方差；贝叶斯推断用“先验 × 似然”更新为后验，是不确定性估计与贝叶斯优化的基础。
+    - 学完能回答：条件概率与贝叶斯公式如何用于“检测阳性后真正患病的概率”这类问题？ ／ 最大似然估计与贝叶斯后验估计的区别是什么？ ／ 置信区间与贝叶斯可信区间的含义有何不同？
+    - 入门阅读：[MIT OCW 18.05 Introduction to Probability and Statistics](https://ocw.mit.edu/courses/18-05-introduction-to-probability-and-statistics-spring-2014/)；[Seeing Theory（布朗大学的可视化概率统计入门）](https://seeing-theory.brown.edu/)
   - `00-M1.3` 微积分与优化（梯度、凸优化） ★★
+    - 学什么：梯度描述函数变化最快的方向，梯度下降是训练神经网络的核心；凸优化问题的局部最优即全局最优，是理解约束优化、MPC 与轨迹优化的基础。
+    - 学完能回答：什么是凸函数、凸集？为什么凸问题更容易求解？ ／ 拉格朗日乘子法如何处理等式约束？ ／ 学习率过大或过小分别会导致梯度下降出现什么现象？
+    - 入门阅读：[Boyd & Vandenberghe, Convex Optimization（作者公开的教材与课件）](https://web.stanford.edu/~boyd/cvxbook/)
   - `00-M1.4` 刚体变换与李群初步（旋转矩阵、四元数） ★★
+    - 学什么：刚体在三维空间的姿态可用旋转矩阵、欧拉角、四元数等表示，位置 + 姿态合成齐次变换；旋转群（SO(3)）与刚体运动群（SE(3)）给出统一的数学框架。
+    - 学完能回答：欧拉角为什么会出现万向节锁？四元数如何避免？ ／ 齐次变换矩阵如何把多个坐标系之间的变换串联起来？ ／ 旋转矩阵需要满足哪些约束？
+    - 入门阅读：[Lynch & Park, Modern Robotics（教材、视频与配套资源）](https://modernrobotics.northwestern.edu/)
 - **M2 编程与工具**
   - `00-M2.1` Python 科学计算（NumPy / pandas / Matplotlib） ★★★ 🍃 [Jupyter](https://jupyter.org/)
+    - 学什么：NumPy 提供高效的多维数组与向量化运算，pandas 提供表格数据的读写、清洗与分组统计，Matplotlib 用于可视化——这是几乎所有科研数据处理的起点。
+    - 学完能回答：向量化运算为什么比 Python 循环快？广播（broadcasting）规则是什么？ ／ 如何用 pandas 完成“按分组求均值、处理缺失值、合并两张表”？ ／ 什么时候应该用数组，什么时候应该用 DataFrame？
+    - 入门阅读：[NumPy: the absolute basics for beginners（官方入门）](https://numpy.org/doc/stable/user/absolute_beginners.html)；[pandas Getting started（官方入门）](https://pandas.pydata.org/docs/getting_started/index.html)
   - `00-M2.2` Linux、Git 与环境管理 ★★
+    - 学什么：命令行、Shell 脚本与 Git 版本控制是科研工程的基本功；虚拟环境与依赖管理保证代码在不同机器上可运行。
+    - 学完能回答：Git 的工作区、暂存区、提交与分支分别是什么？如何回退一次错误提交？ ／ 为什么每个项目都应该有独立的虚拟环境与依赖清单？ ／ 如何用管道和重定向组合多个命令行工具？
+    - 入门阅读：[The Missing Semester of Your CS Education（MIT）](https://missing.csail.mit.edu/)；[Pro Git（官方免费电子书）](https://git-scm.com/book/en/v2)
   - `00-M2.3` C++ 基础（机器人系统常用） ★
+    - 学什么：C++ 在机器人底层驱动、实时控制与高性能库中广泛使用；读懂类、模板、智能指针与编译构建流程，足以阅读 ROS 2 与仿真器源码。
+    - 学完能回答：栈与堆内存的区别是什么？智能指针解决了什么问题？ ／ 头文件、编译、链接分别做什么？ ／ 为什么实时控制代码通常避免动态内存分配？
+    - 入门阅读：[LearnCpp（系统的免费 C++ 教程）](https://www.learncpp.com/)
   - `00-M2.4` 实验管理与可复现（配置、随机种子、日志） ★★
+    - 学什么：可复现研究要求固定随机种子、记录配置与依赖版本、保存数据划分与日志，让别人（和未来的自己）能得到同样的结果。
+    - 学完能回答：只固定随机种子为什么不一定能完全复现 GPU 上的结果？ ／ 一次实验至少应记录哪些信息？ ／ 数据、代码、环境三者分别用什么方式做版本管理？
+    - 入门阅读：[The Turing Way（可复现、开放数据科学手册）](https://book.the-turing-way.org/)
 - **M3 机器学习与深度学习**
   - `00-M3.1` 深度学习基础（反向传播、优化器、正则化） ★★★ 🍃 [PyTorch](https://pytorch.org/)
+    - 学什么：神经网络由可微的层堆叠而成，通过反向传播计算梯度、用优化器更新参数；正则化、归一化与合适的初始化帮助训练稳定并泛化。
+    - 学完能回答：反向传播如何利用链式法则高效计算所有参数的梯度？ ／ Adam 与 SGD 的主要区别是什么？ ／ Dropout、权重衰减、早停分别如何抑制过拟合？
+    - 入门阅读：[动手学深度学习（中文版，含代码）](https://zh.d2l.ai/)
   - `00-M3.2` CNN / GNN / Transformer 架构 ★★★
+    - 学什么：CNN 利用局部连接与权重共享处理网格数据，GNN 在图上做消息传递处理分子与关系数据，Transformer 用自注意力建模序列与集合，是当前大模型的主干。
+    - 学完能回答：卷积的平移等变性与 GNN 的置换不变性分别是什么意思？ ／ 自注意力的 Q、K、V 如何计算？复杂度随序列长度如何增长？ ／ 分子数据为什么常用 GNN，而蛋白序列常用 Transformer？
+    - 入门阅读：[A Gentle Introduction to Graph Neural Networks（Distill）](https://distill.pub/2021/gnn-intro/)；[Vaswani et al., Attention Is All You Need](https://arxiv.org/abs/1706.03762)
   - `00-M3.3` 生成模型（VAE / 扩散模型 / 自回归） ★★
+    - 学什么：生成模型学习数据分布以采样新样本：VAE 学习可采样的隐空间，扩散模型通过逐步去噪生成，自回归模型逐个预测下一个 token。
+    - 学完能回答：VAE 的重参数化技巧解决了什么问题？ ／ 扩散模型的前向加噪与反向去噪分别是什么？ ／ 自回归生成与扩散生成在速度和可控性上各有什么特点？
+    - 入门阅读：[Kingma & Welling, Auto-Encoding Variational Bayes](https://arxiv.org/abs/1312.6114)；[Ho et al., Denoising Diffusion Probabilistic Models](https://arxiv.org/abs/2006.11239)
   - `00-M3.4` 大语言模型与多模态模型基础 ★★★ 🍃 [Hugging Face](https://huggingface.co/)
+    - 学什么：大语言模型基于 Transformer 在海量文本上预训练，再经指令微调与对齐；多模态模型把图像等输入编码后接入语言模型，是 VLA 与科研 Agent 的基础。
+    - 学完能回答：预训练、监督微调与偏好对齐分别解决什么问题？ ／ 什么是 tokenization？上下文长度限制对应用有什么影响？ ／ 多模态模型通常如何把图像特征接入语言模型？
+    - 入门阅读：[Hugging Face LLM Course（官方免费课程）](https://huggingface.co/learn/llm-course)
   - `00-M3.5` 评估方法（数据划分、交叉验证、不确定性） ★★
+    - 学什么：评估要回答“模型在真实使用场景中有多好”：合理的训练 / 验证 / 测试划分、交叉验证、合适的指标，以及对结果不确定性的报告。
+    - 学完能回答：为什么调参必须只用验证集，而不能看测试集？ ／ 类别不平衡时，准确率为什么会误导？应该看什么指标？ ／ 多次随机种子 / 多折结果应该如何报告？
+    - 入门阅读：[scikit-learn 文档：Cross-validation](https://scikit-learn.org/stable/modules/cross_validation.html)
 - **M4 科研方法**
   - `00-M4.1` 文献检索与阅读（PubMed / arXiv / Google Scholar） ★★
+    - 学什么：高效检索与阅读文献：用 PubMed（生物医学）、arXiv（计算机与物理）等检索，用“分轮阅读”先抓问题与结论，再决定是否精读方法。
+    - 学完能回答：如何用 MeSH 主题词和布尔运算构造 PubMed 检索式？ ／ 读一篇论文的第一遍应该看哪些部分？ ／ 如何判断一篇预印本的可信程度？
+    - 入门阅读：[PubMed Help（官方检索帮助）](https://pubmed.ncbi.nlm.nih.gov/help/)；[Keshav, How to Read a Paper](https://doi.org/10.1145/1273445.1273458)
   - `00-M4.2` 实验设计与统计检验 ★★
+    - 学什么：好的实验设计先明确假设、对照与样本量，再选择合适的统计检验；p 值、效应量与置信区间要一起解读。
+    - 学完能回答：p 值到底表示什么？它不表示什么？ ／ 多重比较为什么会增加假阳性？常见的校正方法有哪些？ ／ 配对与独立样本检验分别适用于什么场景？
+    - 入门阅读：[OpenIntro Statistics（免费开源统计教材）](https://www.openintro.org/book/os/)
   - `00-M4.3` 跨学科沟通：医学、药学、工程术语对齐 ★
+    - 学什么：跨学科合作需要对齐术语：医学 / 药学有规范的主题词与疾病命名，工程侧要能把临床需求翻译成可测量的指标。
+    - 学完能回答：同一个临床概念在医学文献与工程论文中常有哪些不同说法？ ／ 如何借助 MeSH 找到一个医学概念的规范名称与上下位词？ ／ 和医生、药师沟通需求时，应该准备哪些问题？
+    - 入门阅读：[MeSH（美国国家医学图书馆医学主题词表）](https://www.nlm.nih.gov/mesh/meshhome.html)；[MedlinePlus（NLM 面向大众的权威健康信息）](https://medlineplus.gov/)
 
 ### 〔药学〕
 
@@ -57,102 +107,296 @@
 > 从靶点到候选药物：理解一个分子如何成为药
 > 优先学习配方：1.1 研发全流程 ｜ 2.2 构效关系 ｜ 2.3 类药性规则 ｜ 3.1 苗头到先导
 
+**学习路线**：`01-M1.1` 研发流程：靶点发现 → 苗头 → 先导 → 候选 → 临床 → 上市 → `01-M1.2` 靶点识别与验证 → `01-M1.3` 药物类型：小分子、多肽、抗体、核酸、细胞与基因治疗 → `01-M2.5` 分子表示：SMILES、分子指纹、分子图 → `01-M2.1` 官能团、立体化学与手性药物 → `01-M2.2` 构效关系（SAR）与生物电子等排 → `01-M2.3` 类药性规则（Lipinski 五规则等）与成药性 → `01-M4.1` 蛋白质结构层级与结合口袋 → `01-M4.3` 分子间作用力与结合自由能 → `01-M4.4` 分子对接与虚拟筛选原理 → `01-M4.2` 结构解析：X 射线、冷冻电镜、NMR → `01-M4.5` 分子动力学模拟基础 → `01-M3.1` 苗头化合物发现：高通量筛选、片段筛选、DNA 编码库 → `01-M3.2` 先导优化：活性、选择性、ADMET 多参数平衡 → `01-M3.3` 骨架跃迁与化合物库设计 → `01-M2.4` 前药设计 → `01-M3.4` 天然产物与中药现代化 → `01-M1.4` 研发成本、周期与失败原因
+
 - **M1 新药研发全景**
   - `01-M1.1` 研发流程：靶点发现 → 苗头 → 先导 → 候选 → 临床 → 上市 ★★★
+    - 学什么：新药研发是一条逐级筛选的流水线：靶点发现与验证 → 苗头化合物 → 先导化合物 → 临床候选 → 临床试验 → 上市审批与上市后监测，每一步都在淘汰风险。
+    - 学完能回答：苗头（hit）、先导（lead）、候选药物（candidate）的判定标准有何不同？ ／ 临床前研究主要回答哪些问题？ ／ AI 方法目前最常介入流水线的哪些环节？
+    - 入门阅读：[Hughes et al., Principles of early drug discovery（Br J Pharmacol 2011）](https://doi.org/10.1111/j.1476-5381.2010.01127.x)；[FDA: The Drug Development Process](https://www.fda.gov/patients/learn-about-drug-and-device-approvals/drug-development-process)
   - `01-M1.2` 靶点识别与验证 ★★
+    - 学什么：靶点识别找出与疾病因果相关、可被药物调节的分子（多为蛋白），靶点验证用遗传学、工具化合物、动物模型等证据确认调节它确实有治疗作用。
+    - 学完能回答：“可成药性”（druggability）指什么？ ／ 遗传学证据为什么被认为能提高靶点成功率？ ／ 靶点验证不充分会在后期造成什么后果？
+    - 入门阅读：[Hughes et al., Principles of early drug discovery（Br J Pharmacol 2011）](https://doi.org/10.1111/j.1476-5381.2010.01127.x)；[Santos et al., A comprehensive map of molecular drug targets（Nat Rev Drug Discov）](https://doi.org/10.1038/nrd.2016.230)
   - `01-M1.3` 药物类型：小分子、多肽、抗体、核酸、细胞与基因治疗 ★★
+    - 学什么：药物模态包括小分子、多肽、抗体等蛋白药、核酸药物（如 siRNA、mRNA）以及细胞与基因治疗，它们在靶点范围、给药方式、生产与监管路径上差别很大。
+    - 学完能回答：小分子与抗体药在作用靶点位置（胞内 / 胞外）上有何典型差异？ ／ 生物制品与化学药在监管上为何常分开管理？ ／ 不同模态各适合 AI 中的哪类建模方法？
+    - 入门阅读：[FDA: What Are “Biologics” Questions and Answers](https://www.fda.gov/about-fda/center-biologics-evaluation-and-research-cber/what-are-biologics-questions-and-answers)；[Santos et al., A comprehensive map of molecular drug targets（Nat Rev Drug Discov）](https://doi.org/10.1038/nrd.2016.230)
   - `01-M1.4` 研发成本、周期与失败原因 ★
+    - 学什么：新药研发周期长、投入高、失败率高；临床阶段失败常见原因包括疗效不足与安全性问题，这也是 ADMET 预测与更好靶点验证受重视的原因。
+    - 学完能回答：临床阶段失败的主要原因有哪些？ ／ 为什么说“尽早失败、低成本失败”很重要？ ／ 研发成本估算通常把哪些因素算进去（如失败项目、资金时间成本）？
+    - 入门阅读：[Kola & Landis, Can the pharmaceutical industry reduce attrition rates?（Nat Rev Drug Discov 2004）](https://doi.org/10.1038/nrd1470)；[DiMasi et al., Innovation in the pharmaceutical industry: New estimates of R&D costs（J Health Econ 2016）](https://doi.org/10.1016/j.jhealeco.2016.01.012)
 - **M2 药物化学基础**
   - `01-M2.1` 官能团、立体化学与手性药物 ★★
+    - 学什么：官能团决定分子的反应性与相互作用方式；立体化学描述原子的空间排布，手性药物的不同对映体可能有不同的活性、代谢与毒性。
+    - 学完能回答：什么是手性中心？R/S 构型如何判断？ ／ 为什么同一药物的两个对映体可能药效或毒性不同？ ／ SMILES 与 RDKit 如何表示和识别立体化学？
+    - 入门阅读：[RDKit Getting Started in Python（含立体化学处理）](https://www.rdkit.org/docs/GettingStartedInPython.html)
   - `01-M2.2` 构效关系（SAR）与生物电子等排 ★★★
+    - 学什么：构效关系（SAR）研究结构改变如何影响活性；生物电子等排是用性质相近的基团替换原有基团，以改善活性、选择性或 ADMET 而保留结合模式。
+    - 学完能回答：匹配分子对（MMP）分析如何帮助总结 SAR？ ／ 举一个常见的生物电子等排替换并说明它可能改善什么性质。 ／ 活性悬崖对 SAR 分析和机器学习分别意味着什么？
+    - 入门阅读：[Meanwell, Synopsis of Some Recent Tactical Application of Bioisosteres in Drug Design（J Med Chem 2011）](https://doi.org/10.1021/jm1013693)
   - `01-M2.3` 类药性规则（Lipinski 五规则等）与成药性 ★★★ 🍃 用 RDKit 计算一组上市药的类药性指标（练习） 🃏 [Lipinski 五规则（Rule of 5）](https://doi.org/10.1016/S0169-409X(96)00423-1)
+    - 学什么：类药性规则用分子量、亲脂性、氢键供受体等简单性质，粗略判断口服吸收的可能性；它是经验性的过滤器，而非成药性的保证。
+    - 学完能回答：Lipinski 五规则包含哪几项？依据的是什么数据？ ／ 哪些类型的药物经常违反这些规则却依然成功上市？ ／ 类药性与“成药性”（developability）有何区别？
+    - 入门阅读：[Lipinski et al., Experimental and computational approaches to estimate solubility and permeability（Adv Drug Deliv Rev）](https://doi.org/10.1016/S0169-409X(96)00423-1)
   - `01-M2.4` 前药设计 ★
+    - 学什么：前药本身活性低或无活性，进入体内后经酶或化学转化释放活性药物，用来改善溶解度、渗透性、稳定性、靶向性或减少副作用。
+    - 学完能回答：酯类前药通常解决什么问题？ ／ 设计前药时需要考虑哪些激活与安全性问题？ ／ 前药的存在对 ADMET 预测模型提出了什么挑战？
+    - 入门阅读：[Rautio et al., The expanding role of prodrugs in contemporary drug design and development（Nat Rev Drug Discov 2018）](https://doi.org/10.1038/nrd.2018.46)
   - `01-M2.5` 分子表示：SMILES、分子指纹、分子图 ★★★ 🍃 [RDKit](https://www.rdkit.org/)、[PubChem](https://pubchem.ncbi.nlm.nih.gov/)、用 RDKit 计算一组上市药的类药性指标（练习）
+    - 学什么：计算机表示分子的三种主流方式：SMILES 字符串、分子指纹（如基于子结构的位向量）和分子图（原子为节点、键为边），是一切 AIDD 模型的输入。
+    - 学完能回答：什么是规范化（canonical）SMILES？为什么需要它？ ／ Morgan / ECFP 指纹是如何生成的？ ／ 分子图相比指纹保留了哪些额外信息？
+    - 入门阅读：[Daylight Theory: SMILES（SMILES 语法权威说明）](https://www.daylight.com/dayhtml/doc/theory/theory.smiles.html)；[RDKit Getting Started in Python](https://www.rdkit.org/docs/GettingStartedInPython.html)
 - **M3 先导发现与优化**
   - `01-M3.1` 苗头化合物发现：高通量筛选、片段筛选、DNA 编码库 ★★
+    - 学什么：苗头发现的常见手段包括高通量筛选（HTS）、基于片段的筛选（FBDD）、DNA 编码化合物库（DEL）与虚拟筛选，各自在库规模、成本与命中质量上取舍不同。
+    - 学完能回答：片段筛选为什么常需要灵敏的生物物理方法与结构信息？ ／ DNA 编码库的“编码”是如何实现的？ ／ 虚拟筛选与实验筛选如何互补？
+    - 入门阅读：[Erlanson et al., Twenty years on: the impact of fragments on drug discovery（Nat Rev Drug Discov 2016）](https://doi.org/10.1038/nrd.2016.109)；[Goodnow et al., DNA-encoded chemistry: enabling the deeper sampling of chemical space（Nat Rev Drug Discov）](https://doi.org/10.1038/nrd.2016.213)
   - `01-M3.2` 先导优化：活性、选择性、ADMET 多参数平衡 ★★★
+    - 学什么：先导优化在提高活性的同时平衡选择性、ADMET、安全性与可合成性，是典型的多参数优化问题，通常经过多轮“设计—合成—测试—分析”循环。
+    - 学完能回答：为什么单纯追求活性常导致分子过于亲脂、成药性变差？ ／ 配体效率等指标在先导优化中有什么用？ ／ 多参数优化（MPO）评分如何把多个性质合成一个决策依据？
+    - 入门阅读：[Hughes et al., Principles of early drug discovery（Br J Pharmacol 2011）](https://doi.org/10.1111/j.1476-5381.2010.01127.x)
   - `01-M3.3` 骨架跃迁与化合物库设计 ★★
+    - 学什么：骨架跃迁在保留关键药效团与活性的前提下替换分子核心骨架，用于改善性质或绕开专利；化合物库设计则在多样性与针对性之间取舍。
+    - 学完能回答：骨架跃迁有哪几类常见方法？ ／ 药效团模型在骨架跃迁中起什么作用？ ／ 生成模型如何被用来做骨架跃迁？
+    - 入门阅读：[Hu, Stumpfe & Bajorath, Recent Advances in Scaffold Hopping（J Med Chem）](https://doi.org/10.1021/acs.jmedchem.6b01437)
   - `01-M3.4` 天然产物与中药现代化 ★
+    - 学什么：天然产物结构复杂、生物活性丰富，是药物的重要来源；中药现代化强调活性成分鉴定、质量控制与作用机制研究。
+    - 学完能回答：天然产物在化学空间上与合成化合物库有何不同？ ／ 天然产物药物发现的主要技术瓶颈是什么？ ／ 研究复方中药作用机制时常用哪些组学与网络方法？
+    - 入门阅读：[Atanasov et al., Natural products in drug discovery: advances and opportunities（Nat Rev Drug Discov 2021）](https://doi.org/10.1038/s41573-020-00114-z)；[Newman & Cragg, Natural Products as Sources of New Drugs（J Nat Prod 2020）](https://doi.org/10.1021/acs.jnatprod.9b01285)
 - **M4 结构生物学与分子相互作用**
   - `01-M4.1` 蛋白质结构层级与结合口袋 ★★ 🍃 [RCSB PDB](https://www.rcsb.org/)、[AlphaFold 蛋白结构数据库](https://alphafold.ebi.ac.uk/)
+    - 学什么：蛋白质结构分为一级（序列）到四级（多亚基组装）；结合口袋是蛋白表面能容纳配体的凹陷区域，其形状与理化性质决定配体如何结合。
+    - 学完能回答：二级结构有哪些常见类型？由什么相互作用维持？ ／ 如何从 PDB 文件中识别配体和结合口袋残基？ ／ 蛋白构象柔性对药物设计有什么影响？
+    - 入门阅读：[PDB-101: Guide to Understanding PDB Data](https://pdb101.rcsb.org/learn/guide-to-understanding-pdb-data/introduction)
   - `01-M4.2` 结构解析：X 射线、冷冻电镜、NMR ★
+    - 学什么：实验结构主要来自 X 射线晶体学、冷冻电镜和核磁共振，三者在样品要求、分辨率与可研究对象上各有优势。
+    - 学完能回答：分辨率数值越小代表什么？ ／ 冷冻电镜为何特别适合大型复合物与膜蛋白？ ／ 读一个 PDB 结构时，如何判断其质量是否可靠？
+    - 入门阅读：[PDB-101: Methods for Determining Structure](https://pdb101.rcsb.org/learn/guide-to-understanding-pdb-data/methods-for-determining-structure)
   - `01-M4.3` 分子间作用力与结合自由能 ★★
+    - 学什么：配体与蛋白通过氢键、疏水作用、静电与范德华作用、π 堆积等结合；结合强弱由结合自由能决定，包含焓与熵的贡献。
+    - 学完能回答：结合自由能与解离常数（Kd）有什么关系？ ／ 为什么疏水作用常被认为主要由熵驱动？ ／ 去溶剂化为什么会影响结合？
+    - 入门阅读：[Gilson & Zhou, Calculation of Protein-Ligand Binding Affinities（Annu Rev Biophys 2007）](https://doi.org/10.1146/annurev.biophys.36.040306.132550)
   - `01-M4.4` 分子对接与虚拟筛选原理 ★★★ 🍃 [ZINC](https://zinc.docking.org/)、[AutoDock Vina](https://vina.scripps.edu/)、对一个已知复合物做重对接并计算 RMSD（练习）、[DiffDock 代码](https://github.com/gcorso/DiffDock)
+    - 学什么：分子对接在蛋白口袋中搜索配体的姿态并用打分函数排序；虚拟筛选用对接或其他方法从大型化合物库中优先挑选值得实验测试的分子。
+    - 学完能回答：对接的“搜索算法”和“打分函数”分别负责什么？ ／ 对接分数为什么不能直接当作结合亲和力？ ／ 如何用已知活性 / 非活性分子评估虚拟筛选的富集能力？
+    - 入门阅读：[Meng et al., Molecular Docking: A Powerful Approach for Structure-Based Drug Discovery（2011）](https://doi.org/10.2174/157340911795677602)；[Trott & Olson, AutoDock Vina（J Comput Chem）](https://doi.org/10.1002/jcc.21334)
   - `01-M4.5` 分子动力学模拟基础 ★★ 🍃 [OpenMM](https://openmm.org/)
+    - 学什么：分子动力学（MD）用力场数值积分原子运动，模拟蛋白与配体随时间的构象变化，可用于研究柔性、结合稳定性以及自由能计算。
+    - 学完能回答：力场由哪些能量项组成？ ／ 为什么需要能量最小化、升温与平衡等准备步骤？ ／ MD 模拟的时间尺度限制意味着哪些过程难以直接观察？
+    - 入门阅读：[Hollingsworth & Dror, Molecular Dynamics Simulation for All（Neuron 2018）](https://doi.org/10.1016/j.neuron.2018.08.011)
 
 #### 02 · 药理学与药代动力学（ADMET） ★★★
 
 > 药物对机体做什么、机体对药物做什么
 > 优先学习配方：1.1 受体理论 ｜ 2.1 ADME 四环节 ｜ 2.3 PK 参数 ｜ 3.1 药物相互作用
 
+**学习路线**：`02-M1.1` 受体理论：激动剂、拮抗剂、部分激动剂 → `02-M1.2` 量效关系：EC50、Emax、治疗指数 → `02-M1.3` 主要药物类别与作用机制（心血管、中枢、抗感染、内分泌） → `02-M2.1` ADME：吸收、分布、代谢、排泄 → `02-M2.3` PK 参数：半衰期、清除率、分布容积、生物利用度、AUC → `02-M2.2` CYP450 代谢酶与转运体 → `02-M2.4` 房室模型与非房室分析 → `02-M3.1` 药物相互作用（DDI）：酶抑制 / 诱导、转运体介导 → `02-M3.4` 药物不良反应分类 → `02-M3.2` 毒理学基础：急毒、重复给药毒性、遗传毒性 → `02-M3.3` 心脏毒性（hERG / QT 延长）与肝毒性 → `02-M1.4` 耐受、依赖与个体差异 → `02-M4.1` 药物基因组学（如 CYP2C19、CYP2D6 多态性） → `02-M4.2` 治疗药物监测（TDM） → `02-M2.5` 群体药代（PopPK）与生理药代（PBPK）模型 → `02-M4.3` 特殊人群用药：老年、肝肾功能不全、儿童、孕期
+
 - **M1 药效学**
   - `02-M1.1` 受体理论：激动剂、拮抗剂、部分激动剂 ★★★
+    - 学什么：药物多通过与受体等靶点结合发挥作用：激动剂激活受体，拮抗剂阻断激动剂作用，部分激动剂即使占满受体也只产生部分最大效应。
+    - 学完能回答：亲和力（affinity）与内在活性（efficacy）有何区别？ ／ 竞争性与非竞争性拮抗剂对量效曲线的影响有何不同？ ／ 反向激动剂与拮抗剂的区别是什么？
+    - 入门阅读：[MSD Manual: Drug–Receptor Interactions](https://www.msdmanuals.com/professional/clinical-pharmacology/pharmacodynamics/drug-receptor-interactions)
   - `02-M1.2` 量效关系：EC50、Emax、治疗指数 ★★★
+    - 学什么：量效关系描述剂量（或浓度）与效应的关系：EC50 反映效能（potency），Emax 反映最大效应（efficacy），治疗指数衡量有效剂量与毒性剂量之间的安全距离。
+    - 学完能回答：效能（potency）高是否意味着药物“更好”？ ／ 治疗指数窄的药物在临床上需要注意什么？ ／ 渐进型与全或无型量效曲线分别如何获得？
+    - 入门阅读：[MSD Manual: Dose-Response Relationships](https://www.msdmanuals.com/professional/clinical-pharmacology/pharmacodynamics/dose-response-relationships)
   - `02-M1.3` 主要药物类别与作用机制（心血管、中枢、抗感染、内分泌） ★★
+    - 学什么：主要药物类别按作用系统与机制划分（如心血管、中枢神经、抗感染、内分泌代谢等），常见靶点类别包括 G 蛋白偶联受体、离子通道、酶、核受体与转运体。
+    - 学完能回答：哪几类蛋白是现有药物最常见的靶点家族？ ／ 举例说明同一靶点类别在不同疾病中的药物。 ／ 了解药物类别对理解老年多重用药有何帮助？
+    - 入门阅读：[Santos et al., A comprehensive map of molecular drug targets（Nat Rev Drug Discov）](https://doi.org/10.1038/nrd.2016.230)；[MSD Manual: Overview of Pharmacodynamics](https://www.msdmanuals.com/professional/clinical-pharmacology/pharmacodynamics/overview-of-pharmacodynamics)
   - `02-M1.4` 耐受、依赖与个体差异 ★
+    - 学什么：反复用药后机体反应减弱称为耐受；依赖涉及停药后的生理或心理症状；遗传、年龄、疾病与合并用药都会造成药物反应的个体差异。
+    - 学完能回答：耐受与耐药（resistance）有何不同？ ／ 哪些药物类别在老年人中容易出现依赖或戒断问题？ ／ 个体差异的主要来源有哪些？
+    - 入门阅读：[MSD Manual: Tolerance and Resistance](https://www.msdmanuals.com/professional/clinical-pharmacology/factors-affecting-response-to-medications/tolerance-and-resistance)
 - **M2 药代动力学**
-  - `02-M2.1` ADME：吸收、分布、代谢、排泄 ★★★ 🍃 [SwissADME](http://www.swissadme.ch/)
+  - `02-M2.1` ADME：吸收、分布、代谢、排泄 ★★★ 🍃 [SwissADME](https://www.swissadme.ch/)
+    - 学什么：ADME 描述药物在体内的过程：吸收进入血液、分布到组织、经代谢转化、最终排泄出体外；四个环节共同决定药物浓度随时间的变化。
+    - 学完能回答：影响口服吸收的主要因素有哪些？ ／ 血浆蛋白结合如何影响药物分布和作用？ ／ 肝代谢与肾排泄分别对哪类药物更重要？
+    - 入门阅读：[MSD Manual: Overview of Pharmacokinetics](https://www.msdmanuals.com/professional/clinical-pharmacology/pharmacokinetics/overview-of-pharmacokinetics)；[MSD Manual: Drug Metabolism](https://www.msdmanuals.com/professional/clinical-pharmacology/pharmacokinetics/drug-metabolism)
   - `02-M2.2` CYP450 代谢酶与转运体 ★★★
+    - 学什么：细胞色素 P450（CYP）酶家族负责大量药物的氧化代谢，转运体（如 P-gp、OATP）影响药物进出细胞；它们的抑制、诱导与遗传多态性是药物相互作用和个体差异的主要来源。
+    - 学完能回答：哪些 CYP 亚型参与了最多的药物代谢？ ／ 酶抑制和酶诱导对合用药物的血药浓度分别有什么影响？ ／ 转运体介导的相互作用与 CYP 介导的有何不同？
+    - 入门阅读：[Zanger & Schwab, Cytochrome P450 enzymes in drug metabolism（Pharmacol Ther 2013）](https://doi.org/10.1016/j.pharmthera.2012.12.007)；[FDA: Examples of Drugs that Interact with CYP Enzymes and Transporter Systems](https://www.fda.gov/drugs/drug-interactions-labeling/healthcare-professionals-fdas-examples-drugs-interact-cyp-enzymes-and-transporter-systems)
   - `02-M2.3` PK 参数：半衰期、清除率、分布容积、生物利用度、AUC ★★★ 🍃 用 Python 写一个一室模型并拟合血药浓度曲线（练习）
+    - 学什么：核心药代参数：半衰期（浓度减半所需时间）、清除率（单位时间清除药物的血浆体积）、分布容积（药量与血药浓度的比例）、生物利用度（进入体循环的比例）与 AUC（暴露量）。
+    - 学完能回答：清除率、分布容积与半衰期三者是什么关系？ ／ 为什么多次给药通常需要若干个半衰期才达到稳态？ ／ 口服生物利用度受哪些过程影响？
+    - 入门阅读：[MSD Manual: Overview of Pharmacokinetics](https://www.msdmanuals.com/professional/clinical-pharmacology/pharmacokinetics/overview-of-pharmacokinetics)；[MSD Manual: Drug Bioavailability](https://www.msdmanuals.com/professional/clinical-pharmacology/pharmacokinetics/drug-bioavailability)
   - `02-M2.4` 房室模型与非房室分析 ★★ 🍃 用 Python 写一个一室模型并拟合血药浓度曲线（练习）
+    - 学什么：房室模型把身体简化为若干药物均匀分布的“隔室”，用微分方程描述浓度变化；非房室分析不假设模型结构，直接从浓度—时间数据计算 AUC、半衰期等参数。
+    - 学完能回答：一室模型与二室模型的浓度—时间曲线有何区别？ ／ 非房室分析中 AUC 通常如何计算？ ／ 什么时候应选用房室模型而不是非房室分析？
+    - 入门阅读：[Mould & Upton, Basic Concepts in Population Modeling, Simulation, and Model-Based Drug Development（CPT PSP 2012）](https://doi.org/10.1038/psp.2012.4)
   - `02-M2.5` 群体药代（PopPK）与生理药代（PBPK）模型 ★★ 🍃 [Open Systems Pharmacology（PK-Sim / MoBi）](https://www.open-systems-pharmacology.org/)
+    - 学什么：群体药代（PopPK）用混合效应模型描述人群典型参数与个体间变异，并寻找年龄、体重、肾功能等协变量；生理药代（PBPK）用器官血流与组织参数机制性地预测药代，常用于特殊人群外推与相互作用评估。
+    - 学完能回答：PopPK 中固定效应与随机效应分别代表什么？ ／ PBPK 模型为什么适合预测老年人或肝肾功能不全者的暴露？ ／ PopPK 与 PBPK 的数据需求有何不同？
+    - 入门阅读：[Mould & Upton, Basic Concepts in Population Modeling, Simulation, and Model-Based Drug Development（CPT PSP 2012）](https://doi.org/10.1038/psp.2012.4)；[Jones & Rowland-Yeo, Basic Concepts in Physiologically Based Pharmacokinetic Modeling（CPT PSP 2013）](https://doi.org/10.1038/psp.2013.41)
 - **M3 药物相互作用与毒理**
   - `02-M3.1` 药物相互作用（DDI）：酶抑制 / 诱导、转运体介导 ★★★ 🍃 [DrugBank](https://go.drugbank.com/)、原型：老年用药清单的 DDI / PIM 规则检查 + LLM 解释（练习）
+    - 学什么：药物相互作用指一种药物改变另一种药物的效应或浓度，可发生在药代层面（如酶抑制 / 诱导、转运体）或药效层面（如作用叠加或拮抗）。
+    - 学完能回答：药代学相互作用与药效学相互作用各举一例。 ／ 为什么老年多重用药人群的相互作用风险更高？ ／ 评估一个相互作用的临床意义时要考虑哪些因素？
+    - 入门阅读：[MSD Manual: Drug Interactions](https://www.msdmanuals.com/professional/clinical-pharmacology/factors-affecting-response-to-medications/drug-interactions)；[FDA: Examples of Drugs that Interact with CYP Enzymes and Transporter Systems](https://www.fda.gov/drugs/drug-interactions-labeling/healthcare-professionals-fdas-examples-drugs-interact-cyp-enzymes-and-transporter-systems)
   - `02-M3.2` 毒理学基础：急毒、重复给药毒性、遗传毒性 ★★
+    - 学什么：非临床毒理学研究包括单次与重复给药毒性、遗传毒性、生殖毒性、致癌性与安全药理等，用于在进入人体前识别风险并确定安全起始剂量，相关要求见 ICH 安全性（S）指南。
+    - 学完能回答：遗传毒性试验组合通常包括哪些类型的试验？ ／ 动物毒理结果外推到人时有哪些局限？ ／ 计算毒理预测在哪些环节可以辅助实验？
+    - 入门阅读：[ICH Safety Guidelines（以官网最新版本为准）](https://www.ich.org/page/safety-guidelines)
   - `02-M3.3` 心脏毒性（hERG / QT 延长）与肝毒性 ★★
+    - 学什么：hERG 钾通道被阻断可延长心电图 QT 间期、增加尖端扭转型室速风险，是药物心脏安全评估的重点；药物性肝损伤是另一类常见的上市后撤市与研发失败原因。
+    - 学完能回答：为什么很多结构多样的药物都能阻断 hERG？ ／ QT 延长风险评估在非临床与临床阶段分别怎么做？ ／ 药物性肝损伤为什么难以在临床前充分预测？
+    - 入门阅读：[Sanguinetti & Tristani-Firouzi, hERG potassium channels and cardiac arrhythmia（Nature 2006）](https://doi.org/10.1038/nature04710)；[ICH Safety Guidelines（含心脏安全相关指南，以官网最新版本为准）](https://www.ich.org/page/safety-guidelines)
   - `02-M3.4` 药物不良反应分类 ★★
+    - 学什么：药物不良反应常按机制分为与剂量相关、可由药理作用预期的反应，和与剂量关系不明显、难以预测的反应（如部分过敏和特异质反应）。
+    - 学完能回答：不良反应（ADR）与不良事件（AE）的区别是什么？ ／ 判断一个事件是否由药物引起时常考虑哪些因素？ ／ 老年人中哪些不良反应特别值得警惕？
+    - 入门阅读：[Edwards & Aronson, Adverse drug reactions: definitions, diagnosis, and management（Lancet 2000）](https://doi.org/10.1016/S0140-6736(00)02799-9)；[MSD Manual: Adverse Drug Reactions](https://www.msdmanuals.com/professional/clinical-pharmacology/concepts-in-pharmacotherapy/adverse-drug-reactions)
 - **M4 精准药学**
   - `02-M4.1` 药物基因组学（如 CYP2C19、CYP2D6 多态性） ★★
+    - 学什么：药物基因组学研究基因变异如何影响药物反应，例如代谢酶基因多态性会改变部分药物的暴露或疗效，相关临床指南可用于指导选药与剂量调整。
+    - 学完能回答：慢代谢型与超快代谢型分别可能带来什么风险？ ／ 药物基因组学检测在临床落地中面临哪些障碍？ ／ 如何查找某个基因—药物组合是否有临床实施指南？
+    - 入门阅读：[MSD Manual: Pharmacogenetics](https://www.msdmanuals.com/professional/clinical-pharmacology/factors-affecting-response-to-medications/pharmacogenetics)；[CPIC 药物基因组学临床实施指南入口](https://cpicpgx.org/)
   - `02-M4.2` 治疗药物监测（TDM） ★★
+    - 学什么：治疗药物监测（TDM）测定血药浓度来个体化调整剂量，适用于治疗窗窄、个体差异大、浓度与疗效 / 毒性关系明确的药物。
+    - 学完能回答：哪些特征的药物适合做 TDM？ ／ 谷浓度与峰浓度分别提供什么信息？ ／ 模型引导的精准给药与传统 TDM 有何关系？
+    - 入门阅读：[Kang & Lee, Overview of Therapeutic Drug Monitoring（Korean J Intern Med 2009）](https://doi.org/10.3904/kjim.2009.24.1.1)；[MSD Manual: Emerging Paradigms in Precision Dosing](https://www.msdmanuals.com/professional/clinical-pharmacology/pharmacokinetics/emerging-paradigms-in-precision-dosing)
   - `02-M4.3` 特殊人群用药：老年、肝肾功能不全、儿童、孕期 ★★★
+    - 学什么：老年人、肝肾功能不全者、儿童与孕妇的药代和药效与一般成人不同，往往需要调整剂量或换药；老年人常见肾清除下降、体成分改变和对某些药物更敏感。
+    - 学完能回答：肾功能下降时，哪类药物最需要调整剂量？ ／ 老年人体脂比例增加对脂溶性药物的分布有什么影响？ ／ 为什么特殊人群的用药证据往往不足？
+    - 入门阅读：[MSD Manual: Pharmacokinetics in Older Adults](https://www.msdmanuals.com/professional/geriatrics/pharmacologic-therapy-in-older-adults/pharmacokinetics-in-older-adults)；[MSD Manual: Pharmacodynamics in Older Adults](https://www.msdmanuals.com/professional/geriatrics/pharmacologic-therapy-in-older-adults/pharmacodynamics-in-older-adults)
 
 #### 03 · 药剂学与制剂 ★★
 
 > 药物如何被做成患者能用、愿意用的剂型
 > 优先学习配方：1.1 剂型分类 ｜ 2.2 缓控释 ｜ 3.1 质量源于设计 ｜ 4.1 适老化剂型
 
+**学习路线**：`03-M1.1` 常见剂型：片剂、胶囊、注射剂、吸入剂、透皮贴剂 → `03-M1.2` 给药途径与首过效应 → `03-M1.3` 溶解度、溶出与生物药剂学分类系统（BCS） → `03-M2.1` 缓释 / 控释制剂 → `03-M2.2` 纳米递送与脂质纳米粒（LNP） → `03-M2.3` 靶向递送与抗体偶联药物（ADC） → `03-M3.1` 质量源于设计（QbD）与 ICH 质量指南 → `03-M3.2` GMP 与连续制造 → `03-M3.3` 稳定性研究与包装 → `03-M3.4` 仿制药一致性评价与生物等效性 → `03-M4.1` 吞咽困难患者的剂型选择（口崩片、液体、可否掰开 / 研碎） → `03-M4.2` 包装与标签的适老化（大字、易开启、单剂量包装） → `03-M4.3` 固定剂量复方与减少服药负担
+
 - **M1 剂型与给药途径**
   - `03-M1.1` 常见剂型：片剂、胶囊、注射剂、吸入剂、透皮贴剂 ★★
+    - 学什么：剂型是药物交给患者的具体形式，如片剂、胶囊、注射剂、吸入剂、透皮贴剂；剂型影响起效速度、作用时长、依从性与稳定性。
+    - 学完能回答：同一药物为什么会开发多种剂型？ ／ 透皮贴剂和吸入剂各适合什么类型的药物？ ／ 剂型选择如何影响老年患者的使用体验？
+    - 入门阅读：[MSD Manual: Drug Absorption（含给药途径与剂型对吸收的影响）](https://www.msdmanuals.com/professional/clinical-pharmacology/pharmacokinetics/drug-absorption)
   - `03-M1.2` 给药途径与首过效应 ★★
+    - 学什么：给药途径决定药物如何进入体循环；口服药物吸收后先经肝脏，部分在到达体循环前被代谢，称为首过效应，静脉、舌下、透皮等途径可绕过或减少首过效应。
+    - 学完能回答：为什么静脉给药的生物利用度被视为 100% 的参照？ ／ 首过效应大的药物适合哪些替代给药途径？ ／ 不同途径的起效速度大致如何排序？
+    - 入门阅读：[MSD Manual: Drug Absorption](https://www.msdmanuals.com/professional/clinical-pharmacology/pharmacokinetics/drug-absorption)；[MSD Manual: Drug Bioavailability](https://www.msdmanuals.com/professional/clinical-pharmacology/pharmacokinetics/drug-bioavailability)
   - `03-M1.3` 溶解度、溶出与生物药剂学分类系统（BCS） ★★
+    - 学什么：口服固体制剂需要先溶出才能吸收；生物药剂学分类系统（BCS）按溶解度和肠道渗透性把药物分为四类，用于指导制剂开发与部分生物等效性豁免。
+    - 学完能回答：BCS 四类各自的溶解度与渗透性组合是什么？ ／ 低溶解度药物有哪些常见的增溶制剂手段？ ／ 体外溶出试验为什么能在一定条件下替代体内研究？
+    - 入门阅读：[Amidon et al., A Theoretical Basis for a Biopharmaceutic Drug Classification（Pharm Res 1995）](https://doi.org/10.1023/A:1016212804288)
 - **M2 新型递送系统**
   - `03-M2.1` 缓释 / 控释制剂 ★★
+    - 学什么：缓释 / 控释制剂通过骨架扩散、膜控、渗透泵等机制延长或控制药物释放，减少给药次数、平稳血药浓度，但不能随意掰开或碾碎。
+    - 学完能回答：缓释与控释在释放特性上有什么区别？ ／ 为什么碾碎缓释片可能造成危险？ ／ 扩散控制型释放可以如何用数学模型描述？
+    - 入门阅读：[Siepmann & Siepmann, Modeling of diffusion controlled drug delivery（J Control Release 2012）](https://doi.org/10.1016/j.jconrel.2011.10.006)
   - `03-M2.2` 纳米递送与脂质纳米粒（LNP） ★★
+    - 学什么：纳米递送系统（如脂质体、聚合物纳米粒、脂质纳米粒 LNP）可保护药物、改善分布或实现胞内递送；LNP 是 mRNA 等核酸药物的关键递送载体。
+    - 学完能回答：LNP 通常由哪几类脂质组成，各起什么作用？ ／ 纳米制剂的体内分布为什么常富集在肝脏？ ／ 纳米药物在质量控制上有哪些额外挑战？
+    - 入门阅读：[Hou et al., Lipid nanoparticles for mRNA delivery（Nat Rev Mater 2021）](https://doi.org/10.1038/s41578-021-00358-0)；[MSD Manual: Nanomedicine](https://www.msdmanuals.com/professional/clinical-pharmacology/pharmacokinetics/nanomedicine)
   - `03-M2.3` 靶向递送与抗体偶联药物（ADC） ★
+    - 学什么：靶向递送让药物更多地到达病灶；抗体偶联药物（ADC）由抗体、连接子与细胞毒载荷组成，借抗体识别靶细胞后释放载荷。
+    - 学完能回答：ADC 的三个组成部分各自影响哪些性质？ ／ 可裂解与不可裂解连接子有何区别？ ／ “旁观者效应”指什么？
+    - 入门阅读：[Drago, Modi & Chandarlapaty, Unlocking the potential of antibody–drug conjugates for cancer therapy（Nat Rev Clin Oncol 2021）](https://doi.org/10.1038/s41571-021-00470-8)
 - **M3 制药工程与质量**
   - `03-M3.1` 质量源于设计（QbD）与 ICH 质量指南 ★★ 🍃 [ICH 指南](https://www.ich.org/)
+    - 学什么：质量源于设计（QbD）强调先定义目标产品质量特征，再通过风险评估和实验设计理解关键物料属性与工艺参数，把质量“设计进”产品而非仅靠终检，相关要求见 ICH Q8–Q12 等指南。
+    - 学完能回答：目标产品质量概况（QTPP）与关键质量属性（CQA）是什么关系？ ／ 设计空间（design space）指什么？ ／ 机器学习可以在 QbD 的哪些环节提供帮助？
+    - 入门阅读：[Yu et al., Understanding Pharmaceutical Quality by Design（AAPS J 2014）](https://doi.org/10.1208/s12248-014-9598-3)；[ICH Quality Guidelines（以官网最新版本为准）](https://www.ich.org/page/quality-guidelines)
   - `03-M3.2` GMP 与连续制造 ★
+    - 学什么：药品生产质量管理规范（GMP）规定了生产与质量控制的最低要求；连续制造把传统分批生产改为连续流程，配合过程分析技术实现实时质量控制。
+    - 学完能回答：GMP 关注哪些方面（人员、厂房、设备、文件、偏差处理等）？ ／ 连续制造相比批生产的优势与监管挑战是什么？ ／ 数据完整性在 GMP 中为什么重要？
+    - 入门阅读：[FDA: Current Good Manufacturing Practice (CGMP) Regulations](https://www.fda.gov/drugs/pharmaceutical-quality-resources/current-good-manufacturing-practice-cgmp-regulations)；[ICH Quality Guidelines（含连续制造相关指南，以官网最新版本为准）](https://www.ich.org/page/quality-guidelines)
   - `03-M3.3` 稳定性研究与包装 ★
+    - 学什么：稳定性研究考察药品在温度、湿度、光照等条件下质量随时间的变化，用于确定有效期与贮存条件；包装材料对防潮、避光与儿童安全也很关键。
+    - 学完能回答：长期试验与加速试验分别用来做什么？ ／ 为什么有些药品要求避光或冷藏保存？ ／ 分装到药盒后，药品稳定性可能受到什么影响？
+    - 入门阅读：[ICH Quality Guidelines（稳定性相关指南，以官网最新版本为准）](https://www.ich.org/page/quality-guidelines)
   - `03-M3.4` 仿制药一致性评价与生物等效性 ★★
+    - 学什么：仿制药需证明与参比制剂药学等效且生物等效（体内暴露相当）；中国开展的仿制药质量和疗效一致性评价也以此为核心思路，具体要求以国家药监局官方文件为准。
+    - 学完能回答：生物等效性研究通常比较哪些药代参数？ ／ 什么情况下可以申请生物等效性豁免？ ／ 一致性评价对药品市场和患者有什么影响？
+    - 入门阅读：[FDA: Abbreviated New Drug Application (ANDA)](https://www.fda.gov/drugs/types-applications/abbreviated-new-drug-application-anda)
 - **M4 适老化与以患者为中心的制剂**
   - `03-M4.1` 吞咽困难患者的剂型选择（口崩片、液体、可否掰开 / 研碎） ★★★
+    - 学什么：吞咽困难在老年人中常见；剂型选择要考虑口崩片、液体制剂、颗粒剂等替代方案，并确认药品能否掰开或碾碎，缓释、肠溶等剂型通常不可碾碎。
+    - 学完能回答：哪些剂型一般不能碾碎？为什么？ ／ 碾碎药物混入食物或经鼻饲给药时有哪些风险？ ／ 照护场景中如何快速查询某药能否碾碎？
+    - 入门阅读：[ISMP: Do Not Crush 清单与相关推荐](https://www.ismp.org/recommendations/do-not-crush)；[MSD Manual: Dysphagia](https://www.msdmanuals.com/professional/gastrointestinal-disorders/esophageal-and-swallowing-disorders/dysphagia)
   - `03-M4.2` 包装与标签的适老化（大字、易开启、单剂量包装） ★★
+    - 学什么：适老化包装与标签包括大字号与高对比度标签、易开启（同时兼顾儿童安全）的容器、按时间分格的单剂量包装等，目标是减少看错、拿错和漏服。
+    - 学完能回答：老年人在识别和开启药品包装时常遇到哪些困难？ ／ 单剂量 / 泡罩分装如何帮助提高依从性？ ／ 易开启与儿童安全包装之间如何权衡？
+    - 入门阅读：[MSD Manual: Adherence to a Medication Regimen](https://www.msdmanuals.com/professional/clinical-pharmacology/factors-affecting-response-to-medications/adherence-to-a-medication-regimen)；[MSD Manual: Pharmacists and Older Adults](https://www.msdmanuals.com/professional/geriatrics/providing-care-to-older-adults/pharmacists-and-older-adults)
   - `03-M4.3` 固定剂量复方与减少服药负担 ★★
+    - 学什么：固定剂量复方把两种或以上活性成分做成一个制剂，可减少服药片数、简化方案、改善依从性，但会降低单独调整某一成分剂量的灵活性。
+    - 学完能回答：固定剂量复方在哪些慢病中应用较多？ ／ 复方制剂的主要缺点是什么？ ／ 方案简化为什么是提升老年人依从性的重要手段？
+    - 入门阅读：[Bangalore et al., Fixed-Dose Combinations Improve Medication Compliance: A Meta-Analysis（Am J Med 2007）](https://doi.org/10.1016/j.amjmed.2006.08.033)
 
 #### 04 · 临床研究、法规与药物警戒 ★★
 
 > 药从实验室走向患者的规则与证据体系
 > 优先学习配方：1.1 临床分期 ｜ 1.3 终点与统计 ｜ 2.1 监管体系 ｜ 3.1 药物警戒
 
+**学习路线**：`04-M1.1` 临床试验分期（I–IV 期） → `04-M1.2` 随机、对照、盲法与伦理审查 → `04-M1.3` 终点设计与统计分析（ITT、样本量） → `04-M1.5` 真实世界数据与真实世界证据（RWD / RWE） → `04-M1.4` 老年人在临床试验中的代表性不足问题 → `04-M2.1` 监管机构：NMPA、FDA、EMA 与 ICH → `04-M2.2` 新药申报路径（IND / NDA / BLA）概念 → `04-M2.3` GCP、GLP 与数据完整性 → `04-M2.4` AI / 软件作为医疗器械（SaMD）的监管思路 → `04-M3.1` 药物警戒与不良反应监测体系 → `04-M3.2` 自发报告数据库与信号检测（比例失衡分析） → `04-M3.3` 用药错误的分类与防范 → `04-M4.1` 处方审核与合理用药 → `04-M4.2` 药物重整（Medication Reconciliation） → `04-M4.3` 药学门诊与慢病管理中的药师角色
+
 - **M1 临床试验**
   - `04-M1.1` 临床试验分期（I–IV 期） ★★★ 🍃 [ClinicalTrials.gov](https://clinicaltrials.gov/)
+    - 学什么：临床试验通常分为 I 期（安全性与药代，常在少量受试者中进行）、II 期（初步疗效与剂量探索）、III 期（大样本确证疗效与安全性）和 IV 期（上市后研究）。
+    - 学完能回答：各期试验的主要目的分别是什么？ ／ 为什么 III 期试验常需要多中心、较大样本？ ／ 上市后研究能发现哪些上市前难以发现的问题？
+    - 入门阅读：[FDA: Step 3 Clinical Research](https://www.fda.gov/patients/drug-development-process/step-3-clinical-research)；[ClinicalTrials.gov（临床试验注册库）](https://clinicaltrials.gov/)
   - `04-M1.2` 随机、对照、盲法与伦理审查 ★★
+    - 学什么：随机化平衡已知和未知的混杂因素，对照组提供比较基准，盲法减少评估偏倚；所有涉及人的研究都需伦理审查与受试者知情同意。
+    - 学完能回答：随机化与盲法分别主要控制哪类偏倚？ ／ 安慰剂对照在什么情况下不符合伦理？ ／ 认知障碍老人参加试验时，知情同意如何处理？
+    - 入门阅读：[WMA Declaration of Helsinki（赫尔辛基宣言）](https://www.wma.net/policies-post/wma-declaration-of-helsinki/)；[ICH Efficacy Guidelines（含 E6 GCP，以官网最新版本为准）](https://www.ich.org/page/efficacy-guidelines)
   - `04-M1.3` 终点设计与统计分析（ITT、样本量） ★★
+    - 学什么：终点是衡量疗效的指标（临床终点、替代终点、患者报告结局等）；统计分析需预先规定，意向治疗（ITT）分析按随机分组分析以保留随机化带来的可比性，样本量由预期效应与把握度决定。
+    - 学完能回答：替代终点有什么优点和风险？ ／ ITT 分析与符合方案集（PP）分析有何区别？ ／ 样本量计算需要哪些输入？
+    - 入门阅读：[ICH Efficacy Guidelines（含 E9 统计原则，以官网最新版本为准）](https://www.ich.org/page/efficacy-guidelines)；[CONSORT / SPIRIT（临床试验报告与方案规范）](https://www.consort-spirit.org/)
   - `04-M1.4` 老年人在临床试验中的代表性不足问题 ★★ 🍃 [ClinicalTrials.gov](https://clinicaltrials.gov/)
+    - 学什么：老年人（尤其是高龄、多病共存、多重用药者）在临床试验中常被排除或比例偏低，导致上市证据难以直接外推到真实老年患者；ICH E7 专门讨论老年人群研究。
+    - 学完能回答：试验中常见的哪些排除标准会把老年人挡在门外？ ／ 证据不足会对老年人的用药决策造成什么影响？ ／ 真实世界数据能在多大程度上弥补这一缺口？
+    - 入门阅读：[ICH Efficacy Guidelines（含 E7 老年人群研究，以官网最新版本为准）](https://www.ich.org/page/efficacy-guidelines)；[MSD Manual: Overview of Pharmacologic Therapy in Older Adults](https://www.msdmanuals.com/professional/geriatrics/pharmacologic-therapy-in-older-adults/overview-of-pharmacologic-therapy-in-older-adults)
   - `04-M1.5` 真实世界数据与真实世界证据（RWD / RWE） ★★
+    - 学什么：真实世界数据（RWD）来自电子病历、医保理赔、登记库、可穿戴设备等日常医疗数据；经过严谨分析得到的真实世界证据（RWE）可支持监管与临床决策。
+    - 学完能回答：RWD 相比随机对照试验数据有哪些偏倚风险？ ／ 目标试验模拟（target trial emulation）想解决什么问题？ ／ 居家监测数据成为 RWD 需要满足哪些质量要求？
+    - 入门阅读：[FDA: Real-World Evidence](https://www.fda.gov/science-research/science-and-research-special-topics/real-world-evidence)
 - **M2 监管与法规**
   - `04-M2.1` 监管机构：NMPA、FDA、EMA 与 ICH ★★ 🍃 [ICH 指南](https://www.ich.org/)、[国家药品监督管理局（NMPA）](https://www.nmpa.gov.cn/)、[FDA Drugs](https://www.fda.gov/drugs) 🃏 [ICH 指南体系（Q / S / E / M）](https://www.ich.org/)
+    - 学什么：主要药品监管机构包括中国国家药品监督管理局（NMPA）、美国 FDA、欧洲药品管理局（EMA）等；ICH 协调各国技术要求，使研发资料可在多地区通用。
+    - 学完能回答：NMPA、FDA、EMA 的审评体系各有什么特点？ ／ 加入 ICH 对中国药品研发有什么意义？ ／ 查询某国最新监管要求应以什么来源为准？
+    - 入门阅读：[ICH 官方网站](https://www.ich.org/)；[European Medicines Agency（EMA）](https://www.ema.europa.eu/en)
   - `04-M2.2` 新药申报路径（IND / NDA / BLA）概念 ★★
+    - 学什么：新药在进入人体试验前需提交临床试验申请（美国称 IND），完成研究后提交上市申请（化学药为 NDA，生物制品为 BLA）；中国有对应的临床试验申请与上市许可申请制度。
+    - 学完能回答：IND 申请通常需要包含哪些资料？ ／ NDA 与 BLA 的适用对象有何不同？ ／ 加速审批、优先审评等特殊通道的目的是什么？
+    - 入门阅读：[FDA: Investigational New Drug (IND) Application](https://www.fda.gov/drugs/types-applications/investigational-new-drug-ind-application)；[FDA: New Drug Application (NDA)](https://www.fda.gov/drugs/types-applications/new-drug-application-nda)
   - `04-M2.3` GCP、GLP 与数据完整性 ★
+    - 学什么：GCP 规范临床试验的设计、实施、记录与报告，GLP 规范非临床安全性研究；数据完整性要求数据可归因、清晰、同步、原始、准确（常称 ALCOA 原则）。
+    - 学完能回答：GCP 中申办者、研究者与伦理委员会各承担什么职责？ ／ ALCOA 各字母代表什么？ ／ 在 AI 研究中使用临床数据时，数据完整性要求意味着什么？
+    - 入门阅读：[ICH Efficacy Guidelines（含 E6 GCP，以官网最新版本为准）](https://www.ich.org/page/efficacy-guidelines)；[FDA 指导原则检索（以官网最新文件为准）](https://www.fda.gov/regulatory-information/search-fda-guidance-documents)
   - `04-M2.4` AI / 软件作为医疗器械（SaMD）的监管思路 ★★
+    - 学什么：独立承担医疗用途的软件可能被作为医疗器械（SaMD）监管；监管通常按风险分级，并关注临床验证、算法变更管理和上市后性能监测，AI 软件的具体要求以各国最新官方文件为准。
+    - 学完能回答：什么样的健康类软件会被认定为医疗器械？ ／ 基于机器学习的软件更新为什么给监管带来新问题？ ／ 一个用药提醒 App 和一个给出剂量建议的 App 在监管上可能有何不同？
+    - 入门阅读：[FDA: Software as a Medical Device (SaMD)](https://www.fda.gov/medical-devices/digital-health-center-excellence/software-medical-device-samd)
 - **M3 药物警戒与用药安全**
   - `04-M3.1` 药物警戒与不良反应监测体系 ★★ 🍃 [FDA Drugs](https://www.fda.gov/drugs)
+    - 学什么：药物警戒是发现、评估、理解和预防药物不良反应及其他药物相关问题的科学与活动，贯穿药品全生命周期，上市后的自发报告是重要信息来源。
+    - 学完能回答：上市前临床试验为什么无法发现所有不良反应？ ／ 一个国家的药物警戒体系通常包括哪些组成部分？ ／ WHO 国际药物监测合作中心（Uppsala Monitoring Centre）承担什么角色？
+    - 入门阅读：[WHO: Pharmacovigilance](https://www.who.int/teams/regulation-prequalification/regulation-and-safety/pharmacovigilance)；[Uppsala Monitoring Centre](https://who-umc.org/)
   - `04-M3.2` 自发报告数据库与信号检测（比例失衡分析） ★★
+    - 学什么：自发报告数据库收集医务人员与公众上报的不良事件；比例失衡分析（如报告比值比 ROR、比例报告比 PRR、贝叶斯方法）用于从中发现可能的药物—事件信号。
+    - 学完能回答：比例失衡分析的基本思想是什么？ ／ 自发报告存在哪些偏倚（如漏报、刺激报告）？ ／ 信号被检测出来后，还需要哪些步骤才能确认因果？
+    - 入门阅读：[Bate & Evans, Quantitative signal detection using spontaneous ADR reporting（Pharmacoepidemiol Drug Saf 2009）](https://doi.org/10.1002/pds.1742)；[FDA 不良事件监测系统说明页](https://www.fda.gov/drugs/surveillance/questions-and-answers-fdas-adverse-event-reporting-system-faers)
   - `04-M3.3` 用药错误的分类与防范 ★★ 🍃 [WHO 用药无害（Medication Without Harm）](https://www.who.int/initiatives/medication-without-harm)
+    - 学什么：用药错误可发生在处方、转抄、调配、给药与监测等任一环节，常按错误类型与造成伤害的程度分类；防范依靠系统设计而不是只责备个人。
+    - 学完能回答：用药错误、不良反应、不良事件三者是什么关系？ ／ 养老机构中给药环节常见的错误类型有哪些？ ／ 条码扫描、电子处方等技术如何减少用药错误？
+    - 入门阅读：[NCC MERP: Taxonomy of Medication Errors](https://www.nccmerp.org/taxonomy-medication-errors)；[MSD Manual: Medication Errors](https://www.msdmanuals.com/professional/clinical-pharmacology/concepts-in-pharmacotherapy/medication-errors)
 - **M4 药学服务与临床药学**
   - `04-M4.1` 处方审核与合理用药 ★★
+    - 学什么：处方审核由药师检查处方的适应证、剂量、相互作用、禁忌与重复用药等问题；合理用药强调在正确的适应证下以合适的剂量、疗程和成本用药。
+    - 学完能回答：处方审核通常检查哪些方面？ ／ 老年人中常见的药物相关问题有哪些？ ／ 规则引擎辅助审方的优点与局限是什么？
+    - 入门阅读：[MSD Manual: Medication-Related Problems in Older Adults](https://www.msdmanuals.com/professional/geriatrics/pharmacologic-therapy-in-older-adults/medication-related-problems-in-older-adults)；[MSD Manual: Medication Errors](https://www.msdmanuals.com/professional/clinical-pharmacology/concepts-in-pharmacotherapy/medication-errors)
   - `04-M4.2` 药物重整（Medication Reconciliation） ★★★
+    - 学什么：药物重整是在入院、转科、出院等照护交接时，比较患者实际在用药物与新医嘱，发现并解决遗漏、重复、剂量错误等差异的过程。
+    - 学完能回答：药物重整通常包括哪几个步骤？ ／ 为什么照护交接是用药错误的高发环节？ ／ 获取“最佳可得用药史”需要哪些信息来源？
+    - 入门阅读：[AHRQ PSNet: Medication Reconciliation](https://psnet.ahrq.gov/primer/medication-reconciliation)；[Mueller et al., Hospital-Based Medication Reconciliation Practices: A Systematic Review（Arch Intern Med 2012）](https://doi.org/10.1001/archinternmed.2012.2246)
   - `04-M4.3` 药学门诊与慢病管理中的药师角色 ★
+    - 学什么：临床药师参与用药评估、方案优化、患者教育与随访，在慢病管理与老年多重用药管理中发挥作用，常与医生、护士组成多学科团队。
+    - 学完能回答：药师主导的用药评估通常包括哪些内容？ ／ 药学门诊与传统药房调剂服务有什么不同？ ／ 数字化工具如何帮助药师开展远程随访？
+    - 入门阅读：[MSD Manual: Pharmacists and Older Adults](https://www.msdmanuals.com/professional/geriatrics/providing-care-to-older-adults/pharmacists-and-older-adults)
 
 #### 05 · AIDD：AI 驱动的药物发现 ★★★
 
@@ -183,7 +427,7 @@
     - 学什么：定量构效关系（QSAR）：用分子描述符或学到的表示，回归或分类预测活性与性质；经典流程强调数据整理、验证和适用域。
     - 学完能回答：一个规范的 QSAR 建模流程包括哪些步骤？ ／ 描述符 + 随机森林 与 图神经网络 各自的优劣是什么？ ／ 活性悬崖（activity cliff）为什么会让 QSAR 模型失效？
     - 入门阅读：[Cherkasov et al., QSAR Modeling: Where Have You Been? Where Are You Going To?（J Med Chem 2014 综述）](https://doi.org/10.1021/jm4004285)；[Chemprop 文档（消息传递网络性质预测工具）](https://chemprop.readthedocs.io/)
-  - `05-M2.2` ADMET 预测模型 ★★★ 🍃 [SwissADME](http://www.swissadme.ch/)、[Therapeutics Data Commons（TDC）](https://tdcommons.ai/)、同一个 ADMET 任务对比随机划分与骨架划分（练习）
+  - `05-M2.2` ADMET 预测模型 ★★★ 🍃 [SwissADME](https://www.swissadme.ch/)、[Therapeutics Data Commons（TDC）](https://tdcommons.ai/)、同一个 ADMET 任务对比随机划分与骨架划分（练习）
     - 学什么：用模型预测吸收、分布、代谢、排泄与毒性（ADMET）终点，在合成前淘汰成药性差的分子；多为数据量有限、噪声较大的任务。
     - 学完能回答：常见 ADMET 终点（溶解度、渗透性、CYP 抑制、hERG 等）分别对应药代 / 毒理中的什么问题？ ／ 为什么 ADMET 数据往往比活性数据更难建模？ ／ 体外 ADMET 预测与体内药代表现之间有什么差距？
     - 入门阅读：[TDC ADMET Benchmark Group](https://tdcommons.ai/benchmark/admet_group/overview/)；[Daina et al., SwissADME（Sci Rep 2017）](https://doi.org/10.1038/srep42717)
@@ -260,11 +504,11 @@
 
 - **M1 运动学**
   - `06-M1.1` 位姿表示：旋转矩阵、欧拉角、四元数、齐次变换 ★★★
-  - `06-M1.2` 正运动学与逆运动学 ★★★ 🍃 [Modern Robotics（教材与课程）](http://hades.mech.northwestern.edu/index.php/Modern_Robotics)、手推一个 2 自由度平面机械臂的正逆运动学并用 Python 可视化（练习）
+  - `06-M1.2` 正运动学与逆运动学 ★★★ 🍃 [Modern Robotics（教材与课程）](https://modernrobotics.northwestern.edu/)、手推一个 2 自由度平面机械臂的正逆运动学并用 Python 可视化（练习）
   - `06-M1.3` 雅可比矩阵与奇异性 ★★ 🍃 手推一个 2 自由度平面机械臂的正逆运动学并用 Python 可视化（练习）
   - `06-M1.4` 移动机器人运动学（差速、全向） ★★
 - **M2 动力学**
-  - `06-M2.1` 刚体动力学：牛顿—欧拉与拉格朗日方法 ★★ 🍃 [Modern Robotics（教材与课程）](http://hades.mech.northwestern.edu/index.php/Modern_Robotics)、[Pinocchio](https://github.com/stack-of-tasks/pinocchio)
+  - `06-M2.1` 刚体动力学：牛顿—欧拉与拉格朗日方法 ★★ 🍃 [Modern Robotics（教材与课程）](https://modernrobotics.northwestern.edu/)、[Pinocchio](https://github.com/stack-of-tasks/pinocchio)
   - `06-M2.2` 接触、摩擦与抓取力学 ★★ 🍃 [Drake](https://drake.mit.edu/)
   - `06-M2.3` 腿足与平衡（ZMP 等概念） ★
 - **M3 机器人软件系统**
@@ -516,7 +760,7 @@
   - `16-M3.3` 生命体征趋势分析与预警 ★★ 🍃 [PhysioNet](https://physionet.org/)
   - `16-M3.4` 认知衰退的数字生物标志物（研究阶段，审慎使用） ★
 - **M4 陪护与交互**
-  - `16-M4.1` 陪伴机器人与对话 Agent（记忆、个性化、情感支持） ★★ 🃏 [PARO 治疗型海豹机器人](http://www.parorobots.com/)
+  - `16-M4.1` 陪伴机器人与对话 Agent（记忆、个性化、情感支持） ★★ 🃏 [PARO 治疗型海豹机器人](https://unit.aist.go.jp/hiiri/topics/03-en.html)
   - `16-M4.2` 认知训练与康复游戏 ★
   - `16-M4.3` 照护者辅助：交接班记录、照护计划生成 ★★
   - `16-M4.4` 移位、喂食、穿衣等物理辅助操作（研究前沿） ★★
@@ -547,7 +791,7 @@
 
 ### 02 · 药理学与药代动力学（ADMET）
 
-- [ ] [SwissADME](http://www.swissadme.ch/) — 在线估算理化性质、药代与类药性的免费工具  `02-M2.1`
+- [ ] [SwissADME](https://www.swissadme.ch/) — 在线估算理化性质、药代与类药性的免费工具  `02-M2.1`
 - [ ] [Open Systems Pharmacology（PK-Sim / MoBi）](https://www.open-systems-pharmacology.org/) — 开源的生理药代动力学建模平台  `02-M2.5`
 - [ ] 用 Python 写一个一室模型并拟合血药浓度曲线（练习） — 手写一室口服吸收模型，求半衰期、清除率、AUC  `02-M2.4`
 
@@ -577,7 +821,7 @@
 
 ### 06 · 机器人学基础
 
-- [ ] [Modern Robotics（教材与课程）](http://hades.mech.northwestern.edu/index.php/Modern_Robotics) — 西北大学 Lynch & Park 的机器人学教材与配套课程  `06-M1.2`
+- [ ] [Modern Robotics（教材与课程）](https://modernrobotics.northwestern.edu/) — 西北大学 Lynch & Park 的机器人学教材与配套课程  `06-M1.2`
 - [ ] [Pinocchio](https://github.com/stack-of-tasks/pinocchio) — 高效的刚体动力学与运动学 C++/Python 库  `06-M2.1`
 - [ ] 手推一个 2 自由度平面机械臂的正逆运动学并用 Python 可视化（练习） — 从几何法到雅可比，体会奇异位形  `06-M1.2`
 
@@ -788,7 +1032,7 @@
 - **怎么用**：① 理解养老产品真正要服务的评估维度；② 设计监测或干预指标时对齐 ADL / IADL 等功能指标，而不只盯单一疾病指标。
 - 挂载点：`12-M3.1` ｜ 关键词：多维评估 · ADL / IADL · 跨学科团队 ｜ 接下来：`12-M3.2`, `12-M2.1`, `13-M1.1`
 
-### [PARO 治疗型海豹机器人](http://www.parorobots.com/)
+### [PARO 治疗型海豹机器人](https://unit.aist.go.jp/hiiri/topics/03-en.html)
 
 - **是什么**：日本产业技术综合研究所（AIST）开发的海豹外形治疗型陪伴机器人，能通过触摸、声音等传感器做出反应。
 - **怎么用**：① 认知症非药物干预与陪伴机器人研究的经典案例；② 讨论陪伴机器人伦理（依赖、欺骗感、替代人际关怀）时的参照对象。

@@ -293,7 +293,7 @@ export const CARDS: StudyCard[] = [
     def: '日本产业技术综合研究所（AIST）开发的海豹外形治疗型陪伴机器人，能通过触摸、声音等传感器做出反应。',
     use: '① 认知症非药物干预与陪伴机器人研究的经典案例；② 讨论陪伴机器人伦理（依赖、欺骗感、替代人际关怀）时的参照对象。',
     target: '16-M4.1',
-    url: 'http://www.parorobots.com/',
+    url: 'https://unit.aist.go.jp/hiiri/topics/03-en.html',
     tags: ['陪伴机器人', '认知症照护', '非药物干预', '伦理讨论'],
     next: ['15-M1.2', '16-M1.1', '14-M2.4'],
     madeBy: '让模型帮忙',
