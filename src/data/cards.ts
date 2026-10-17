@@ -118,7 +118,7 @@ export const CARDS: StudyCard[] = [
     target: '10-M2.1',
     url: 'https://arxiv.org/abs/2307.15818',
     tags: ['VLA', 'VLM 联合微调', '动作即文本 token', '语义泛化'],
-    next: ['card-rt1', 'card-openvla', '10-M1.2'],
+    next: ['card-rt1', 'card-openvla', '10-M1.2', 'leaf-openvla'],
     madeBy: '让模型帮忙',
     date: '2023-07',
   },

@@ -161,6 +161,46 @@ if src_outline.exists() and src_outline.stat().st_mtime > (DATA / 'theory.ts').s
 if 'done: true' in theory_text:
     errors.append('theory.ts 含 done: true——个人进度应存放在浏览器 localStorage 或 progress/*.local.json，不进公共数据')
 
+# ---------- 7. 学习点指引与学习路线（src/data/guides.ts） ----------
+import json  # noqa: E402
+guides_file = DATA / 'guides.ts'
+if guides_file.exists():
+    gtext = guides_file.read_text(encoding='utf-8')
+    gm = re.search(r'^export const GUIDES[^=]*= (.*)$', gtext, re.M)
+    rm = re.search(r'^export const ROUTES[^=]*= (.*)$', gtext, re.M)
+    guides = json.loads(gm.group(1)) if gm else {}
+    routes = json.loads(rm.group(1)) if rm else {}
+    for key, g in guides.items():
+        if key not in point_ids:
+            errors.append(f'指引挂不上树：{key} 不是理论地图里的学习点')
+        if not g.get('what'):
+            errors.append(f'指引 {key} 缺少 what')
+        if not 2 <= len(g.get('ask', [])) <= 3:
+            errors.append(f'指引 {key} 的 ask 应为 2–3 个，现在 {len(g.get("ask", []))} 个')
+        if not 1 <= len(g.get('read', [])) <= 2:
+            errors.append(f'指引 {key} 的 read 应为 1–2 个，现在 {len(g.get("read", []))} 个')
+        for r in g.get('read', []):
+            if not re.match(r'^https?://', r.get('url', '')) or not r.get('title'):
+                errors.append(f'指引 {key} 的 read 条目不完整：{r}')
+    for cid, ids in routes.items():
+        if cid not in chapter_ids:
+            errors.append(f'学习路线挂不上篇章：{cid}')
+        for pid in ids:
+            if pid not in point_ids:
+                errors.append(f'篇章 {cid} 学习路线断链：{pid}')
+            elif not pid.startswith(cid + '-'):
+                errors.append(f'篇章 {cid} 学习路线混入其他篇章的点：{pid}')
+        if len(ids) != len(set(ids)):
+            errors.append(f'篇章 {cid} 学习路线有重复学习点')
+        missing = sorted(p for p in point_ids if p.startswith(cid + '-') and p not in ids)
+        if missing:
+            errors.append(f'篇章 {cid} 学习路线未覆盖：{", ".join(missing)}')
+    guide_dir = ROOT / 'content' / 'guides'
+    newest = max((f.stat().st_mtime for f in guide_dir.glob('*.md')), default=0)
+    if newest > guides_file.stat().st_mtime + 1:
+        errors.append('content/guides/*.md 比 src/data/guides.ts 新：请先跑 python scripts/generate-theory.py')
+    print(f'指引 {len(guides)} 条 ｜ 学习路线 {len(routes)} 条')
+
 # ---------- 结果 ----------
 print(f'理论点 {len(point_ids)} ｜ 模块 {len(module_ids)} ｜ 枝干 {len(chapter_ids)} ｜ '
       f'叶子 {len(leaf_ids)} ｜ 收集箱 {len(inbox_urls)}（毕业 {len(graduated_urls)}）｜ 卡片 {len(card_ids)}')

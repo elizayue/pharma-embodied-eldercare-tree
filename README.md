@@ -5,11 +5,21 @@
 
 ![预览](./preview.png)
 
+## 三分钟上手
+
+1. **打开网站**：<https://elizayue.github.io/pharma-embodied-eldercare-tree/>——不用安装，也不用注册。
+2. **选一条入门路径**：展开页面顶部的「从哪开始」，按你的背景选一条路线。
+3. **展开篇章，再点一个学习点**：学习点下方会出现「学什么 / 学完能回答的问题 / 入门阅读」，以及挂在这个点上的学习卡片和叶子（项目 / 练习）。目前 05 AIDD 篇章已有完整指引和「学习路线」，其他篇章陆续补充。
+4. **记录进度**：勾选框标记已完成，✎ 写个人笔记。这些**只保存在你自己的浏览器里**，不会上传到任何地方。
+5. **保存 / 迁移进度**：「导出进度 JSON」可以把进度放到任何地方（本地文件夹、网盘）；换电脑或换浏览器时用「导入进度」恢复。
+6. **离线使用**：下载本仓库（Code → Download ZIP），解压后双击 `index.html` 即可。
+7. **反馈**：发现错误或想补充内容，欢迎提 [Issue](https://github.com/elizayue/pharma-embodied-eldercare-tree/issues) 或 Pull Request。
+
 ## 怎么用
 
 **直接双击 `index.html`**（或 `dashboard/tree.html`，两者内容相同）用浏览器打开即可——单文件、离线可用、不需要 node 或服务器。
 
-- **理论地图**：17 个篇章（枝干）→ 69 个模块 → 259 个学习点（枝节），星级 = 推荐学习 / 深入程度，每篇章附「优先学习配方」。
+- **理论地图**：17 个篇章（枝干）→ 69 个模块 → 259 个学习点（枝节），星级 = 推荐学习 / 深入程度，每篇章附「优先学习配方」。点击学习点即可展开：学什么、自检问题、入门阅读，以及挂在该点的卡片与叶子（05 AIDD 篇章为试点，附有序「学习路线」）。
 - **叶子清单**：71 片叶子（真实项目 / 工具 / 数据库 + 无链接的动手练习），每片都挂在树上的某个节点。
 - **学习卡片**：25 张粗粒度索引卡（AlphaFold、RT-2、π0、Beers 标准等），一屏看完「是什么、挂在哪、接下来学什么」。
 - **收集箱**：暂时没空学的项目 / 论文先放这里，学完再「毕业」成卡片或叶子。
@@ -40,13 +50,15 @@
 ## 改内容 / 扩展这棵树
 
 ```bash
-# 1. 理论地图：编辑 content/theory-outline.md（唯一手写源），然后
-python scripts/generate-theory.py     # → src/data/theory.ts（生成物，勿手改）
+# 1. 理论地图：编辑 content/theory-outline.md（唯一手写源）；
+#    学习点指引与学习路线：编辑 content/guides/<篇章id>.md（格式见 content/guides/05.md），然后
+python scripts/generate-theory.py     # → src/data/theory.ts + src/data/guides.ts（生成物，勿手改）
 # 2. 叶子 / 卡片 / 收集箱 / 入口路径：直接编辑 src/data/leaves.ts、cards.ts、inbox.ts、content.ts
 # 3. 校验 + 导出
 python scripts/check-tree.py          # 断链、id 唯一、卡片 tags 数量、源与生成物同步、公共数据不含个人进度
 python scripts/export-dashboard.py    # → dashboard/tree.html + index.html
 python scripts/export-markdown.py     # → tree.md
+python scripts/check-links.py         # （可选，需联网）校验指引里的入门阅读链接能否打开
 ```
 
 只需要 Python 3（标准库），不依赖任何第三方包。数据约定（叶子 `anchor` 三级落脚、卡片 `target` / `next` 只能指向树上节点等）详见 [`AGENTS.md`](./AGENTS.md)。

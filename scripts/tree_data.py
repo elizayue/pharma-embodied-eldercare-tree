@@ -135,7 +135,20 @@ def parse_starters():
     return out
 
 
+# ---------- 学习点指引 + 学习路线（guides.ts 由 generate-theory.py 生成，单行 JSON） ----------
+def parse_guides():
+    f = DATA / 'guides.ts'
+    if not f.exists():
+        return {}, {}
+    text = f.read_text(encoding='utf-8')
+    import json
+    g = re.search(r'^export const GUIDES[^=]*= (.*)$', text, re.M)
+    r = re.search(r'^export const ROUTES[^=]*= (.*)$', text, re.M)
+    return (json.loads(g.group(1)) if g else {}), (json.loads(r.group(1)) if r else {})
+
+
 def tree() -> dict:
     return {'chapters': parse_theory(), 'leaves': parse_leaves(),
             'inbox': parse_inbox(), 'cards': parse_cards(), 'starters': parse_starters(),
+            'guides': parse_guides()[0], 'routes': parse_guides()[1],
             'generated': str(date.today())}

@@ -159,32 +159,97 @@
 > 你的主场：把机器学习用于分子、蛋白与临床数据
 > 优先学习配方：1.1 分子表示学习 ｜ 2.1 性质预测 ｜ 3.1 结构预测 ｜ 4.1 分子生成
 
+**学习路线**：`05-M1.3` 公共数据库：ChEMBL、PubChem、PDB、ZINC、DrugBank → `05-M1.1` 分子表示学习：指纹、图神经网络、SMILES 语言模型 → `05-M1.4` 数据划分陷阱：随机 vs 骨架划分、数据泄漏 → `05-M2.1` QSAR 与分子性质预测 → `05-M2.2` ADMET 预测模型 → `05-M2.4` 不确定性估计与适用域 → `05-M1.2` 蛋白表示：序列语言模型（ESM 类）与结构表示 → `05-M3.1` 蛋白结构预测（AlphaFold 系列、RoseTTAFold、ESMFold） → `05-M3.2` 生物分子复合物结构预测（蛋白—配体、蛋白—核酸） → `05-M3.3` 深度学习分子对接（如 DiffDock） → `05-M2.3` 药物—靶点相互作用（DTI）与结合亲和力预测 → `05-M3.4` 结合自由能计算与 ML 加速 → `05-M4.1` 分子生成：VAE、强化学习、扩散模型、语言模型 → `05-M4.4` 多目标优化与可合成性评估 → `05-M4.5` 逆合成与反应预测 → `05-M4.2` 基于口袋的三维分子生成 → `05-M4.3` 蛋白质设计（如 RFdiffusion、ProteinMPNN） → `05-M5.1` 主动学习与贝叶斯优化 → `05-M5.3` LLM / Agent 在药物研发中的应用（文献挖掘、工具调用） → `05-M5.2` 自动化实验室（Self-driving Lab）与 DMTA 闭环 → `05-M5.4` AI 临床：患者分层、试验设计与药物重定位
+
 - **M1 数据与表示**
   - `05-M1.1` 分子表示学习：指纹、图神经网络、SMILES 语言模型 ★★★ 🍃 [DeepChem](https://deepchem.io/)、[Chemprop](https://github.com/chemprop/chemprop)
+    - 学什么：把分子变成模型能吃的向量或图：手工指纹（如 ECFP）、图神经网络在原子—键图上做消息传递、或把 SMILES 当作序列交给语言模型。
+    - 学完能回答：分子指纹、分子图、SMILES 三种表示各自丢失或保留了哪些信息？ ／ 消息传递神经网络（MPNN）一轮“消息—更新—读出”分别在做什么？ ／ 同一个分子有多个合法 SMILES，这对序列模型意味着什么？
+    - 入门阅读：[Gilmer et al., Neural Message Passing for Quantum Chemistry（MPNN 统一框架）](https://arxiv.org/abs/1704.01212)；[RDKit 入门文档（分子读写与指纹）](https://www.rdkit.org/docs/GettingStartedInPython.html)
   - `05-M1.2` 蛋白表示：序列语言模型（ESM 类）与结构表示 ★★★ 🃏 [ESM-2 / ESMFold](https://github.com/facebookresearch/esm)
+    - 学什么：把氨基酸序列（或结构）编码成向量；蛋白语言模型（如 ESM）在海量序列上自监督预训练，其表示可迁移到功能、结构等下游任务。
+    - 学完能回答：蛋白语言模型的掩码预训练和 NLP 里的 BERT 有何异同？ ／ 为什么只靠单条序列的嵌入也能包含结构信息？ ／ 序列表示与结构表示各适合什么下游任务？
+    - 入门阅读：[Rives et al., PNAS 2021（ESM：无监督学习 2.5 亿条蛋白序列）](https://doi.org/10.1073/pnas.2016239118)；[Lin et al., Science 2023（ESM-2 / ESMFold）](https://doi.org/10.1126/science.ade2574)
   - `05-M1.3` 公共数据库：ChEMBL、PubChem、PDB、ZINC、DrugBank ★★ 🍃 [PubChem](https://pubchem.ncbi.nlm.nih.gov/)、[ChEMBL](https://www.ebi.ac.uk/chembl/)、[ZINC](https://zinc.docking.org/)、[DrugBank](https://go.drugbank.com/)、[RCSB PDB](https://www.rcsb.org/)
+    - 学什么：AIDD 的数据底座：ChEMBL（类药分子活性）、PubChem（化合物与筛选数据）、PDB（实验结构）、ZINC（可购买化合物）、DrugBank（药物与靶点知识）各有分工与许可条款。
+    - 学完能回答：想做某靶点的活性预测，应该去哪个库取数据？要注意哪些活性类型与单位？ ／ 实验结构（PDB）和预测结构（AlphaFold DB）在使用上有什么区别？ ／ 哪些数据库对商业使用有许可限制？
+    - 入门阅读：[ChEMBL 官方站点](https://www.ebi.ac.uk/chembl/)；[PDB-101（RCSB 的结构生物学入门教育资源）](https://pdb101.rcsb.org/)
   - `05-M1.4` 数据划分陷阱：随机 vs 骨架划分、数据泄漏 ★★★ 🍃 [Therapeutics Data Commons（TDC）](https://tdcommons.ai/)、同一个 ADMET 任务对比随机划分与骨架划分（练习）
+    - 学什么：分子数据里相似结构会扎堆，随机划分会让测试集与训练集过于相似而高估性能；骨架划分、时间划分等更接近真实的外推场景。
+    - 学完能回答：什么是 Bemis–Murcko 骨架？骨架划分如何构造？ ／ 为什么同一模型在随机划分和骨架划分上性能会差很多？ ／ 除了划分方式，还有哪些常见的数据泄漏来源（如重复分子、同一实验批次）？
+    - 入门阅读：[Wu et al., MoleculeNet: A Benchmark for Molecular Machine Learning](https://arxiv.org/abs/1703.00564)；[DeepChem Splitters 文档（随机 / 骨架 / 聚类等划分实现）](https://deepchem.readthedocs.io/en/latest/api_reference/splitters.html)
 - **M2 性质与活性预测**
   - `05-M2.1` QSAR 与分子性质预测 ★★★ 🍃 [ChEMBL](https://www.ebi.ac.uk/chembl/)、[DeepChem](https://deepchem.io/)、[Chemprop](https://github.com/chemprop/chemprop) 🃏 [Chemprop（D-MPNN）](https://github.com/chemprop/chemprop)
+    - 学什么：定量构效关系（QSAR）：用分子描述符或学到的表示，回归或分类预测活性与性质；经典流程强调数据整理、验证和适用域。
+    - 学完能回答：一个规范的 QSAR 建模流程包括哪些步骤？ ／ 描述符 + 随机森林 与 图神经网络 各自的优劣是什么？ ／ 活性悬崖（activity cliff）为什么会让 QSAR 模型失效？
+    - 入门阅读：[Cherkasov et al., QSAR Modeling: Where Have You Been? Where Are You Going To?（J Med Chem 2014 综述）](https://doi.org/10.1021/jm4004285)；[Chemprop 文档（消息传递网络性质预测工具）](https://chemprop.readthedocs.io/)
   - `05-M2.2` ADMET 预测模型 ★★★ 🍃 [SwissADME](http://www.swissadme.ch/)、[Therapeutics Data Commons（TDC）](https://tdcommons.ai/)、同一个 ADMET 任务对比随机划分与骨架划分（练习）
+    - 学什么：用模型预测吸收、分布、代谢、排泄与毒性（ADMET）终点，在合成前淘汰成药性差的分子；多为数据量有限、噪声较大的任务。
+    - 学完能回答：常见 ADMET 终点（溶解度、渗透性、CYP 抑制、hERG 等）分别对应药代 / 毒理中的什么问题？ ／ 为什么 ADMET 数据往往比活性数据更难建模？ ／ 体外 ADMET 预测与体内药代表现之间有什么差距？
+    - 入门阅读：[TDC ADMET Benchmark Group](https://tdcommons.ai/benchmark/admet_group/overview/)；[Daina et al., SwissADME（Sci Rep 2017）](https://doi.org/10.1038/srep42717)
   - `05-M2.3` 药物—靶点相互作用（DTI）与结合亲和力预测 ★★
+    - 学什么：预测药物（小分子）与靶点（蛋白）是否结合及结合强弱；输入通常是分子表示 + 蛋白序列 / 结构表示，难点在新靶点、新骨架上的泛化。
+    - 学完能回答：DTI 的分类任务与亲和力回归任务（如 Kd / Ki）有何区别？ ／ “冷启动”划分（新药物 / 新靶点）为什么比随机划分难得多？ ／ 只用序列的 DTI 模型与基于结构的方法相比有哪些局限？
+    - 入门阅读：[Öztürk et al., DeepDTA: Deep Drug-Target Binding Affinity Prediction](https://arxiv.org/abs/1801.10193)；[TDC DTI 任务说明](https://tdcommons.ai/multi_pred_tasks/dti/)
   - `05-M2.4` 不确定性估计与适用域 ★★
+    - 学什么：模型应告诉你“它有多确定”和“这个分子是否在它见过的化学空间内”；常用集成、MC Dropout、证据学习等估计不确定性，用相似度等界定适用域。
+    - 学完能回答：偶然不确定性与认知不确定性有什么区别？ ／ 如何评价一个不确定性估计是否“校准”良好？ ／ 在先导优化中，不确定性可以怎样指导下一轮实验选择？
+    - 入门阅读：[Hirschfeld et al., Uncertainty Quantification Using Neural Networks for Molecular Property Prediction](https://arxiv.org/abs/2005.10036)；[Chemprop 文档（含不确定性估计用法）](https://chemprop.readthedocs.io/)
 - **M3 结构驱动方法**
   - `05-M3.1` 蛋白结构预测（AlphaFold 系列、RoseTTAFold、ESMFold） ★★★ 🍃 [AlphaFold 蛋白结构数据库](https://alphafold.ebi.ac.uk/)、[ColabFold](https://github.com/sokrypton/ColabFold) 🃏 [AlphaFold 2](https://www.nature.com/articles/s41586-021-03819-2)
+    - 学什么：从氨基酸序列预测三维结构；AlphaFold 2 结合多序列比对与注意力网络大幅提升精度，并附带每残基置信度（pLDDT）。
+    - 学完能回答：多序列比对（MSA）为什么能提供结构信息？ ／ pLDDT 与 PAE 分别表示什么？低置信区域该如何解读？ ／ 预测结构直接用于药物设计时要注意什么（如构象、口袋柔性）？
+    - 入门阅读：[Jumper et al., AlphaFold 2（Nature 2021）](https://www.nature.com/articles/s41586-021-03819-2)；[Mirdita et al., ColabFold: making protein folding accessible to all（Nat Methods 2022）](https://doi.org/10.1038/s41592-022-01488-1)
   - `05-M3.2` 生物分子复合物结构预测（蛋白—配体、蛋白—核酸） ★★ 🃏 [AlphaFold 3](https://www.nature.com/articles/s41586-024-07487-w)
+    - 学什么：把结构预测从单链扩展到蛋白—蛋白、蛋白—配体、蛋白—核酸等复合物；AlphaFold 3 等模型引入扩散式结构生成来处理多类分子。
+    - 学完能回答：复合物结构预测相比单链结构预测多了哪些难点？ ／ 预测出的蛋白—配体复合物能否直接代替对接或实验结构？证据是什么？ ／ 这类模型的使用条款（代码、权重、服务器）对科研有何影响？
+    - 入门阅读：[Abramson et al., AlphaFold 3（Nature 2024）](https://www.nature.com/articles/s41586-024-07487-w)；[AlphaFold Server（官方在线服务）](https://alphafoldserver.com/)
   - `05-M3.3` 深度学习分子对接（如 DiffDock） ★★ 🍃 对一个已知复合物做重对接并计算 RMSD（练习）、[DiffDock 代码](https://github.com/gcorso/DiffDock) 🃏 [DiffDock](https://arxiv.org/abs/2210.01776)
+    - 学什么：用深度学习直接生成配体在口袋中的结合姿态（如把对接视为生成问题的 DiffDock），并需用物理合理性检查和新靶点测试来评估其真实可用性。
+    - 学完能回答：传统对接的“搜索 + 打分”与生成式对接的思路有何不同？ ／ 只看 RMSD < 2 Å 的成功率为什么不够？还应检查什么？ ／ 在训练集中未见过的蛋白上，深度学习对接表现如何变化？
+    - 入门阅读：[Corso et al., DiffDock](https://arxiv.org/abs/2210.01776)；[Buttenschoen et al., PoseBusters（物理合理性与泛化检验）](https://arxiv.org/abs/2308.05777)
   - `05-M3.4` 结合自由能计算与 ML 加速 ★
+    - 学什么：用基于物理的炼金术自由能方法（如 FEP）计算相对结合自由能，精度高但计算昂贵；机器学习可用于加速、筛选或修正这类计算。
+    - 学完能回答：相对结合自由能（RBFE）和绝对结合自由能计算的区别是什么？ ／ 为什么 FEP 常用于先导优化阶段而不是大规模虚拟筛选？ ／ ML 打分函数与 FEP 可以如何互补？
+    - 入门阅读：[Chodera et al., Alchemical free energy methods for drug discovery: progress and challenges（2011 综述）](https://doi.org/10.1016/j.sbi.2011.01.011)；[OpenFE（开源自由能计算生态）](https://openfree.energy/)
 - **M4 生成式设计**
   - `05-M4.1` 分子生成：VAE、强化学习、扩散模型、语言模型 ★★★ 🍃 [REINVENT 4](https://github.com/MolecularAI/REINVENT4)
+    - 学什么：用生成模型（VAE、强化学习、语言模型、扩散模型等）在化学空间中提出新分子，而不只是筛选已有库；关键是可控地朝目标性质优化。
+    - 学完能回答：在连续隐空间里优化分子（VAE）与用强化学习微调生成器，思路有何不同？ ／ 生成分子常用哪些评价指标（有效性、新颖性、多样性等）？它们的局限是什么？ ／ 为什么“模型打分高”的生成分子不一定好？
+    - 入门阅读：[Sanchez-Lengeling & Aspuru-Guzik, Inverse molecular design using machine learning（Science 2018 综述）](https://doi.org/10.1126/science.aat2663)；[Gómez-Bombarelli et al., Automatic chemical design using a data-driven continuous representation of molecules](https://arxiv.org/abs/1610.02415)
   - `05-M4.2` 基于口袋的三维分子生成 ★★
+    - 学什么：以蛋白结合口袋的三维结构为条件，直接生成放在口袋里的分子（原子类型 + 坐标），常用自回归或等变扩散模型。
+    - 学完能回答：为什么口袋条件生成通常需要旋转 / 平移等变的网络？ ／ 三维生成的分子要检查哪些化学与几何合理性？ ／ 用对接分数评价生成分子有什么偏差？
+    - 入门阅读：[Peng et al., Pocket2Mol](https://arxiv.org/abs/2205.07249)；[Guan et al., TargetDiff：3D Equivariant Diffusion for Target-Aware Molecule Generation](https://arxiv.org/abs/2303.03543)
   - `05-M4.3` 蛋白质设计（如 RFdiffusion、ProteinMPNN） ★★ 🍃 [RFdiffusion 代码](https://github.com/RosettaCommons/RFdiffusion) 🃏 [RFdiffusion](https://www.nature.com/articles/s41586-023-06415-8)
+    - 学什么：先生成满足功能约束的蛋白骨架（如 RFdiffusion），再为骨架设计氨基酸序列（如 ProteinMPNN），最后用结构预测与实验筛选验证。
+    - 学完能回答：“骨架生成 → 序列设计 → 结构预测自洽检查”这条流程每一步解决什么问题？ ／ 蛋白设计与小分子设计在表示和评价上有何不同？ ／ 计算设计的蛋白为什么仍需要大量实验验证？
+    - 入门阅读：[Watson et al., RFdiffusion（Nature 2023）](https://www.nature.com/articles/s41586-023-06415-8)；[Dauparas et al., ProteinMPNN（Science 2022）](https://doi.org/10.1126/science.add2187)
   - `05-M4.4` 多目标优化与可合成性评估 ★★
+    - 学什么：真实的分子设计要同时优化活性、选择性、ADMET 与可合成性，属于多目标权衡；需要合理的打分组合与基准来避免模型“钻打分漏洞”。
+    - 学完能回答：加权求和、帕累托前沿两种多目标处理方式各有什么问题？ ／ 合成可及性评分（SA score）是怎么估计的？它能代替真实合成路线评估吗？ ／ 什么是生成模型的“奖励投机”（reward hacking）？如何防范？
+    - 入门阅读：[Ertl & Schuffenhauer, Synthetic accessibility score（J Cheminform 2009）](https://doi.org/10.1186/1758-2946-1-8)；[Brown et al., GuacaMol: Benchmarking Models for De Novo Molecular Design](https://arxiv.org/abs/1811.09621)
   - `05-M4.5` 逆合成与反应预测 ★★
+    - 学什么：逆合成从目标分子反推可行的合成路线，由单步反应预测模型 + 多步搜索（如蒙特卡洛树搜索）组成；正向反应预测则判断给定反应物会生成什么。
+    - 学完能回答：基于模板与无模板的单步逆合成方法有何区别？ ／ 多步路线规划中，搜索终止条件（可购买原料）为何重要？ ／ 计算给出的路线为什么仍需化学家判断？
+    - 入门阅读：[Coley et al., Machine Learning in Computer-Aided Synthesis Planning（Acc Chem Res 2018）](https://doi.org/10.1021/acs.accounts.8b00087)；[AiZynthFinder（开源逆合成规划工具）](https://github.com/MolecularAI/aizynthfinder)
 - **M5 闭环与智能体**
   - `05-M5.1` 主动学习与贝叶斯优化 ★★
+    - 学什么：实验昂贵时，用代理模型 + 采集函数决定下一批该测哪些分子（主动学习 / 贝叶斯优化），在探索与利用之间权衡，用更少实验找到更好的化合物。
+    - 学完能回答：高斯过程代理模型和采集函数（如 EI、UCB）各自承担什么角色？ ／ 批量（batch）选择相比一次选一个多了什么难点？ ／ 主动学习在数据很少的冷启动阶段可能出现什么问题？
+    - 入门阅读：[Shahriari et al., Taking the Human Out of the Loop: A Review of Bayesian Optimization（Proc IEEE 2016）](https://doi.org/10.1109/JPROC.2015.2494218)；[BoTorch（PyTorch 贝叶斯优化库）文档](https://botorch.org/)
   - `05-M5.2` 自动化实验室（Self-driving Lab）与 DMTA 闭环 ★★
+    - 学什么：自驱动实验室把设计—合成—测试—分析（DMTA）闭环自动化：算法提出实验，机器人执行，数据回流更新模型；也是 AIDD 与机器人学的直接交汇点。
+    - 学完能回答：一个自驱动实验室由哪些模块组成？哪一环通常是瓶颈？ ／ 闭环系统中如何保证实验数据质量与可复现性？ ／ 化学自动化实验和家庭服务机器人在操作需求上有什么共通与差异？
+    - 入门阅读：[Tom et al., Self-Driving Laboratories for Chemistry and Materials Science（Chem Rev 2024 综述）](https://doi.org/10.1021/acs.chemrev.4c00055)；[Boiko et al., Autonomous chemical research with large language models（Nature 2023）](https://doi.org/10.1038/s41586-023-06792-0)
   - `05-M5.3` LLM / Agent 在药物研发中的应用（文献挖掘、工具调用） ★★★ 🍃 做一个调用 RDKit / PubChem 的药物问答小 Agent（练习）
+    - 学什么：让大语言模型调用化学工具（检索、性质计算、反应预测等）完成多步任务；工具让回答可核查，但幻觉、安全与评测仍是主要问题。
+    - 学完能回答：为什么化学问答要让 LLM 调用工具，而不是直接作答？ ／ 一个化学 Agent 的工具清单应如何设计？如何记录与展示信息来源？ ／ LLM Agent 在药物研发中有哪些安全与双重用途风险？
+    - 入门阅读：[Bran et al., ChemCrow: Augmenting large-language models with chemistry tools](https://arxiv.org/abs/2304.05376)；[Boiko et al., Autonomous chemical research with large language models（Nature 2023）](https://doi.org/10.1038/s41586-023-06792-0)
   - `05-M5.4` AI 临床：患者分层、试验设计与药物重定位 ★★
+    - 学什么：AI 在临床端的用途包括为已有药物寻找新适应症（药物重定位）、患者分层与试验设计辅助；这些应用对证据等级与监管要求更高。
+    - 学完能回答：药物重定位的计算方法大致有哪几类（基于网络、基于签名、基于结构等）？ ／ 为什么计算预测的重定位候选仍需临床证据验证？ ／ 老年人群在临床试验中的代表性不足，对 AI 模型训练数据有什么影响？
+    - 入门阅读：[Pushpakom et al., Drug repurposing: progress, challenges and recommendations（Nat Rev Drug Discov 综述）](https://doi.org/10.1038/nrd.2018.168)；[ClinicalTrials.gov（临床试验注册库）](https://clinicaltrials.gov/)
 
 ### 〔具身智能〕
 
@@ -597,7 +662,7 @@
 | [TDC 基准](https://tdcommons.ai/) | `leaf-tdc` | ADMET 基准 · DTI · 数据划分 | `05-M1.4`, `card-chemprop`, `leaf-p-scaffold` | — |
 | [ICH 指南体系（Q / S / E / M）](https://www.ich.org/) | `04-M2.1` | 质量 Q · 安全 S · 有效性 E（含 GCP） · 多学科 M | `04-M2.3`, `03-M3.1`, `leaf-nmpa` | — |
 | [RT-1](https://arxiv.org/abs/2212.06817) | `10-M2.1` | Robotics Transformer · 真实机器人大规模数据 · 离散动作 token | `card-rt2`, `card-saycan`, `09-M3.2` | 2022-12 |
-| [RT-2](https://arxiv.org/abs/2307.15818) | `10-M2.1` | VLA · VLM 联合微调 · 动作即文本 token · 语义泛化 | `card-rt1`, `card-openvla`, `10-M1.2` | 2023-07 |
+| [RT-2](https://arxiv.org/abs/2307.15818) | `10-M2.1` | VLA · VLM 联合微调 · 动作即文本 token · 语义泛化 | `card-rt1`, `card-openvla`, `10-M1.2`, `leaf-openvla` | 2023-07 |
 | [Open X-Embodiment / RT-X](https://arxiv.org/abs/2310.08864) | `09-M3.2` | 跨本体数据集 · 多机构协作 · RT-1-X / RT-2-X | `leaf-oxe`, `card-octo`, `10-M1.3` | 2023-10 |
 | [OpenVLA](https://arxiv.org/abs/2406.09246) | `10-M2.2` | 开源 VLA · 7B · LoRA 微调 · Open X-Embodiment 训练 | `leaf-openvla`, `card-rt2`, `10-M3.2` | 2024-06 |
 | [Octo](https://arxiv.org/abs/2405.12213) | `10-M2.2` | 通用策略 · Transformer + 扩散动作头 · 开源 | `leaf-octo`, `card-openvla`, `card-oxe` | 2024-05 |

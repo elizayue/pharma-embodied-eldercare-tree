@@ -38,6 +38,10 @@ for ch in T['chapters']:
         L += [f'### 〔{DOMAIN[ch["id"]]}〕', '']
     L.append(f'#### {ch["id"]} · {ch["name"]} {stars(ch["weight"])}')
     L += ['', f'> {ch["summary"]}', f'> 优先学习配方：{ch["p0"]}', '']
+    route = T.get('routes', {}).get(ch['id'])
+    if route:
+        nm = {f'{ch["id"]}-{p["id"]}': p['name'] for mo in ch['modules'] for p in mo['points']}
+        L += ['**学习路线**：' + ' → '.join(f'`{k}` {nm.get(k, k)}' for k in route), '']
     for mo in ch['modules']:
         L.append(f'- **{mo["name"]}**')
         for pt in mo['points']:
@@ -50,6 +54,11 @@ for ch in T['chapters']:
             if cs:
                 extra += ' 🃏 ' + '、'.join(f'[{c["name"]}]({c["url"]})' for c in cs)
             L.append(f'  - `{key}` {pt["name"]} {stars(pt["freq"])}{extra}')
+            g = T.get('guides', {}).get(key)
+            if g:
+                L.append(f'    - 学什么：{g["what"]}')
+                L.append('    - 学完能回答：' + ' ／ '.join(g['ask']))
+                L.append('    - 入门阅读：' + '；'.join(f'[{r["title"]}]({r["url"]})' for r in g['read']))
     L.append('')
 L += ['## 叶子清单', '']
 groups = {}

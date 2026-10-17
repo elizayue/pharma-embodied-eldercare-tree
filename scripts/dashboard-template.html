@@ -150,6 +150,29 @@
   .starter b { display: block; font-size: 13px; color: var(--kt); font-weight: 500; }
   .starter ol { padding-inline-start: 18px; margin-block-start: 2px; }
   .domain { font-size: 11px; color: var(--k4); margin-block: var(--sp3) var(--sp1); letter-spacing: 1px; }
+  .pt .tg { flex: none; border: none; background: none; cursor: pointer; color: var(--k3); padding: 0; width: 16px; align-self: center; }
+  .pt .tg svg { width: 14px; height: 14px; transition: transform .15s ease-out; }
+  .pt.open .tg svg { transform: rotate(90deg); }
+  .pt .nm .pname { cursor: pointer; }
+  .pt .nm .pname:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .gmark { font-size: 10px; color: var(--c1); border: 1px solid color-mix(in srgb, var(--c1) 35%, transparent); border-radius: var(--rc); padding: 0 4px; margin-inline-start: 4px; white-space: nowrap; }
+  .pt-detail { margin: 2px 0 var(--sp2) 44px; padding: var(--sp2) var(--sp3); border-inline-start: 2px solid color-mix(in srgb, var(--c1) 40%, transparent); background: color-mix(in srgb, var(--c1) 4%, transparent); border-radius: 0 var(--rc) var(--rc) 0; font-size: 13px; }
+  .pt-detail .sec { margin-block: 4px 6px; }
+  .pt-detail .sec > b { display: block; font-size: 11px; font-weight: 500; color: var(--k3); letter-spacing: 1px; margin-block-end: 2px; }
+  .pt-detail ol, .pt-detail ul { padding-inline-start: 20px; }
+  .pt-detail li { margin-block: 1px; }
+  .pt-detail .muted { color: var(--k4); font-size: 12px; }
+  .mini { display: flex; flex-wrap: wrap; gap: var(--sp1); align-items: baseline; padding: 3px 0; border-block-end: 1px dashed var(--bd); }
+  .mini:last-child { border-block-end: none; }
+  .mini .rel { font-size: 10px; color: var(--k4); border: 1px solid var(--bd); border-radius: var(--rc); padding: 0 4px; }
+  .mini .rel.direct { color: var(--em); border-color: color-mix(in srgb, var(--em) 40%, transparent); }
+  .route { margin-block-end: var(--sp2); font-size: 12px; color: var(--k2); border: 1px solid var(--bd); border-radius: var(--rc); padding: var(--sp2) var(--sp3); }
+  .route b { font-weight: 500; color: var(--kt); }
+  .route ol { display: flex; flex-wrap: wrap; gap: 2px var(--sp2); list-style: none; padding: 0; margin-block-start: 4px; counter-reset: r; }
+  .route li { counter-increment: r; cursor: pointer; }
+  .route li::before { content: counter(r) ". "; color: var(--k4); font-variant-numeric: tabular-nums; }
+  .route li:hover { color: var(--kt); text-decoration: underline; }
+  .route li.done { color: var(--pos); }
   footer { margin-block-start: var(--sp4); font-size: 11px; color: var(--k4); }
 </style>
 </head>
@@ -273,11 +296,12 @@ T.leaves.forEach(l => {
   const cs = T.cards.filter(c => cardHits(c, l));
   if (cs.length) cardsByLeafId[l.id] = cs;
 });
+// 兜底：既没挂到任何叶子、target/next 也不指向任何学习点的卡片，才放进叶子清单分组底部（正常情况下应为空——
+// 卡片已直接展示在其挂载的学习点下方）
 T.cards.forEach(c => {
-  if (!T.leaves.some(l => cardHits(c, l))) {
-    const m = c.target.match(/^(\d{2})-M/);
-    const ch = m ? m[1] : 'root';
-    (orphanCards[ch] = orphanCards[ch] || []).push(c);
+  const hasPoint = [c.target, ...c.next].some(r => /^\d{2}-M\d+\.\d+$/.test(r));
+  if (!hasPoint && !T.leaves.some(l => cardHits(c, l))) {
+    (orphanCards.root = orphanCards.root || []).push(c);
   }
 });
 
@@ -315,7 +339,38 @@ const TABS = [
 const count = { theory: T.chapters.reduce((n, c) => n + c.modules.reduce((k, m) => k + m.points.length, 0), 0),
   list: T.leaves.length, inbox: T.inbox.length, cards: T.cards.length };
 // 手风琴展开状态：理论地图篇章 / 叶子清单分组
-const openCh = new Set(), openGrp = new Set(['root']);
+const openCh = new Set(), openGrp = new Set(['root']), openPt = new Set();
+const GUIDES = T.guides || {}, ROUTES = T.routes || {};
+const ptName = {}; T.chapters.forEach(ch => ch.modules.forEach(mo => mo.points.forEach(pt => ptName[ch.id + '-' + pt.id] = pt.name)));
+// 某学习点挂着的卡片：① target 直挂 ② next 引用 ③ 经本点叶子关联（卡片 target/next 指向本点的某片叶子）
+function cardsForPoint(key, here) {
+  const out = [], seen = new Set();
+  const push = (c, rel) => { if (!seen.has(c.id)) { seen.add(c.id); out.push({ c, rel }); } };
+  T.cards.filter(c => c.target === key).forEach(c => push(c, '直挂'));
+  T.cards.filter(c => c.next.includes(key)).forEach(c => push(c, '相关'));
+  const leafIds = new Set(here.map(l => l.id));
+  T.cards.filter(c => leafIds.has(c.target) || c.next.some(n => leafIds.has(n))).forEach(c => push(c, '经叶子'));
+  return out;
+}
+function pointDetail(key, here) {
+  const g = GUIDES[key];
+  const cs = cardsForPoint(key, here);
+  const guideHtml = g ? `
+    <div class="sec"><b>学什么</b>${esc(g.what)}</div>
+    <div class="sec"><b>学完能回答</b><ol>${g.ask.map(a => `<li>${esc(a)}</li>`).join('')}</ol></div>
+    <div class="sec"><b>入门阅读</b><ul>${g.read.map(r => `<li><a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.title)} ↗</a></li>`).join('')}</ul></div>`
+    : '<div class="sec muted">这个学习点的「学什么 / 自检问题 / 入门阅读」还没写（目前试点只覆盖 05 篇章）。</div>';
+  const cardsHtml = cs.length ? `<div class="sec"><b>学习卡片 · ${cs.length}</b>${cs.map(({ c, rel }) => `
+      <div class="mini">${ck(c.id)}<span class="rel ${rel === '直挂' ? 'direct' : ''}">${rel}</span>
+        <a href="${esc(c.url)}" target="_blank" rel="noopener">${esc(c.name)} ↗</a>
+        ${c.date ? `<span class="badge">${esc(c.date)}</span>` : ''}
+        <span class="muted">${c.tags.map(esc).join(' · ')}</span>
+        <span class="badge node" data-go="${esc(c.id)}" title="在学习卡片板块查看">卡片详情</span></div>`).join('')}</div>` : '';
+  const leavesHtml = here.length ? `<div class="sec"><b>叶子（项目 / 练习）· ${here.length}</b>${here.map(l => `
+      <div class="mini">${ck(l.id)}${l.url ? `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.name)} ↗</a>` : `<span>✎ ${esc(l.name)}</span><span class="badge">练习</span>`}
+        <span class="muted">${esc(l.intro)}</span></div>`).join('')}</div>` : '';
+  return `<div class="pt-detail">${guideHtml}${cardsHtml}${leavesHtml}</div>`;
+}
 function nodeBadge(key) {
   if (!key) return '';
   if (idx[key]) return `<span class="badge node" data-go="${esc(key)}" title="跳转到 ${esc(key)}">${esc(key)}</span>`;
@@ -343,20 +398,22 @@ function panelTheory() {
     const chHit = match(ch.name, ch.summary, ch.p0);
     const modsHtml = ch.modules.map((mo, m) => {
       const rows = mo.points.map((pt, p) => ({ pt, p })).filter(({ pt }) =>
-        chHit || match(pt.name, pt.id, ch.id + '-' + pt.id)).map(({ pt, p }) => {
+        chHit || match(pt.name, pt.id, ch.id + '-' + pt.id, (GUIDES[ch.id + '-' + pt.id] || {}).what)).map(({ pt, p }) => {
         const key = ch.id + '-' + pt.id;
         const here = leavesByPoint[key] || [];
         const chips = here.length ? `<span class="chips">${here.map(l => l.url
           ? `<span class="badge leafy node" data-go="${esc(l.id)}" title="叶子：${esc(l.intro)}，点击在叶子清单定位">${esc(l.name)} ↗</span>`
           : `<span class="badge dash" title="练习项：${esc(l.intro)}">✎ ${esc(l.name)}</span>`).join('')}</span>` : '';
         const leafCnt = here.length ? `<span class="cnt leafy" data-go="${esc(here[0].id)}" title="${here.length} 片叶子长在本枝节，点击在叶子清单定位">叶 ${here.length}</span>` : '';
-        const cardIds = cardIdsByPoint[key] || [];
-        const cardCnt = cardIds.length ? `<span class="cnt cardy" data-go="${esc(cardIds[0])}" title="${cardIds.length} 张学习卡片指向本点，点击跳去学习卡片">卡 ${cardIds.length}</span>` : '';
+        const nCards = cardsForPoint(key, here).length;
+        const cardCnt = nCards ? `<span class="cnt cardy" data-pt="${esc(key)}" title="${nCards} 张学习卡片挂在本点，点击展开">卡 ${nCards}</span>` : '';
+        const isOpen = openPt.has(key) || (query && GUIDES[key] && match(GUIDES[key].what));
         return `
-        <div class="pt ${isDone(key) ? 'is-done' : ''}" id="th-${c}-${m}-${p}">
-          ${ck(key)}<span class="id">${ch.id}-${pt.id}</span><span class="nm">${esc(pt.name)}${chips}${noteText(key)}</span>
+        <div class="pt ${isDone(key) ? 'is-done' : ''} ${isOpen ? 'open' : ''}" id="th-${c}-${m}-${p}">
+          <button class="tg" data-pt="${esc(key)}" title="展开：学什么 + 卡片 + 叶子">${chev}</button>
+          ${ck(key)}<span class="id">${ch.id}-${pt.id}</span><span class="nm"><span class="pname" data-pt="${esc(key)}">${esc(pt.name)}</span>${GUIDES[key] ? '<span class="gmark">指引</span>' : ''}${isOpen ? '' : chips}${noteText(key)}</span>
           <span>${stars(pt.freq)}</span>${leafCnt}${cardCnt}${noteBtn(key, pt.name)}
-        </div>`;
+        </div>${isOpen ? pointDetail(key, here) : ''}`;
       }).join('');
       return rows ? `<div class="mod"><h4>${esc(mo.name)}</h4>${rows}</div>` : '';
     }).join('');
@@ -368,6 +425,8 @@ function panelTheory() {
       <summary>${chev}<span>${ch.id} · ${esc(ch.name)}</span><span class="stars">${'★'.repeat(ch.weight)}</span>
         <span class="sum">${esc(ch.summary)}</span><span class="n">${doneN}/${total} 点</span></summary>
       <div class="ch-body">
+        ${ROUTES[ch.id] && !query ? `<div class="route"><b>学习路线</b>（按顺序学，点击展开该学习点）<ol>${ROUTES[ch.id].map(k =>
+          `<li class="${isDone(k) ? 'done' : ''}" data-pt="${esc(k)}" data-scroll="1" title="${esc(k)}">${esc(ptName[k] || k)}${isDone(k) ? ' ✓' : ''}</li>`).join('')}</ol></div>` : ''}
         ${ch.p0 ? `<p class="p0">优先学习配方：${esc(ch.p0)}</p>` : ''}
         ${modsHtml}
       </div>
@@ -392,7 +451,7 @@ function panelList() {
     if (query && !items) return '';
     const orphans = orphanCards[g.key] || [];
     const orphanLine = orphans.length && !query ? `
-      <p class="orphan">本枝干知识卡片（暂未挂到具体叶子）：
+      <p class="orphan">未挂到学习点或叶子的卡片（兜底）：
         ${orphans.map(c => `<span class="badge leafy node" data-go="${esc(c.id)}">${esc(c.name)}</span>`).join(' ')}</p>` : '';
     const open = query ? true : openGrp.has(g.key);
     return `<details class="ch grp" data-grp="${g.key}" ${open ? 'open' : ''}>
@@ -450,19 +509,25 @@ function render() {
   document.querySelectorAll('[data-tab]').forEach(b => b.onclick = () => { cur = +b.dataset.tab; render(); });
   document.querySelectorAll('[data-go]').forEach(b => b.onclick = () => go(b.dataset.go));
   document.querySelectorAll('[data-done]').forEach(b => b.onchange = () => toggleDone(b.dataset.done));
+  document.querySelectorAll('[data-pt]').forEach(b => b.onclick = () => togglePt(b.dataset.pt, !!b.dataset.scroll));
   document.querySelectorAll('[data-note]').forEach(b => b.onclick = () => editNote(b.dataset.note, b.dataset.label));
   // 手风琴状态写回（搜索时强制展开，不记状态）
   document.querySelectorAll('details.ch[data-ch]').forEach(d =>
     d.ontoggle = () => { if (!query) { d.open ? openCh.add(d.dataset.ch) : openCh.delete(d.dataset.ch); } });
   document.querySelectorAll('details.ch[data-grp]').forEach(d =>
     d.ontoggle = () => { if (!query) { d.open ? openGrp.add(d.dataset.grp) : openGrp.delete(d.dataset.grp); } });
-  if (location.hash.length > 1) go(decodeURIComponent(location.hash.slice(1)), true);
 }
 
+function togglePt(key, scroll) {
+  if (scroll) openPt.add(key); else if (openPt.has(key)) openPt.delete(key); else openPt.add(key);
+  const t = idx[key];
+  render();
+  if (scroll && t) { const el = document.getElementById(`th-${t.c}-${t.m}-${t.p}`); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+}
 function go(key, fromHash) {
   const t = idx[key];
   if (!t) return;
-  if (t.type === 'theory') openCh.add(T.chapters[t.c].id);
+  if (t.type === 'theory') { openCh.add(T.chapters[t.c].id); openPt.add(T.chapters[t.c].id + '-' + T.chapters[t.c].modules[t.m].points[t.p].id); }
   if (t.type === 'list') openGrp.add(LEAF_GROUPS[t.c].key);
   cur = TAB_INDEX[t.type];
   render();
@@ -481,9 +546,13 @@ $('#starters').innerHTML = (T.starters || []).map(s => `<div class="starter"><b>
 const QS = new URLSearchParams(location.search);
 if (QS.get('expand') === 'all') T.chapters.forEach(ch => openCh.add(ch.id));
 else if (QS.get('expand')) QS.get('expand').split(',').forEach(id => openCh.add(id));
+// ?open=05-M1.1,05-M3.1 展开指定学习点（并自动展开其篇章）
+if (QS.get('open')) QS.get('open').split(',').forEach(k => { openPt.add(k); openCh.add(k.split('-')[0]); });
 if (QS.get('tab')) cur = Math.max(0, Math.min(3, +QS.get('tab') || 0));
 if (QS.get('starters') === '1') $('#starters-box').open = true;
 render();
+// 深链 #节点id：只在载入时处理一次（之前放在 render 里会与 go→render 互相递归）
+if (location.hash.length > 1) go(decodeURIComponent(location.hash.slice(1)), true);
 </script>
 </body>
 </html>

@@ -16,6 +16,7 @@
 - 叶子（`leaves.ts`）：`id` 用 `leaf-` 前缀；`anchor` ∈ `root` / 篇章 id（`'05'`）/ 学习点编号 / `wild`；有链接 = 项目，无链接须加 `practice: true`；`tags` 里的学习点编号必须真实存在。
 - 卡片（`cards.ts`）：`id` 用 `card-` 前缀；`target` 和 `next`（2–4 个）只能指向树上节点（学习点编号 / 叶子 id / 卡片 id / 收集箱 url）；`tags` 3–5 个；`date` 只在确定时填写。
 - 收集箱（`inbox.ts`）：`cat` = 「分类 · 模块编号」（如 `仿真平台 · 11-M1`），归类不下写 `野生枝节`；`level` ∈ 观望 / 跟练 / 深入。
+- 学习点指引（`content/guides/<篇章id>.md` → 生成 `src/data/guides.ts`）：每个 `## 编号` 下写 `what:`（一句话核心概念）、`ask:`（2–3 个自检问题）、`read:`（1–2 个 `标题 | URL`，只用官方文档 / 综述 / 原始论文，写入前用 curl 验证，跑 `scripts/check-links.py` 复核）；文件头 `route:` 为篇章学习路线，须覆盖该篇章全部学习点且不重复。
 - 入口路径（`content.ts` 的 `STARTERS`）：每条一行，`{ who, desc, steps: [...] }`。
 
 ## 常用命令
