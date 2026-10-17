@@ -41,7 +41,7 @@ export const CARDS: StudyCard[] = [
     target: '05-M3.2',
     url: 'https://www.nature.com/articles/s41586-024-07487-w',
     tags: ['复合物结构', '扩散模块', '蛋白—配体', '蛋白—核酸'],
-    next: ['card-alphafold2', 'card-diffdock', '01-M4.3'],
+    next: ['card-alphafold2', 'card-diffdock', '01-M4.3', 'leaf-afdb'],
     madeBy: '让模型帮忙',
     date: '2024-05',
   },

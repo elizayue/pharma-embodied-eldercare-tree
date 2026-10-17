@@ -589,7 +589,7 @@
 | --- | --- | --- | --- | --- |
 | [Lipinski 五规则（Rule of 5）](https://doi.org/10.1016/S0169-409X(96)00423-1) | `01-M2.3` | 口服类药性 · 分子量 · logP · 氢键供体 / 受体 | `leaf-p-lipinski`, `02-M2.1`, `05-M2.2` | 1997 |
 | [AlphaFold 2](https://www.nature.com/articles/s41586-021-03819-2) | `05-M3.1` | 蛋白结构预测 · MSA · Evoformer · CASP14 | `card-alphafold3`, `leaf-colabfold`, `leaf-afdb` | 2021-07 |
-| [AlphaFold 3](https://www.nature.com/articles/s41586-024-07487-w) | `05-M3.2` | 复合物结构 · 扩散模块 · 蛋白—配体 · 蛋白—核酸 | `card-alphafold2`, `card-diffdock`, `01-M4.3` | 2024-05 |
+| [AlphaFold 3](https://www.nature.com/articles/s41586-024-07487-w) | `05-M3.2` | 复合物结构 · 扩散模块 · 蛋白—配体 · 蛋白—核酸 | `card-alphafold2`, `card-diffdock`, `01-M4.3`, `leaf-afdb` | 2024-05 |
 | [ESM-2 / ESMFold](https://github.com/facebookresearch/esm) | `05-M1.2` | 蛋白语言模型 · 单序列结构预测 · 表示学习 | `card-alphafold2`, `05-M3.1`, `05-M2.3` | — |
 | [DiffDock](https://arxiv.org/abs/2210.01776) | `05-M3.3` | 扩散模型 · 盲对接 · 姿态生成 | `leaf-diffdock`, `leaf-vina`, `leaf-p-dock` | 2022-10 |
 | [RFdiffusion](https://www.nature.com/articles/s41586-023-06415-8) | `05-M4.3` | 蛋白质从头设计 · 扩散模型 · 结合蛋白设计 | `leaf-rfdiffusion`, `card-alphafold2`, `05-M4.2` | 2023-07 |
