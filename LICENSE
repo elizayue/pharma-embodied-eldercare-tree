@@ -1,21 +1,62 @@
-MIT License
+Copyright (c) 2026 elizayue. All rights reserved.
+版权所有 (c) 2026 elizayue。保留所有权利。
 
-Copyright (c) 2026 elizayue
+适用范围 / Scope
+----------------
+本文件适用于本仓库中的「代码」部分，包括但不限于：scripts/ 下的全部脚本与
+页面模板、index.html、dashboard/tree.html 中的页面结构 / 样式 / 脚本、
+src/data/*.ts 中的类型与接口声明，以及构建与校验工具。
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+This file applies to the "code" portion of this repository, including but not
+limited to: all scripts and page templates under scripts/, the page structure,
+styles and scripts in index.html and dashboard/tree.html, the type and
+interface declarations in src/data/*.ts, and the build and check tooling.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+以下部分不适用本文件 / The following are NOT covered by this file:
+  * 学习树内容（篇章、学习点、指引、叶子、卡片、收集箱条目及其生成 / 导出文件）
+    采用 CC BY 4.0 许可，见 LICENSE-CONTENT.md。
+    The learning-tree content (chapters, learning points, guides, leaves,
+    cards, inbox items, and the files generated / exported from them) is
+    licensed under CC BY 4.0; see LICENSE-CONTENT.md.
+  * 改编自 S2AI（https://github.com/chenxiaoyu0505/S2AI）的部分，仍按 S2AI 的
+    MIT License（Copyright (c) 2026 cxy）提供，见 THIRD_PARTY_NOTICES.md。
+    Portions derived from S2AI remain available under S2AI's MIT License
+    (Copyright (c) 2026 cxy); see THIRD_PARTY_NOTICES.md.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+条款（中文）
+------------
+未经版权所有者事先书面许可，任何人不得使用、复制、修改、合并、发布、分发、
+再许可或出售上述代码的全部或任何部分，也不得基于其制作衍生作品。
+
+依据 GitHub 服务条款，你可以在 GitHub 上查看本仓库并对其进行 fork；
+除此之外不授予任何其他权利。通过浏览器打开公开的网页进行个人学习，
+不视为对代码的复制或分发授权。
+
+如需授权，请通过 GitHub（https://github.com/elizayue）联系版权所有者。
+
+本代码按「原样」提供，不附带任何明示或默示的担保。
+
+Terms (English)
+---------------
+No permission is granted to use, copy, modify, merge, publish, distribute,
+sublicense, or sell all or any part of the code described above, or to create
+derivative works based on it, without the prior written permission of the
+copyright holder.
+
+You may view and fork this repository on GitHub as permitted by the GitHub
+Terms of Service; no other rights are granted. Opening the published web page
+in a browser for personal study does not grant any right to copy or
+distribute the code.
+
+To request permission, contact the copyright holder via GitHub:
+https://github.com/elizayue
+
+THE CODE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED.
+
+版本说明 / Prior versions
+-------------------------
+本次调整之前发布的版本以 MIT License 发布，已获得这些版本副本的人仍可按
+MIT License 使用它们；本文件仅适用于本次调整及之后的版本。
+Versions published before this change were released under the MIT License and
+remain so for those copies; this file applies to this and later versions only.

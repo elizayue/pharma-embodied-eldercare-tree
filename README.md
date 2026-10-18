@@ -75,4 +75,8 @@ python scripts/check-links.py         # （可选，需联网）校验指引里�
 
 ## 许可
 
-本项目以 [MIT License](./LICENSE) 开源。改编自 S2AI 的代码部分保留其 MIT 声明，见 [`THIRD_PARTY_NOTICES.md`](./THIRD_PARTY_NOTICES.md)。
+- **代码：保留所有权利。** `scripts/` 下的脚本与页面模板、页面的结构 / 样式 / 脚本、`src/data/*.ts` 中的类型声明等代码，版权归 elizayue 所有，未经书面许可不得使用、复制、修改或分发，见 [`LICENSE`](./LICENSE)。如需授权，请通过 GitHub 联系 [@elizayue](https://github.com/elizayue)。
+- **内容：[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hans)。** 篇章、学习点、指引、叶子、卡片、收集箱条目及其生成 / 导出文件，可以自由复制、改编、定制（含商用），注明出处即可，署名格式：「来源：elizayue/pharma-embodied-eldercare-tree，CC BY 4.0」。具体路径见 [`LICENSE-CONTENT.md`](./LICENSE-CONTENT.md)。
+- **改编自 S2AI 的部分仍保留 MIT。** 源自 [S2AI](https://github.com/chenxiaoyu0505/S2AI) 的部分继续按其 MIT License（Copyright (c) 2026 cxy）提供，我在其上的修改与新增保留所有权利，见 [`THIRD_PARTY_NOTICES.md`](./THIRD_PARTY_NOTICES.md)。
+- **第三方资料归各自权利人。** 内容中引用的论文、数据库、指南、课程等，版权与使用条款以其原始来源为准，不在本仓库许可范围内。
+- **旧版本说明：** 本次许可调整之前发布的版本以 MIT License 发布，已获得这些版本副本的人仍可按 MIT 使用；新许可只适用于本次调整及之后的版本。
